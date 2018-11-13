@@ -1,24 +1,23 @@
 package com.github.physiengine.object;
 
-import com.github.physiengine.components.Component;
 import com.github.physiengine.math.Vector2;
 
-public class Transform extends Component {
+public class Transform {
 
 	private Vector2 pos, scale;
 
 	private float rotation;
 
-	public Transform(String name) {
-		super(name);
-
-		setPos(new Vector2());
-		setScale(new Vector2());
-
+	public Transform() {
+		this.pos = new Vector2(0, 0);
+		this.scale = new Vector2(1, 1);
+		this.rotation = 0;
 	}
-
-	public void update() {
-
+	
+	public Transform(float x, float y) {
+		this.pos = new Vector2(x, y);
+		this.scale = new Vector2(1, 1);
+		this.rotation = 0;
 	}
 
 	public float getRotation() {
