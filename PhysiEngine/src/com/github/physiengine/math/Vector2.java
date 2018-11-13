@@ -66,6 +66,13 @@ public class Vector2 {
 		this.y *= sv.y; 				
 	}
 	
+	public void add(float x, float y) {
+		
+		this.x += x;
+		this.y += y;
+		
+	}
+	
 	// Statics
 	
 	public static Vector2 Add(Vector2 sv1 , Vector2 sv2) {

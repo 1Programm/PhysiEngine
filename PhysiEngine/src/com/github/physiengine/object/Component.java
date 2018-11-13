@@ -1,4 +1,4 @@
-package com.github.physiengine.components;
+package com.github.physiengine.object;
 
 import com.github.physiengine.object.*;
 

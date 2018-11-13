@@ -1,5 +1,7 @@
 package com.github.physiengine.components;
 
+import com.github.physiengine.object.Component;
+
 public class Renderer extends Component{
 
 	public Renderer(String name) {
