@@ -5,12 +5,14 @@ import com.github.physiengine.object.*;
 public abstract class Component {
 
 	private String name;
-
 	private GameObject parent;
+	
+	private boolean enabled;
 
 	public Component(String name) {
 
 		this.name = name;
+		this.enabled = true;
 
 	}
 
