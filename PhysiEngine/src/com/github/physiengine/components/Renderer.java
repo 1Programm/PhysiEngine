@@ -8,7 +8,7 @@ public class Renderer extends Component{
 
 	@Override
 	public void update() {
-		
+		//a
 	}
 
 }
