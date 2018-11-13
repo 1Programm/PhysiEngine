@@ -6,7 +6,7 @@ public class Transform extends Component {
 
 	private Vector2 pos, scale;
 	
-	private float rotation;
+	private float rotation; 
 	
 	public Transform(String name) {
 		super(name);
