@@ -7,6 +7,6 @@ public class Settings {
 
 	public static Vector2 GRAVITY = new Vector2();
 
-	public static Material SPACE_MATERIAL = new Material(0, 0, 0.1f);
+	public static Material SPACE_MATERIAL = new Material(0, 0, 0.1f); 
 	
 }
