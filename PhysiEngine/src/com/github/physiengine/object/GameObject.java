@@ -2,6 +2,8 @@ package com.github.physiengine.object;
 
 import java.util.HashMap;
 
+import com.github.physiengine.components.Component;
+
 public class GameObject {
 
 	private HashMap<String, Component> components;
