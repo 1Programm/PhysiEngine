@@ -3,7 +3,6 @@ package com.github.physiengine.object;
 import java.util.HashMap;
 
 import com.github.physiengine.components.Component;
-import com.github.physiengine.components.Transform;
 
 public class GameObject {
 
