@@ -22,7 +22,7 @@ public class Vector2 {
 		this.y = v2.y - v1.y;		
 	}
 	
-	//Mehoden
+	//Methoden
 	
 	public float getLength() {
 		return (float)Math.sqrt(x*x+y*y);
