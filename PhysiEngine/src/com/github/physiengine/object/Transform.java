@@ -1,7 +1,7 @@
-package com.github.physiengine.components;
+package com.github.physiengine.object;
 
+import com.github.physiengine.components.Component;
 import com.github.physiengine.math.Vector2;
-import com.github.physiengine.object.Component;
 
 public class Transform extends Component {
 
