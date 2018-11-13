@@ -3,10 +3,13 @@ package com.github.physiengine.object;
 import java.util.HashMap;
 
 import com.github.physiengine.components.Component;
+import com.github.physiengine.components.Transform;
 
 public class GameObject {
 
 	private HashMap<String, Component> components;
+	
+	private Transform transform;
 	
 	public GameObject() {
 		
@@ -28,6 +31,12 @@ public class GameObject {
 			return true;
 		}
 		
+	}
+	
+	public Component GetComponent(String name){
+		if(!components.containsKey(name)) return null;
+		
+		return components.get(name);
 	}
 
 }
