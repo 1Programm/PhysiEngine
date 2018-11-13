@@ -16,7 +16,7 @@ public class Vector2 {
 		this.x = v.x;
 		this.y = v.y;
 	}
-	
+	 
 	public Vector2(Vector2 v1, Vector2 v2) {
 		this.x = v2.x - v1.x;
 		this.y = v2.y - v1.y;		
