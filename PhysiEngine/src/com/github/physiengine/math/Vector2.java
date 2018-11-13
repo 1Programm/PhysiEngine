@@ -43,7 +43,7 @@ public class Vector2 {
 	}
 	
 	
-	
+	 
 	//"normal"
 	
 	public void add(Vector2 sv) {
@@ -54,7 +54,7 @@ public class Vector2 {
 	public void sub(Vector2 sv) {
 		this.x -= sv.x;
 		this.y -= sv.y; 				
-	}
+	} 
 	
 	public void div(Vector2 sv) {
 		this.x /= sv.x;
@@ -64,7 +64,7 @@ public class Vector2 {
 	public void mul(Vector2 sv) {
 		this.x *= sv.x;
 		this.y *= sv.y; 				
-	}
+	}  
 	
 	// Statics
 	
