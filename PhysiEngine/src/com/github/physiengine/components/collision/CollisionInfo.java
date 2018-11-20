@@ -2,11 +2,9 @@ package com.github.physiengine.components.collision;
 
 public class CollisionInfo {
 
-	public float penetrateX, penetrateY, collisionAngel;
+	public float penetrateX;
+	public float penetrateY;
 	
-	public CollisionInfo(float pX, float pY, float cA) {
-		penetrateX = pX;
-		penetrateY = pY;
-		collisionAngel = cA;
-	}
+	public float collisionAngel;
+	
 }
