@@ -1,6 +1,5 @@
 package com.github.helperclasses.saver;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,7 +11,7 @@ public class SaveGameState {
 
 	}
 
-	public boolean saveToFile(Saveable data) {
+	public static boolean saveToFile(Saveable data) {
 
 		boolean success = true;
 
@@ -22,7 +21,7 @@ public class SaveGameState {
 
 		FileWriter fw;
 		try {
-			fw = new FileWriter("/" + savePath, true);
+			fw = new FileWriter(savePath, true);
 
 			for (String line : newData) {
 
@@ -31,7 +30,7 @@ public class SaveGameState {
 			}
 			fw.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 
 			success = false;

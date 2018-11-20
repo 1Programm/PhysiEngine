@@ -12,14 +12,14 @@ public class LoadGameState {
 
 	}
 
-	public static ArrayList<String> getFileContent(String fileName) {
+	public static ArrayList<String> getFileContent(String path) {
 
 		ArrayList<String> content = new ArrayList<>();
 
 		BufferedReader bf = null;
 
 		try {
-			bf = new BufferedReader(new FileReader("/" + fileName + ".xXInfoKingzHDXx"));
+			bf = new BufferedReader(new FileReader(path));
 		} catch (FileNotFoundException e) {
 
 			System.out.println("Error 404: File not found");
