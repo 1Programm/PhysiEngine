@@ -25,11 +25,17 @@ public abstract class Component {
 	public void setParent(GameObject parent) {
 		this.parent = parent;
 	}
+	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean b) {
+		this.enabled = b;
+	}
 
 	public String getName() {
-
 		return name;
-
 	}
 
 }
