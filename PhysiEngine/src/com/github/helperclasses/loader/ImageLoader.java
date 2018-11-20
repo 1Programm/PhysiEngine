@@ -12,15 +12,15 @@ public class ImageLoader {
 
 	}
 
-	public static BufferedImage loadImage(String path) {
+	public static BufferedImage loadImage(String fileName, String fileType) {
 
 		BufferedImage bi = null;
 
 		try {
-			bi = ImageIO.read(new File("/" + path));
+			bi = ImageIO.read(new File("/" + fileName + "." + fileType));
 		} catch (IOException e) {
 
-			System.out.println("File not found!");
+			System.out.println("Error 404: File not found");
 
 		}
 
