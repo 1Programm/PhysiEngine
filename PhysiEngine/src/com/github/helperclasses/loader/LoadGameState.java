@@ -12,9 +12,9 @@ public class LoadGameState {
 
 	}
 
-	public static ArrayList<String> getFileContent(String path) {
+	public static String[] getGameState(String path) {
 
-		ArrayList<String> content = new ArrayList<>();
+		ArrayList<String> gameStateArray = new ArrayList<>();
 
 		BufferedReader bf = null;
 
@@ -36,7 +36,7 @@ public class LoadGameState {
 
 		while (line != null) {
 
-			content.add(line);
+			gameStateArray.add(line);
 
 			try {
 				bf.readLine();
@@ -45,8 +45,16 @@ public class LoadGameState {
 			}
 
 		}
+		
+		String[] gameState = new String[gameStateArray.size()];
+		
+		for(int i = 0; i < gameState.length; i++) {
+			
+			gameState[i] = gameStateArray.get(i);
+			
+		}
 
-		return content;
+		return gameState;
 
 	}
 
