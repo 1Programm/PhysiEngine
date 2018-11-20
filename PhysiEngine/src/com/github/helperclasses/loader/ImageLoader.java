@@ -27,5 +27,21 @@ public class ImageLoader {
 		return bi;
 
 	}
+	
+	public static BufferedImage loadImage(String path) {
+
+		BufferedImage bi = null;
+
+		try {
+			bi = ImageIO.read(new File("/" + path));
+		} catch (IOException e) {
+
+			System.out.println("Error 404: File not found");
+
+		}
+
+		return bi;
+
+	}
 
 }
