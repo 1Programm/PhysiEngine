@@ -56,6 +56,10 @@ public class Vector2 {
 	}
 	
 	public void add2() {
+	
+	}
+
+	public void add3() {
 		
 	}
 
