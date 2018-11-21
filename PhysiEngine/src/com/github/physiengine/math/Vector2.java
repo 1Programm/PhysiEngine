@@ -60,6 +60,10 @@ public class Vector2 {
 		this.y -= sv.y;
 	}
 	
+	public void add2() {
+		
+	}
+	
 	public void div(Vector2 sv) {
 		this.x /= sv.x;
 		this.y /= sv.y; 				
