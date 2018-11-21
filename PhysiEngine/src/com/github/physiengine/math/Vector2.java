@@ -51,13 +51,13 @@ public class Vector2 {
 		this.y += sv.y; 				
 	}
 	
-	public void sub(Vector2 sv) {
-		this.x -= sv.x;
-		this.y -= sv.y; 				
-	}
-	
 	public void add1() {
 		
+	}
+
+	public void sub(Vector2 sv) {
+		this.x -= sv.x;
+		this.y -= sv.y;
 	}
 	
 	public void div(Vector2 sv) {
