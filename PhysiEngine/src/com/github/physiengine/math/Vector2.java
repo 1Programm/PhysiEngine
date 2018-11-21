@@ -50,18 +50,6 @@ public class Vector2 {
 		this.x += sv.x;
 		this.y += sv.y; 				
 	}
-	
-	public void add1() {
-		
-	}
-	
-	public void add2() {
-	
-	}
-
-	public void add3() {
-		
-	}
 
 	public void sub(Vector2 sv) {
 		this.x -= sv.x;
