@@ -8,8 +8,8 @@ public abstract class Collider extends Component{
 
 	private enum Layers {
 		BaseLayer,
-		
 	}
+	
 	
 	private ArrayList<Layers> myLayer;
 
@@ -26,13 +26,12 @@ public abstract class Collider extends Component{
 			return collideWith((Circle)other);
 		}
 		
-		
 		return null;
 	}
 	
-	protected abstract CollisionInfo collideWith(AABB aabb);
+	protected abstract CollisionInfo collideWith(AABB other);
 
-	protected abstract CollisionInfo collideWith(Circle cicle);
+	protected abstract CollisionInfo collideWith(Circle other);
 	
 
 	@Override
