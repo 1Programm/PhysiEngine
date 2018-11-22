@@ -1,5 +1,6 @@
 package com.github.physiengine.components.model;
 
+import com.github.physiengine.components.Changes;
 import com.github.physiengine.math.Vector2;
 
 public class Model_Rectangle extends Model {
@@ -23,16 +24,10 @@ public class Model_Rectangle extends Model {
 	// Eine Change - class, die angibt welche sachen sich beim parent (GameObject) geändert haben ... ?
 	
 	@Override
-	public void update(/*Changes changes*/) {
-		/*
-		 * if(changes.position){
-		 * 		updateVertecies(parent.transform.position, parent.transform.size);
-		 * }else if(changes.size){
-		 * 		updateVertecies(parent.transform.position, parent.transform.size);
-		 * }
-		 * 
-		 *  [...]
-		 */
+	public void update(Changes c) {
+		 if(c.position || c.size){
+		 		updateVertecies(parent.getTransform().getPos(), parent.getTransform().getScale());
+		 }
 	}
 	
 }
