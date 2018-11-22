@@ -4,10 +4,10 @@ import com.github.physiengine.object.*;
 
 public abstract class Component {
 
-	private String name;
-	private GameObject parent;
+	protected String name;
+	protected GameObject parent;
 	
-	private boolean enabled;
+	protected boolean enabled;
 
 	public Component(String name) {
 
@@ -16,7 +16,7 @@ public abstract class Component {
 
 	}
 
-	public abstract void update();
+	public abstract void update(Changes c);
 
 	public GameObject getParent() {
 		return parent;

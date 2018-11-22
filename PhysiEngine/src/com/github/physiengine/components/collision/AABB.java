@@ -7,9 +7,10 @@ public class AABB extends Collider{
 	public Vector2 position;
 	public Vector2 size;
 	
-	public AABB(Vector2 pos, Vector2 size) {
-		this.position = pos;
-		this.size = size;
+	public AABB() {
+		onPositionChanged();
+		onSizeChanged();
+		onRotationChanged();
 	}
 
 	@Override
@@ -58,6 +59,21 @@ public class AABB extends Collider{
 	protected CollisionInfo collideWith(Circle other) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	protected void onPositionChanged() {
+		this.position = parent.getTransform().getPos();
+	}
+
+	@Override
+	protected void onSizeChanged() {
+		this.size = parent.getTransform().getScale();		
+	}
+
+	@Override
+	protected void onRotationChanged() {
+		//TODO
 	}
 
 }

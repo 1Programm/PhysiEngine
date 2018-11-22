@@ -2,6 +2,7 @@ package com.github.physiengine.components.collision;
 
 import java.util.ArrayList;
 
+import com.github.physiengine.components.Changes;
 import com.github.physiengine.components.Component;
 
 public abstract class Collider extends Component{
@@ -9,7 +10,6 @@ public abstract class Collider extends Component{
 	private enum Layers {
 		BaseLayer,
 	}
-	
 	
 	private ArrayList<Layers> myLayer;
 
@@ -34,7 +34,11 @@ public abstract class Collider extends Component{
 	protected abstract CollisionInfo collideWith(Circle other);
 	
 
+	protected abstract void onPositionChanged();
+	protected abstract void onSizeChanged();
+	protected abstract void onRotationChanged();
+	
 	@Override
-	public void update() {}
+	public void update(Changes c) {}
 	
 }

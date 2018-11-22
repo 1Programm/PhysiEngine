@@ -1,14 +1,13 @@
 package com.github.physiengine.math;
 
-public class Vector2 {
-
+public class Vector2 { // Wer das liest ist cooool :D
 	public float x;
 	public float y;
 
 	// --------------------------------------------------------------------------------------------
 	// Constructors
 	// --------------------------------------------------------------------------------------------
-
+	//commentad
 	public Vector2() {
 		x = y = 0;
 	}
