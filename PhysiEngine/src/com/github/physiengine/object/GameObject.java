@@ -34,5 +34,5 @@ public class GameObject {
 	public Transform getTransform() {
 		return transform;
 	}
-
+	
 }

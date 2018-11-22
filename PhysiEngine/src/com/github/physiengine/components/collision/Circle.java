@@ -8,18 +8,24 @@ public class Circle extends Collider{
 	
 	public float radius;
 	
+	public Circle() {
+		onPositionChanged();
+		onSizeChanged();
+		onRotationChanged();
+	}
+	
 	@Override
-	protected CollisionInfo collideWith(AABB aabb) {
+	protected CollisionInfo collideWith(AABB other) {
  
 		return null;
 	}
 
 	@Override
-	protected CollisionInfo collideWith(Circle circle) {
-		Vector2 distV = new Vector2(position, circle.position);
+	protected CollisionInfo collideWith(Circle other) {
+		Vector2 distV = new Vector2(position, other.position);
 		float dist = distV.getLength();
 		
-		float intersect = (radius + circle.radius) - dist;
+		float intersect = (radius + other.radius) - dist;
 		
 		if(intersect >= 0) {
 			
@@ -34,6 +40,21 @@ public class Circle extends Collider{
 		
 		
 		return null;
+	}
+
+	@Override
+	protected void onPositionChanged() {
+		this.position = parent.getTransform().getPos();
+	}
+
+	@Override
+	protected void onSizeChanged() {
+		this.radius = parent.getTransform().getScale().getLength();
+	}
+
+	@Override
+	protected void onRotationChanged() {
+		//TODO 
 	}
 
 }

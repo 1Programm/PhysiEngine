@@ -2,6 +2,7 @@ package com.github.physiengine.components.collision;
 
 import java.util.ArrayList;
 
+import com.github.physiengine.components.Changes;
 import com.github.physiengine.components.Component;
 
 public abstract class Collider extends Component{
@@ -30,12 +31,16 @@ public abstract class Collider extends Component{
 		return null;
 	}
 	
-	protected abstract CollisionInfo collideWith(AABB aabb);
+	protected abstract CollisionInfo collideWith(AABB other);
 
-	protected abstract CollisionInfo collideWith(Circle cicle);
+	protected abstract CollisionInfo collideWith(Circle other);
 	
 
+	protected abstract void onPositionChanged();
+	protected abstract void onSizeChanged();
+	protected abstract void onRotationChanged();
+	
 	@Override
-	public void update() {}
+	public void update(Changes c) {}
 	
 }
