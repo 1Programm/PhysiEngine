@@ -56,5 +56,11 @@ public class Transform {
 		pos.add(x,y);
 		
 	}
+	
+	public void move(Vector2 vec) {
+		
+		pos.add(vec);
+		
+	}
 
 }
