@@ -2,6 +2,7 @@ package com.github.helperclasses.loader;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -12,7 +13,7 @@ public class ImageLoader {
 
 	}
 
-	public static BufferedImage loadImage(String path) {
+	public static BufferedImage loadImage(String path) throws FileNotFoundException {
 
 		BufferedImage bi = null;
 
@@ -24,7 +25,14 @@ public class ImageLoader {
 
 		}
 
-		return bi;
+		if (bi != null) {
+
+			return bi;
+		} else {
+
+			throw new FileNotFoundException();
+
+		}
 
 	}
 
