@@ -11,17 +11,15 @@ public class SaveGameState {
 
 	}
 
-	public static boolean saveToFile(Saveable data) {
+	public static boolean saveToFile(Saveable data, String path) {
 
 		boolean success = true;
-
-		String savePath = data.getSavePath();
 
 		String[] newData = data.getContent();
 
 		FileWriter fw;
 		try {
-			fw = new FileWriter(savePath, true);
+			fw = new FileWriter(path, true);
 
 			for (String line : newData) {
 

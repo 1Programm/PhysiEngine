@@ -8,16 +8,16 @@ public class Transform {
 
 	private float rotation;
 
-	public Transform() {
-		this.pos = new Vector2(0, 0);
-		this.scale = new Vector2(1, 1);
-		this.rotation = 0; 
-	}
+	public Transform() { init(0, 0, 1, 1, 0); }
+	public Transform(float x, float y) { init(x, y, 1, 1, 0); }
+	public Transform(float x, float y, float r) { init(x, y, 1, 1, r); }
+	public Transform(float x, float y, float w, float h) { init(x, y, w, h, 0); }
+	public Transform(float x, float y, float w, float h, float r) { init(x, y, w, h, r); }
 	
-	public Transform(float x, float y) {
+	private void init(float x, float y, float w, float h, float r) {
 		this.pos = new Vector2(x, y);
-		this.scale = new Vector2(1, 1);
-		this.rotation = 0;
+		this.scale = new Vector2(w, h);
+		this.rotation = r; 
 	}
 
 	public float getRotation() {
@@ -37,10 +37,8 @@ public class Transform {
 	}
 
 	public void setPos(float x, float y) {
-
 		pos.x = x;
 		pos.y = y;
-
 	}
 
 	public Vector2 getScale() {

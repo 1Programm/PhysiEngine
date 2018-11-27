@@ -8,24 +8,16 @@ import javax.imageio.ImageIO;
 
 public class ImageLoader {
 
-	public ImageLoader() {
-
-	}
-
 	public static BufferedImage loadImage(String path) {
-
-		BufferedImage bi = null;
+		BufferedImage image = null;
 
 		try {
-			bi = ImageIO.read(new File(path));
+			image = ImageIO.read(new File(path));
 		} catch (IOException e) {
-
 			System.out.println("Error 404: File not found");
-
 		}
 
-		return bi;
-
+		return image;
 	}
 
 }
