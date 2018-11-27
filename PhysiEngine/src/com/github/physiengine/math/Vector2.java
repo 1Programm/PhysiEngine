@@ -64,14 +64,6 @@ public class Vector2 { // Wer das liest ist cooool :D
 		this.x += point.x;
 		this.y += point.y;
 	}
-	
-	public void test(){
-		
-	}
-	
-	public void test2() {
-		
-	}
 
 	// --------------------------------------------------------------------------------------------
 	// Operating Methods
