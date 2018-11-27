@@ -8,23 +8,7 @@ public class GameObject {
 
 	private HashMap<String, Component> components;
 
-	private Transform transform;
-	
-	/*
-	 *  ------- > Später Ergebniss:
-	 * 
-	 * 
-	 * 	GameObject g = new GameObject();
-	 *  // g hat position von (0, 0) und size (1, 1);
-	 * 
-	 * 	g.setPosition(100, 100);
-	 * 
-	 * 	g.addComponent(new Model_Rectangle());
-	 * 	((Model)g.getComponent("model")).image = Loader.LoadImage("/image1.png");
-	 * 
-	 */
-	
-	
+	protected Transform transform;	
 
 	public GameObject() {
 		components = new HashMap<>();
@@ -36,13 +20,19 @@ public class GameObject {
 			return false;
 		}else {
 			components.put(c.getName(), c);
+			c.setParent(this);
 			return true;
 		}
 	}
+	
+	public void removeComponent(String name){
+		components.remove(name);
+	}
 
 	public Component GetComponent(String name) {
-		if (!components.containsKey(name))
+		if (!components.containsKey(name)) {
 			return null;
+		}
 
 		return components.get(name);
 	}
