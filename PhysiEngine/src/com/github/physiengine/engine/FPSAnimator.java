@@ -1,6 +1,6 @@
 package com.github.physiengine.engine;
 
-public abstract class FPSAnimator implements Runnable{
+public class FPSAnimator implements Runnable{
 
 	private Thread thread; 
 	private boolean running = false;
