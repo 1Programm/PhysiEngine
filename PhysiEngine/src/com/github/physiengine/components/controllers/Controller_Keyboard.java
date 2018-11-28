@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 
 import com.github.physiengine.math.Vector2;
 
+import com.github.helperclasses.strings.StringUtils;
+
 public class Controller_Keyboard extends Controller implements KeyListener {
 
 	private int keyUp, keyLeft, keyDown, keyRight;
@@ -24,7 +26,11 @@ public class Controller_Keyboard extends Controller implements KeyListener {
 		String[] splittedKeys = controll.split(",");
 		
 		if(splittedKeys.length != 4) {
-			//Throw Exception
+			try {
+				throw new Exception("Not valid Keys - do 'W,A,S,D' or 'Enter,Up,Tab,Escape' ...");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return;
 		}
 		
