@@ -72,6 +72,11 @@ public class StringUtils {
 	};
 	
 	public static int KeyCharToKeyCode(String keyChar) {
-		return keyboardKeys.get(keyChar);
+		for(String key : keyboardKeys.keySet()) {
+			if(key.equalsIgnoreCase(keyChar)) {
+				return keyboardKeys.get(key);
+			}
+		}
+		return -1;
 	}
 }
