@@ -21,7 +21,17 @@ public class Controller_Keyboard extends Controller implements KeyListener {
 	}
 	
 	public Controller_Keyboard(String controll, float speed) {
+		String[] splittedKeys = controll.split(",");
 		
+		if(splittedKeys.length != 4) {
+			//Throw Exception
+			return;
+		}
+		
+		this.keyUp = StringUtils.KeyCharToKeyCode(splittedKeys[0]);
+		this.keyLeft = StringUtils.KeyCharToKeyCode(splittedKeys[1]);
+		this.keyDown = StringUtils.KeyCharToKeyCode(splittedKeys[2]);
+		this.keyRight = StringUtils.KeyCharToKeyCode(splittedKeys[3]);
 	}
 
 	@Override
@@ -37,8 +47,6 @@ public class Controller_Keyboard extends Controller implements KeyListener {
 		if(right) newVec.x += speed;
 		
 		return newVec;
-		
-		
 	}
 
 	@Override
