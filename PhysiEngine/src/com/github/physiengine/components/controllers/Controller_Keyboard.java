@@ -38,6 +38,8 @@ public class Controller_Keyboard extends Controller implements KeyListener {
 		this.keyLeft = StringUtils.KeyCharToKeyCode(splittedKeys[1]);
 		this.keyDown = StringUtils.KeyCharToKeyCode(splittedKeys[2]);
 		this.keyRight = StringUtils.KeyCharToKeyCode(splittedKeys[3]);
+		
+		this.speed = speed;
 	}
 
 	@Override
