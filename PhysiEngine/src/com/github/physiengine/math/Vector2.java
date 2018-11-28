@@ -65,8 +65,8 @@ public class Vector2 { // Wer das liest ist cooool :D
 		this.y += point.y;
 	}
 	
-	public String print(String name) {
-		return name + " (" + x + ", " + y + ")";
+	public void print(String name) {
+		System.out.println(name + " (" + x + ", " + y + ")");
 	}
 
 	// --------------------------------------------------------------------------------------------
