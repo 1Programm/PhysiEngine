@@ -18,12 +18,15 @@ public abstract class Component {
 
 	public abstract void update(Changes c);
 
+	protected void init() {}
+	
 	public GameObject getParent() {
 		return parent;
 	}
 
 	public void setParent(GameObject parent) {
 		this.parent = parent;
+		init();
 	}
 	
 	public boolean isEnabled() {

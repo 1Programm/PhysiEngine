@@ -63,10 +63,33 @@ public class Vector2 { // Wer das liest ist cooool :D
 
 		this.x += point.x;
 		this.y += point.y;
-	}
+	}	
 	
 	public void print(String name) {
-		System.out.println(name + " (" + x + ", " + y + ")");
+		System.out.println(name + ": " + toString());
+	}
+	
+	// --------------------------------------------------------------------------------------------
+	// Super Methods
+	// --------------------------------------------------------------------------------------------
+
+	@Override
+	protected Vector2 clone() {
+		return new Vector2(this.x, this.y);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Vector2)) return false;
+		
+		Vector2 vec = (Vector2)obj;
+		
+		return (this.x == vec.x && this.y == vec.y);
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
 	}
 
 	// --------------------------------------------------------------------------------------------
@@ -99,6 +122,10 @@ public class Vector2 { // Wer das liest ist cooool :D
 		this.x /= x;
 		this.y /= y;
 	}
+	
+	public void div(float d) {
+		div(d, d);
+	}
 
 	public void div(Vector2 v) {
 		if(v == null) return;
@@ -111,6 +138,10 @@ public class Vector2 { // Wer das liest ist cooool :D
 		this.y *= y;
 	}
 
+	public void mul(float m) {
+		mul(m, m);
+	}
+	
 	public void mul(Vector2 v) {
 		if(v == null) return;
 		
