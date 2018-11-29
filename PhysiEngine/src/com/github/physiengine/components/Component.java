@@ -6,14 +6,11 @@ public abstract class Component {
 
 	protected String name;
 	protected GameObject parent;
-	
 	protected boolean enabled;
 
 	public Component(String name) {
-
 		this.name = name;
 		this.enabled = true;
-
 	}
 
 	public abstract void update(Changes c);
