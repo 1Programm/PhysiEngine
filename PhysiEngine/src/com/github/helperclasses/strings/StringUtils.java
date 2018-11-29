@@ -69,14 +69,37 @@ public class StringUtils {
 		keyboardKeys.put("B", KeyEvent.VK_B);
 		keyboardKeys.put("N", KeyEvent.VK_N);
 		keyboardKeys.put("M", KeyEvent.VK_M);
+		
+		keyboardKeys.put("UP", KeyEvent.VK_UP);
+		keyboardKeys.put("DOWN", KeyEvent.VK_DOWN);
+		keyboardKeys.put("LEFT", KeyEvent.VK_LEFT);
+		keyboardKeys.put("RIGHT", KeyEvent.VK_RIGHT);
 	};
 	
-	public static int KeyCharToKeyCode(String keyChar) {
+	public static int keyCharToKeyCode(String keyChar) {
 		for(String key : keyboardKeys.keySet()) {
 			if(key.equalsIgnoreCase(keyChar)) {
 				return keyboardKeys.get(key);
 			}
 		}
 		return -1;
+	}
+	
+	/*
+	 * String[] a = {"a", "b", "c"};
+	 * 
+	 * append(a, "")  -> abc
+	 * append(a, " ") -> a b c
+	 * append(a, "d") -> adbdc
+	 */
+	public static String append(String[] array, String between) {
+		String ret = "";
+		
+		for(int i=0;i<array.length;i++) {
+			if(i != 0) ret += between;
+			ret += array[i];
+		}
+		
+		return ret;
 	}
 }

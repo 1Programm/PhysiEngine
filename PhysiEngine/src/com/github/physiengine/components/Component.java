@@ -37,5 +37,13 @@ public abstract class Component {
 	public String getName() {
 		return name;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj.getClass() == this.getClass()) {
+			return true;
+		}
+		return false;
+	}
 
 }

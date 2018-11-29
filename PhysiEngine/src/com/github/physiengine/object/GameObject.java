@@ -36,6 +36,18 @@ public class GameObject {
 
 		return components.get(name);
 	}
+	
+	public <T extends Component> T getComponent(Class<T> typ) {
+		for(String name : components.keySet()) {
+			try {
+				return typ.cast(components.get(name));
+			}catch (ClassCastException e) {
+				//Not right...
+			}
+		}
+		
+		return null;
+	}
 
 	public Transform getTransform() {
 		return transform;
