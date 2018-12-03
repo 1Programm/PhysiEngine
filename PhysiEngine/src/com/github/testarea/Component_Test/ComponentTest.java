@@ -1,4 +1,4 @@
-package com.github.testarea.ComponentTest;
+package com.github.testarea.Component_Test;
 
 import com.github.physiengine.components.Component;
 import com.github.physiengine.components.collision.AABB;

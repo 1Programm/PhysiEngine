@@ -1,4 +1,4 @@
-package com.github.testarea.HelperClassTest;
+package com.github.testarea.HelperClass_Test;
 
 import com.github.helperclasses.math.MathHelp;
 import com.github.physiengine.math.Vector2;
