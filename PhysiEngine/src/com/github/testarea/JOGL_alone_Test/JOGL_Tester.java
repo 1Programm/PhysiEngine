@@ -15,28 +15,24 @@ public class JOGL_Tester {
 	public static GLWindow window;
 	
 	public JOGL_Tester() {
-		new Thread(new Runnable() {
-			public void run() {
-				GLProfile.initSingleton();
-				
-				profile = GLProfile.get(GLProfile.GL2);
-				GLCapabilities caps = new GLCapabilities(profile);
-				
-				window = GLWindow.create(caps);
-				window.setSize(WIDTH, HEIGHT);
-				window.setResizable(false);
-				window.addGLEventListener(new MyEventListener());
-				window.setTitle("JOGL - Test");
-				window.requestFocus();
-				
-				window.setVisible(true);
-				
-				// Our FPSAnimator ! ;D not from OpenGL
-				FPSAnimator anim = new FPSAnimator(60, false);
-				anim.setUpdateMethod(update);
-				anim.start();
-			}
-		}).start();
+		GLProfile.initSingleton();
+		
+		profile = GLProfile.get(GLProfile.GL2);
+		GLCapabilities caps = new GLCapabilities(profile);
+		
+		window = GLWindow.create(caps);
+		window.setSize(WIDTH, HEIGHT);
+		window.setResizable(false);
+		window.addGLEventListener(new MyEventListener());
+		window.setTitle("JOGL - Test");
+		window.requestFocus();
+		
+		window.setVisible(true);
+		
+		// Our FPSAnimator ! ;D not from OpenGL
+		//FPSAnimator anim = new FPSAnimator(60, false);
+		//anim.setUpdateMethod(update);
+		//anim.start();
 		
 	}
 	
