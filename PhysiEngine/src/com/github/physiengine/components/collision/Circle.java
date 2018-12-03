@@ -8,15 +8,8 @@ public class Circle extends Collider{
 	
 	public float radius;
 	
-	public Circle() {
-		onPositionChanged();
-		onSizeChanged();
-		onRotationChanged();
-	}
-	
 	@Override
 	protected CollisionInfo collideWith(AABB other) {
- 
 		return null;
 	}
 

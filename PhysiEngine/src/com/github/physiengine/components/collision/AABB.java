@@ -6,12 +6,6 @@ public class AABB extends Collider{
 	
 	public Vector2 position;
 	public Vector2 size;
-	
-	public AABB() {
-		onPositionChanged();
-		onSizeChanged();
-		onRotationChanged();
-	}
 
 	@Override
 	protected CollisionInfo collideWith(AABB other) {
