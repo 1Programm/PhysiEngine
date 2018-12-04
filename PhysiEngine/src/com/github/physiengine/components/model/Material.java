@@ -9,13 +9,7 @@ public class Material extends Component{
 	public float bounce;
 	public float friction;
 	
-	public Material() {
-		super("material");
-	}
-	
 	public Material(float mass, float bounce, float friction) {
-		super("material");
-		
 		this.mass = mass;
 		this.bounce = bounce;
 		this.friction = friction;

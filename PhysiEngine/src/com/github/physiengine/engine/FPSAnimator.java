@@ -10,9 +10,13 @@ public class FPSAnimator implements Runnable{
 	
 	private UpdateMethod updateMethod;
 	
-	public FPSAnimator(double FPS, boolean printFPS) {
+	public FPSAnimator(double FPS) {
 		this.FPS = FPS;
-		this.printFPS = printFPS;
+		this.printFPS = false;
+	}
+	
+	public void showFPS(boolean v) {
+		printFPS = v;
 	}
 	
 	public void setUpdateMethod(UpdateMethod updateMethod) {

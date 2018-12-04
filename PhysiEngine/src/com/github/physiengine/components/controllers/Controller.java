@@ -5,10 +5,6 @@ import com.github.physiengine.components.Component;
 import com.github.physiengine.math.Vector2;
 
 public abstract class Controller extends Component {
-
-	public Controller() {
-		super("Controller");
-	}
 	
 	@Override
 	public void update(Changes c) {

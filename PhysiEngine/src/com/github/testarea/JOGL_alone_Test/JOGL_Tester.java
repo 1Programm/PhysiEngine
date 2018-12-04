@@ -51,7 +51,7 @@ public class JOGL_Tester {
 		window.setVisible(true);
 		
 		// Our FPSAnimator ! ;D not from OpenGL
-		FPSAnimator anim = new FPSAnimator(60, false);
+		FPSAnimator anim = new FPSAnimator(60);
 		anim.setUpdateMethod(update);
 		anim.start();
 	}

@@ -14,7 +14,6 @@ public abstract class Collider extends Component{
 	private ArrayList<Layers> myLayer;
 
 	public Collider() {
-		super("collider");
 		myLayer = new ArrayList<>();
 		myLayer.add(Layers.BaseLayer);
 	}

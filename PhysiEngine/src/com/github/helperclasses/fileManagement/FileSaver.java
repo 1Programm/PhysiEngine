@@ -14,6 +14,7 @@ public class FileSaver {
 			
 			for(String line : data) {
 				writer.write(line);
+				writer.newLine();
 			}
 			
 			writer.close();
@@ -22,8 +23,8 @@ public class FileSaver {
 		}
 	}
 
-	public static void saveToFile(Saveable data) {
-		saveFromArray(data.getContent(), data.getPath());
+	public static void saveToFile(Saveable data, String path) {
+		saveFromArray(data.getContent(), path);
 	}
 
 }

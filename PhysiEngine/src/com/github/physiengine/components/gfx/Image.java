@@ -6,7 +6,6 @@ import com.github.physiengine.components.Component;
 public class Image extends Component {
 
 	public Image() {
-		super("Image");
 	}
 
 	public void update(Changes c) {

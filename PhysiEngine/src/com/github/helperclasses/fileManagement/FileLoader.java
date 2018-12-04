@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.github.helperclasses.interfaces.Loadable;
-import com.github.helperclasses.interfaces.Saveable;
 
 public class FileLoader {
 
@@ -37,15 +36,6 @@ public class FileLoader {
 		}
 
 		return gameState;
-	}
-	
-	public static void loadInto(Loadable toLoad) {
-		if(toLoad instanceof Saveable) {
-			String path = ((Saveable)toLoad).getPath();
-			loadInto(toLoad, path);
-		}else {
-			System.out.println("this object doesn't implement Saveable");
-		}
 	}
 	
 	public static void loadInto(Loadable toLoad, String path) {

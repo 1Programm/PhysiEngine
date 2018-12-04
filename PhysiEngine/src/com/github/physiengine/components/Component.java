@@ -8,9 +8,19 @@ public abstract class Component {
 	protected GameObject parent;
 	protected boolean enabled;
 
-	public Component(String name) {
-		this.name = name;
+	public Component() {
+		setupName();
+		
 		this.enabled = true;
+	}
+	
+	private void setupName() {
+		Class<?> c = super.getClass();
+		while(!c.getSuperclass().getSimpleName().equals("Component")) {
+			c = c.getSuperclass();
+		}
+		
+		this.name = c.getSimpleName().toLowerCase();
 	}
 
 	public abstract void update(Changes c);

@@ -14,7 +14,7 @@ public class Transform {
 	public Transform(float x, float y, float w, float h) { init(x, y, w, h, 0); }
 	public Transform(float x, float y, float w, float h, float r) { init(x, y, w, h, r); }
 	
-	private void init(float x, float y, float w, float h, float r) {
+	public void init(float x, float y, float w, float h, float r) {
 		this.pos = new Vector2(x, y);
 		this.scale = new Vector2(w, h);
 		this.rotation = r; 
