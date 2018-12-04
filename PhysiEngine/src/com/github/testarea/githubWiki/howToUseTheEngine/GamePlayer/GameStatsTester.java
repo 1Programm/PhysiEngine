@@ -26,7 +26,7 @@ public class GameStatsTester {
 											+ stats2.getVariable("testString"));
 		
 		
-		//First possibly to get a variable
+		//First way to get a variable
 		Object theFPS1_asObject = stats2.getVariable("FPS");
 		int theFPS1_asInt = (int)theFPS1_asObject;
 		theFPS1_asInt ++;
@@ -34,7 +34,7 @@ public class GameStatsTester {
 		Debug.LogInfo(GameStatsTester.class, "theFps1: " + theFPS1_asInt);
 		
 		
-		//Second possibly to get a variable (No casting needed)
+		//Second way to get a variable (No casting needed)
 		int theFPS2_asInt = stats2.getVariable("FPS", Integer.class);
 		theFPS2_asInt++;
 
