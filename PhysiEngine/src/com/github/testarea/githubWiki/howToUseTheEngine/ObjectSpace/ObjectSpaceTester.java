@@ -1,7 +1,5 @@
 package com.github.testarea.githubWiki.howToUseTheEngine.ObjectSpace;
 
-import com.github.physiengine.engine.GamePlayer;
-import com.github.physiengine.engine.GameStats;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.object.GameObject;
 

@@ -1,7 +1,5 @@
 package com.github.helperclasses.math;
 
-import com.github.physiengine.math.Vector2;
-
 public class MathHelp {
 
 	public static float blendNumbers(float num1, float num2, float percentage) {

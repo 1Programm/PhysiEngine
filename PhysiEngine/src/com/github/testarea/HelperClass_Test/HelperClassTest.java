@@ -1,7 +1,7 @@
 package com.github.testarea.HelperClass_Test;
 
 import com.github.helperclasses.math.MathHelp;
-import com.github.physiengine.math.Vector2;
+import com.github.helperclasses.math.Vector2;
 
 public class HelperClassTest {
 

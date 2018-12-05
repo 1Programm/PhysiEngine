@@ -38,8 +38,8 @@ public class GamePlayer {
 	};
 	
 	private void updateSpace(ObjectSpace space) {
-		for(int i=0;i<space.objects.size();i++) {
-			space.objects.get(i).update();
+		for(int i=0;i<space.size();i++) {
+			space.get(i).update();
 		}
 	}
 	

@@ -1,6 +1,6 @@
 package com.github.physiengine.components.collision;
 
-import com.github.physiengine.math.Vector2;
+import com.github.helperclasses.math.Vector2;
 
 public class AABB extends Collider{
 	

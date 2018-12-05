@@ -1,6 +1,7 @@
 package com.github.helperclasses.strings;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class StringUtils {
@@ -76,7 +77,7 @@ public class StringUtils {
 		keyboardKeys.put("RIGHT", KeyEvent.VK_RIGHT);
 	};
 	
-	public static int keyCharToKeyCode(String keyChar) {
+	public static int KeyCharToKeyCode(String keyChar) {
 		for(String key : keyboardKeys.keySet()) {
 			if(key.equalsIgnoreCase(keyChar)) {
 				return keyboardKeys.get(key);
@@ -92,7 +93,7 @@ public class StringUtils {
 	 * append(a, " ") -> a b c
 	 * append(a, "d") -> adbdc
 	 */
-	public static String append(String[] array, String between) {
+	public static String Append(String[] array, String between) {
 		String ret = "";
 		
 		for(int i=0;i<array.length;i++) {
@@ -101,5 +102,28 @@ public class StringUtils {
 		}
 		
 		return ret;
+	}
+	
+	
+	public static String ArrayToString(Object[] data) {
+		String ret = "(";
+		
+		for(int i=0;i<data.length;i++) {
+			if(i != 0) ret += ", ";
+			ret += data[i].toString();
+		}
+		
+		return ret + ")";
+	}
+	
+	public static String ArrayListToString(ArrayList<Object> data) {
+		String ret = "(";
+		
+		for(int i=0;i<data.size();i++) {
+			if(i != 0) ret += ", ";
+			ret += data.get(i).toString();
+		}
+		
+		return ret + ")";
 	}
 }

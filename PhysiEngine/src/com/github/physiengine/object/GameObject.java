@@ -37,14 +37,12 @@ public class GameObject {
 		this.components = new HashMap<>();
 		this.transform = new Transform(x, y, w, h, r);
 		
-		if(ObjectSpace.currentOpenSpace != null) {
-			ObjectSpace.currentOpenSpace.add(this);
+		if(ObjectSpace.curOpenSpace != null) {
+			ObjectSpace.curOpenSpace.add(this);
 		}
 	}
 	
-	public void update() {
-		
-	}
+	public void update() {}
 
 	public boolean addComponent(String name, Component c) {
 		if (components.containsKey(name)) {

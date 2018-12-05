@@ -1,4 +1,4 @@
-package com.github.testarea.JOGL_alone_Test;
+package com.github.testarea.githubWiki.rendering.JOGL_alone_Test;
 
 import com.github.physiengine.engine.FPSAnimator;
 import com.github.physiengine.engine.UpdateMethod;

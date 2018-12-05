@@ -18,7 +18,7 @@ public class FPSAnimatorTester {
 	}
 	
 	private static UpdateMethod updateMethod = () -> {
-		Debug.LogInfo(FPSAnimatorTester.class, "Testing fps");
+		Debug.Log(FPSAnimatorTester.class, "Testing fps");
 	};
 	
 }

@@ -9,18 +9,18 @@ import com.github.physiengine.object.GameObject;
 public class GamePlayerTester {
 
 	public static void main(String[] args) {
-		GamePlayer game = new GamePlayer(GameStats.SimpleGame(1));
+		GamePlayer game = new GamePlayer(GameStats.SimpleGame(1, 600, 500));
 		
 		ObjectSpace space1 = new ObjectSpace(true);
 		
 		new GameObject("Cat") {
 			@Override
 			public void update() {
-				Debug.LogInfo(this.getClass(), "Miauuu");
+				Debug.Log(this.getClass(), "Miauuu");
 			}
 		};
 		
-		ObjectSpace.CloseOpenSpace();
+		ObjectSpace.CloseSpace();
 		
 		
 		game.addSpace(space1);

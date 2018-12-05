@@ -1,7 +1,7 @@
 package com.github.physiengine.components.model;
 
+import com.github.helperclasses.math.Vector2;
 import com.github.physiengine.components.Changes;
-import com.github.physiengine.math.Vector2;
 
 public class Model_Rectangle extends Model {
 	

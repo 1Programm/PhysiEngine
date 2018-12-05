@@ -1,4 +1,4 @@
-package com.github.physiengine.math;
+package com.github.helperclasses.math;
 
 public class Vector2 {
 	public float x;

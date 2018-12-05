@@ -6,55 +6,62 @@ import com.github.physiengine.object.GameObject;
 
 public class ObjectSpace {
 
-	public static ObjectSpace currentOpenSpace = null;
-	
 	private static int ignores = 0;
+	public static ObjectSpace curOpenSpace = null;
 	
 	public static void Ignore(int num) {
-		if(currentOpenSpace == null) return;
-		ignores = num;
+		ignores += num;
 	}
 	
 	public static void IgnoreStart() {
-		if(currentOpenSpace == null) return;
 		ignores = -1;
 	}
 	
 	public static void IgnoreStop() {
-		if(currentOpenSpace == null) return;
 		ignores = 0;
 	}
 	
-	public static void CloseOpenSpace() {
-		currentOpenSpace = null;
+	public static void CloseSpace() {
+		curOpenSpace = null;
 		ignores = 0;
 	}
 	
 	
 	
-	public ArrayList<GameObject> objects;
+	
+	private ArrayList<GameObject> objects;
 	
 	public ObjectSpace(boolean isOpen) {
-		if(isOpen) {
-			currentOpenSpace = this;
-		}
-		
 		objects = new ArrayList<>();
+		
+		if(isOpen) {
+			curOpenSpace = this;
+		}
 	}
 	
-	public GameObject add(GameObject obj) {
-		if(currentOpenSpace == this) {
+	public void add(GameObject object) {
+		if(this == curOpenSpace) {
 			if(ignores != 0) {
 				if(ignores > 0) {
 					ignores--;
 				}
-				
-				return obj;
+				return;
 			}
 		}
 		
-		objects.add(obj);
-		return obj;
+		objects.add(object);
+	}
+	
+	public int size() {
+		return objects.size();
+	}
+	
+	public GameObject get(int i) {
+		return objects.get(i);
+	}
+	
+	public ArrayList<GameObject> getObjects(){
+		return objects;
 	}
 	
 }

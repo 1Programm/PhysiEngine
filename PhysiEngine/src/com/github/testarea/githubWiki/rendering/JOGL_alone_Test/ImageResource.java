@@ -1,4 +1,4 @@
-package com.github.testarea.JOGL_alone_Test;
+package com.github.testarea.githubWiki.rendering.JOGL_alone_Test;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

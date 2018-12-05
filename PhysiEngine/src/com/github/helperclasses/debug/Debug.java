@@ -1,29 +1,30 @@
 package com.github.helperclasses.debug;
 
 public class Debug {
-	
-	private static final String SYSTEM_INFO = "PHYSIENGINE->Debug->Info";
-	private static final String SYSTEM_ERROR = "PHYSIENGINE->Debug->Error";
 
-	private static Console console = (msg) -> {
-		System.out.println(msg);
-	};
+	private static final String DEBUG_WARNING = "PHYSIENGINE -> DEBUG -> WARNING";
+	private static final String DEBUG_ERROR = "PHYSIENGINE -> DEBUG -> ERROR";
+	
+	private static final Console console = (in) -> {System.out.println(in);};
 	
 	
 	
-	public static void LogInfo(Class<?> from, String message) {
-		console.print(SYSTEM_INFO + ": [" + from.getSimpleName() + "] -> " + message);
+	public static void Log(Class<?> from, String message) {
+		console.print(": [" + from + "] -> " + message);
+	}
+			
+	public static void LogWarning(Class<?> from, String message) {
+		console.print(DEBUG_WARNING + ": [" + from + "] -> " + message);
 	}
 	
 	public static void LogError(Class<?> from, String message) {
-		console.print(SYSTEM_ERROR + ": [" + from.getSimpleName() + "] -> " + message);
+		console.print(DEBUG_ERROR + ": [" + from + "] -> " + message);
 	}
 	
-	
-	
-	
-	public interface Console {
-		public void print(String message);
+			
+			
+	private interface Console{
+		public void print(String input);
 	}
 	
 }

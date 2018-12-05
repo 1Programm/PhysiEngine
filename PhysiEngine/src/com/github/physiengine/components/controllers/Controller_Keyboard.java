@@ -3,8 +3,7 @@ package com.github.physiengine.components.controllers;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import com.github.physiengine.math.Vector2;
-
+import com.github.helperclasses.math.Vector2;
 import com.github.helperclasses.strings.StringUtils;
 
 public class Controller_Keyboard extends Controller implements KeyListener {
@@ -34,10 +33,10 @@ public class Controller_Keyboard extends Controller implements KeyListener {
 			return;
 		}
 		
-		this.keyUp = StringUtils.keyCharToKeyCode(splittedKeys[0]);
-		this.keyLeft = StringUtils.keyCharToKeyCode(splittedKeys[1]);
-		this.keyDown = StringUtils.keyCharToKeyCode(splittedKeys[2]);
-		this.keyRight = StringUtils.keyCharToKeyCode(splittedKeys[3]);
+		this.keyUp = StringUtils.KeyCharToKeyCode(splittedKeys[0]);
+		this.keyLeft = StringUtils.KeyCharToKeyCode(splittedKeys[1]);
+		this.keyDown = StringUtils.KeyCharToKeyCode(splittedKeys[2]);
+		this.keyRight = StringUtils.KeyCharToKeyCode(splittedKeys[3]);
 		
 		this.speed = speed;
 	}

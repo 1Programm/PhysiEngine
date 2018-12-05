@@ -1,8 +1,8 @@
 package com.github.physiengine.components.controllers;
 
+import com.github.helperclasses.math.Vector2;
 import com.github.physiengine.components.Changes;
 import com.github.physiengine.components.Component;
-import com.github.physiengine.math.Vector2;
 
 public abstract class Controller extends Component {
 	

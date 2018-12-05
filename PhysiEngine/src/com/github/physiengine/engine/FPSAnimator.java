@@ -16,7 +16,7 @@ public class FPSAnimator implements Runnable{
 	}
 	
 	public void showFPS(boolean v) {
-		printFPS = v;
+		this.printFPS = v;
 	}
 	
 	public void setUpdateMethod(UpdateMethod updateMethod) {
@@ -66,7 +66,5 @@ public class FPSAnimator implements Runnable{
 		if(updateMethod != null) {
 			updateMethod.update();
 		}
-		
-		
 	}
 }
