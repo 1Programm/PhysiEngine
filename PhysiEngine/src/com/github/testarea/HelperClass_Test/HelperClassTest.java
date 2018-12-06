@@ -7,6 +7,17 @@ public class HelperClassTest {
 
 	public static void main(String[] args) {
 		
+		Vector2 in = new Vector2(2, 2);
+		
+		Vector2 mirror = new Vector2(1, 0);
+		
+		Vector2 out = Vector2.getReflection(mirror, in);
+		
+		in.print("In: ");
+		out.print("Out: ");
+		
+		
+		w("");
 		w("MathHelp.blendNumbers - Test:");
 		w("-----------------------------------");
 		

@@ -68,6 +68,10 @@ public class Vector2 {
 		System.out.println(name + ": " + toString());
 	}
 	
+	public float[] toArray() {
+		return new float[] {x, y};
+	}
+	
 	// --------------------------------------------------------------------------------------------
 	// Super Methods
 	// --------------------------------------------------------------------------------------------
@@ -205,5 +209,36 @@ public class Vector2 {
 		if(v1 == null || v2 == null) return 0;
 		
 		return (float) Math.acos(Dot(v1, v2) / (v1.getLength() * v2.getLength()));
+	}
+	
+	
+	/*
+	 * Reflection:
+	 * 
+	 * o-----------> x
+	 * |  
+	 * |   \    |
+	 * |    \   |  <- this is the reflected Vector
+	 * |     \  |
+	 * |      o |
+	 * |   <----|  <- this is the normal
+	 * |      o |
+	 * |     /  |  <- this is the toBeReflected Vector
+	 * |    /   |
+	 * |   /    |  
+	 * |
+	 * V
+	 * y
+	 * 
+	 */
+	public static Vector2 getReflection(Vector2 normal, Vector2 toBeReflected) {
+		Vector2 ret = new Vector2(normal);
+		
+		float dot = Vector2.Dot(toBeReflected, normal) * 2;
+		
+		ret.mul(dot);
+		ret.sub(toBeReflected);
+		
+		return ret;
 	}
 }

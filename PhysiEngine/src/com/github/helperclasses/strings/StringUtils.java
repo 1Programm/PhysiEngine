@@ -93,7 +93,7 @@ public class StringUtils {
 	 * append(a, " ") -> a b c
 	 * append(a, "d") -> adbdc
 	 */
-	public static String Append(String[] array, String between) {
+	public static String Append(Object[] array, String between) {
 		String ret = "";
 		
 		for(int i=0;i<array.length;i++) {

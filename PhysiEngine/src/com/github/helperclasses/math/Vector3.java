@@ -51,27 +51,20 @@ public class Vector3 {
 		this.z /= l;
 	}
 
-	public void rotate(Vector3 rotation) {
-		//TODO
+	public void rotate(Vector3 direction, float rotation) {
+		Matrix3x3 m = Matrix3x3.getRotationAround(direction, rotation);
+		Vector3 v = m.mul(this);
+		this.x = v.x;
+		this.y = v.y;
+		this.z = v.z;
 	}
-
-	public void rotateAround(Vector3 rotation, Vector3 point) {
-		if(point == null) return;
-		if(rotation == null) return;
-		
-		this.x -= point.x;
-		this.y -= point.y;
-		this.z -= point.z;
-
-		rotate(rotation);
-
-		this.x += point.x;
-		this.y += point.y;
-		this.z += point.z;
-	}	
 	
 	public void print(String name) {
 		System.out.println(name + ": " + toString());
+	}
+	
+	public float[] toArray() {
+		return new float[] {x, y, z};
 	}
 	
 	// --------------------------------------------------------------------------------------------
