@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.math.Vector2;
 import com.github.helperclasses.math.Vector3;
+import com.github.physiengine.gfx.Window;
 import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
@@ -14,6 +15,8 @@ public class GamePlayer {
 	private ArrayList<ObjectSpace> spaces;
 	
 	private FPSAnimator animator;
+	
+	private Window window;
 	
 	public GamePlayer(GameStats stats) {
 		this.stats = stats;
@@ -28,6 +31,8 @@ public class GamePlayer {
 		
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
+		
+		window = Window.Create(stats);
 	}
 	
 	public void startGame() {
@@ -35,6 +40,8 @@ public class GamePlayer {
 	}
 	
 	private UpdateMethod updateMethod = () -> {
+		window.getWindow().display();
+		
 		for(int i=0;i<spaces.size();i++) {
 			updateSpace(spaces.get(i));
 		}
