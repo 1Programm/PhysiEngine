@@ -1,5 +1,7 @@
 package com.github.helperclasses.math;
 
+import java.awt.Color;
+
 public class MathHelp {
 
 	public static float blendNumbers(float num1, float num2, float percentage) {
@@ -16,6 +18,10 @@ public class MathHelp {
 		step.mul(stepSize);
 		
 		return Vector2.Add(start, step);
+	}
+	
+	public static Color getColor(Vector3 v) {
+		return new Color((int)v.x, (int)v.y, (int)v.z);
 	}
 	
 }

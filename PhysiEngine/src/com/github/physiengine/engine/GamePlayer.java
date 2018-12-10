@@ -3,6 +3,8 @@ package com.github.physiengine.engine;
 import java.util.ArrayList;
 
 import com.github.helperclasses.debug.Debug;
+import com.github.helperclasses.math.Vector2;
+import com.github.helperclasses.math.Vector3;
 import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
@@ -16,10 +18,8 @@ public class GamePlayer {
 	public GamePlayer(GameStats stats) {
 		this.stats = stats;
 		this.spaces = new ArrayList<>();
-	}
-	
-	public void startGame() {
-		Integer FPS = stats.getVariable("FPS", Integer.class);
+		
+		Integer FPS = getFPS();
 		
 		if(FPS == null) {
 			Debug.LogError(this.getClass(), "There is no FPS value in the GameStats. Setup a FPS value by saying something like: stats.setVariable(\"FPS\", 60);");
@@ -28,6 +28,9 @@ public class GamePlayer {
 		
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
+	}
+	
+	public void startGame() {
 		animator.start();
 	}
 	
@@ -54,5 +57,46 @@ public class GamePlayer {
 		
 		spaces.get(spaces.size() - 1).add(object);
 	}
+
+	public GameStats getStats() {
+		return stats;
+	}
 	
+	public Integer getFPS() {
+		return stats.getVariable(GameStats.FPS, Integer.class);
+	}
+	
+	public Vector3 getBackgoundColor() {
+		return stats.getVariable(GameStats.BACKGROUND, Vector3.class);
+	}
+	
+	public String getBackgroundImagePath() {
+		return stats.getVariable(GameStats.BACKGROUND, String.class);
+	}
+	
+	public Vector2 getWindowSize() {
+		return stats.getVariable(GameStats.WINDOW_SIZE, Vector2.class);
+	}
+	
+	public int getWindowWidth() {
+		Vector2 size = getWindowSize();
+		
+		if(size == null) {
+			Debug.Log(GamePlayer.class, "The Window Size is not set in the GameStats");
+			return -1;
+		}
+		
+		return (int)size.x;
+	}
+	
+	public int getWindowHeight() {
+		Vector2 size = getWindowSize();
+		
+		if(size == null) {
+			Debug.Log(GamePlayer.class, "The Window Size is not set in the GameStats");
+			return -1;
+		}
+		
+		return (int)size.x;
+	}
 }

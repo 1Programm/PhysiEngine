@@ -9,7 +9,7 @@ import com.github.physiengine.object.GameObject;
 public class GamePlayerTester {
 
 	public static void main(String[] args) {
-		GamePlayer game = new GamePlayer(GameStats.SimpleGame(1, 600, 500));
+		GamePlayer game = new GamePlayer(GameStats.SimpleGame(1, "Simple Game", 600, 500));
 		
 		ObjectSpace space1 = new ObjectSpace(true);
 		
