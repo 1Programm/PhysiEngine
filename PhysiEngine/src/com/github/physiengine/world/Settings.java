@@ -8,4 +8,6 @@ public class Settings {
 
 	public static float airFriction = 0.2f; 
 	
+	public static float unitSize = 10;
+	
 }

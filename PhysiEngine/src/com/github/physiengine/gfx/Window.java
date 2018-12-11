@@ -25,7 +25,7 @@ public class Window {
 		w.window.setSize(width, height);
 		w.window.setResizable(false);    // <-- should this be a variable in GameStats ?
 		w.window.requestFocus();
-		w.window.addGLEventListener(new WindowUpdates());
+		w.window.addGLEventListener(new WindowUpdates(w));
 		w.window.addWindowListener(new WindowListener());
 		w.window.setVisible(true);
 		
