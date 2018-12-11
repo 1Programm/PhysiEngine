@@ -22,12 +22,7 @@ public class GamePlayer {
 		this.stats = stats;
 		this.spaces = new ArrayList<>();
 		
-		Integer FPS = getFPS();
-		
-		if(FPS == null) {
-			Debug.LogError(this.getClass(), "There is no FPS value in the GameStats. Setup a FPS value by saying something like: stats.setVariable(\"FPS\", 60);");
-			return;
-		}
+		int FPS = getFPS();
 		
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
@@ -69,8 +64,15 @@ public class GamePlayer {
 		return stats;
 	}
 	
-	public Integer getFPS() {
-		return stats.getVariable(GameStats.FPS, Integer.class);
+	public int getFPS() {
+		Integer fps = stats.getVariable(GameStats.FPS, Integer.class);
+		
+		if(fps == null) {
+			Debug.LogWarning(GamePlayer.class, "The FPS - variable is not set.");
+			return -1;
+		}
+		
+		return fps;
 	}
 	
 	public Vector3 getBackgoundColor() {
@@ -82,14 +84,18 @@ public class GamePlayer {
 	}
 	
 	public Vector2 getWindowSize() {
-		return stats.getVariable(GameStats.WINDOW_SIZE, Vector2.class);
+		Vector2 ret = stats.getVariable(GameStats.WINDOW_SIZE, Vector2.class);
+		
+		if(ret == null) Debug.LogWarning(GamePlayer.class, "The WINDOW_SIZE - variable is not set");
+		
+		return ret;
 	}
 	
 	public int getWindowWidth() {
 		Vector2 size = getWindowSize();
 		
 		if(size == null) {
-			Debug.Log(GamePlayer.class, "The Window Size is not set in the GameStats");
+			Debug.LogError(GamePlayer.class, "The Window Size is not set in the GameStats");
 			return -1;
 		}
 		
@@ -100,7 +106,7 @@ public class GamePlayer {
 		Vector2 size = getWindowSize();
 		
 		if(size == null) {
-			Debug.Log(GamePlayer.class, "The Window Size is not set in the GameStats");
+			Debug.LogError(GamePlayer.class, "The Window Size is not set in the GameStats");
 			return -1;
 		}
 		
