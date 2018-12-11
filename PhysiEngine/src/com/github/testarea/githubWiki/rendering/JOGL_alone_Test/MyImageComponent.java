@@ -1,6 +1,5 @@
 package com.github.testarea.githubWiki.rendering.JOGL_alone_Test;
 
-import com.github.physiengine.components.Changes;
 import com.github.physiengine.components.Component;
 
 public class MyImageComponent extends Component{
@@ -12,7 +11,7 @@ public class MyImageComponent extends Component{
 	}
 	
 	@Override
-	public void update(Changes c) {
+	public void update() {
 		
 	}
 

@@ -1,5 +1,7 @@
 package com.github.testarea.githubWiki.howToUseTheEngine.Components.AddComponentTest;
 
+import java.awt.Color;
+
 import com.github.physiengine.components.Component;
 import com.github.physiengine.components.collision.AABB;
 import com.github.physiengine.components.controllers.Controller_Keyboard;
@@ -15,7 +17,7 @@ public class ComponentTest {
 		
 		obj1.addComponent("myCollider", new AABB());
 		obj1.addComponent(new Controller_Keyboard(2));
-		obj1.addComponent(new Image());
+		obj1.addComponent(new Image(Color.BLACK));
 		
 		test();
 	}

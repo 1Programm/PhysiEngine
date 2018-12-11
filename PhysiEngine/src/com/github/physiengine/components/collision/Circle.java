@@ -3,10 +3,6 @@ package com.github.physiengine.components.collision;
 import com.github.helperclasses.math.Vector2;
 
 public class Circle extends Collider{
-
-	public Vector2 position;
-	
-	public float radius;
 	
 	@Override
 	protected CollisionInfo collideWith(AABB other) {
@@ -15,10 +11,10 @@ public class Circle extends Collider{
 
 	@Override
 	protected CollisionInfo collideWith(Circle other) {
-		Vector2 distV = new Vector2(position, other.position);
+		Vector2 distV = new Vector2(getPosition(), other.getPosition());
 		float dist = distV.getLength();
 		
-		float intersect = (radius + other.radius) - dist;
+		float intersect = (getRadius() + other.getRadius()) - dist;
 		
 		if(intersect >= 0) {
 			
@@ -35,19 +31,8 @@ public class Circle extends Collider{
 		return null;
 	}
 
-	@Override
-	protected void onPositionChanged() {
-		this.position = parent.getTransform().getPos();
-	}
-
-	@Override
-	protected void onSizeChanged() {
-		this.radius = parent.getTransform().getScale().getLength();
-	}
-
-	@Override
-	protected void onRotationChanged() {
-		//TODO 
+	private float getRadius() {
+		return getWidth() > getHeight() ? getWidth() : getHeight();
 	}
 
 }

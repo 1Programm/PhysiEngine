@@ -1,6 +1,5 @@
 package com.github.physiengine.components.model;
 
-import com.github.physiengine.components.Changes;
 import com.github.physiengine.components.Component;
 
 public class Material extends Component{
@@ -16,5 +15,5 @@ public class Material extends Component{
 	}
 	
 	@Override
-	public void update(Changes c) {}
+	public void update() {}
 }

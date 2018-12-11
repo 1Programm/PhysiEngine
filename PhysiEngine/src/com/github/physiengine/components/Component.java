@@ -23,7 +23,7 @@ public abstract class Component {
 		this.name = c.getSimpleName().toLowerCase();
 	}
 
-	public abstract void update(Changes c);
+	public abstract void update();
 
 	protected void init() {}
 	

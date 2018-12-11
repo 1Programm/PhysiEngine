@@ -7,11 +7,16 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
 public class Window {
+	
+	public static GLProfile profile;
 
 	public static Window Create(GameStats stats) {
 		Window w = new Window();
-		
-		GLProfile profile = GLProfile.get(GLProfile.GL2);
+
+		if(profile == null) {
+			profile = GLProfile.get(GLProfile.GL2);
+		}
+
 		GLCapabilities caps = new GLCapabilities(profile);
 		
 		String name = stats.getVariable(GameStats.WINDOW_NAME, String.class);

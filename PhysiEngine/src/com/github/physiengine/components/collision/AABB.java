@@ -1,25 +1,20 @@
 package com.github.physiengine.components.collision;
 
-import com.github.helperclasses.math.Vector2;
-
-public class AABB extends Collider{
-	
-	public Vector2 position;
-	public Vector2 size;
+public class AABB extends Collider {
 
 	@Override
 	protected CollisionInfo collideWith(AABB other) {
-		float left1 = position.x;
-		float left2 = other.position.x;
+		float left1 = getX();
+		float left2 = other.getX();
 		
-		float top1 = position.y;
-		float top2 = other.position.y;
+		float top1 = getY();
+		float top2 = other.getY();
 		
-		float right1 = position.x + size.x;
-		float right2 = other.position.x + other.size.x;
+		float right1 = left1 + getWidth();
+		float right2 = left2 + other.getWidth();
 		
-		float bottom1 = position.y + size.y;
-		float bottom2 = other.position.y + other.size.y;
+		float bottom1 = top1 + getHeight();
+		float bottom2 = top2 + other.getHeight();
 		
 		
 		if(left1 > right2) return null;
@@ -55,19 +50,5 @@ public class AABB extends Collider{
 		return null;
 	}
 
-	@Override
-	protected void onPositionChanged() {
-		this.position = parent.getTransform().getPos();
-	}
-
-	@Override
-	protected void onSizeChanged() {
-		this.size = parent.getTransform().getScale();		
-	}
-
-	@Override
-	protected void onRotationChanged() {
-		//TODO
-	}
 
 }
