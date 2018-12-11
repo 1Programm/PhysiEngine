@@ -7,7 +7,7 @@ public final class PhysiSystem {
 	}
 	
 	public static final void EXIT() {
-		
+		System.exit(0);
 	}
 	
 }
