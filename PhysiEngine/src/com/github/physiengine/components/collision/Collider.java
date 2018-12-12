@@ -9,7 +9,11 @@ public abstract class Collider extends Component{
 	private Vector2 size;
 	private float rotationOffset;
 
-	public Collider() {}
+	public Collider() {
+		this.positionOffset = new Vector2();
+		this.size = new Vector2(1, 1);
+		this.rotationOffset = 0;
+	}
 	
 	public Collider(float offX, float offY, float width, float height, float rotationOffset) {
 		this.positionOffset = new Vector2(offX, offY);

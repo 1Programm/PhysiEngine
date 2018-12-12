@@ -4,11 +4,11 @@ public class AABB extends Collider {
 
 	@Override
 	protected CollisionInfo collideWith(AABB other) {
-		float left1 = getX();
-		float left2 = other.getX();
+		float left1 = getX() - getWidth()/2;
+		float left2 = other.getX() - other.getWidth()/2;
 		
-		float top1 = getY();
-		float top2 = other.getY();
+		float top1 = getY() - getHeight()/2;
+		float top2 = other.getY() - other.getHeight()/2;
 		
 		float right1 = left1 + getWidth();
 		float right2 = left2 + other.getWidth();

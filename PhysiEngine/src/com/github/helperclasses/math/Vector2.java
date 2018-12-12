@@ -176,6 +176,9 @@ public class Vector2 {
 	}
 
 	public static Vector2 Mul(Vector2 v1, Vector2 v2) {
+		if(v1 == null) return v2.clone();
+		if(v2 == null) return v1.clone();
+		
 		return new Vector2(v2.x * v1.x, v2.y * v1.y);
 	}
 

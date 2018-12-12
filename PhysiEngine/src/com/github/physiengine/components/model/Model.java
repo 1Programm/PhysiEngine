@@ -11,7 +11,13 @@ public class Model extends Component{
 	public void update() {}
 
 	public Vector2[] getVertecies() {
-		return vertecies;
+		Vector2[] verts = new Vector2[vertecies.length];
+		
+		for(int i=0;i<vertecies.length;i++) {
+			verts[i] = Vector2.Mul(vertecies[i], parent.getTransform().getScale());
+		}
+		
+		return verts;
 	}
 	
 }

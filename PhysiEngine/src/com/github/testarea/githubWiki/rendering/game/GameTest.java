@@ -5,6 +5,9 @@ import java.awt.Color;
 import com.github.helperclasses.controll.Input;
 import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.math.Vector2;
+import com.github.physiengine.components.collision.AABB;
+import com.github.physiengine.components.collision.Collider;
+import com.github.physiengine.components.collision.CollisionInfo;
 import com.github.physiengine.components.controllers.Controller_Keyboard;
 import com.github.physiengine.components.gfx.Image;
 import com.github.physiengine.components.model.Model_Rectangle;
@@ -26,20 +29,29 @@ public class GameTest {
 		
 		ObjectSpace space = new ObjectSpace(true);
 		
-		GameObject o1 = new GameObject("testImage1");
-		o1.addComponent(new Model_Rectangle(null, new Vector2(4, 4)));
+		GameObject o1 = new GameObject("testImage1", 0, 0, 1, 1);
+		o1.addComponent(new Model_Rectangle(null, new Vector2(1, 1)));
 		o1.addComponent(new Image("/images/crystals/19.png"));
 		o1.getComponent(Image.class).setColor(new Color(255, 255, 255, 255)); // Alters the image color
+		o1.addComponent(new AABB());
 		
-		GameObject o = new GameObject("testImage");
-		o.addComponent(new Model_Rectangle(null, new Vector2(4, 4)));
+		GameObject o = new GameObject("testImage", 0, 0, 1f, 1f);
+		o.addComponent(new Model_Rectangle(null, new Vector2(1, 1)));
 		o.addComponent(new Image("/images/crystals/11.png"));
 		o.addComponent(new Controller_Keyboard("W,A,S,D", 0.05f));
+		o.addComponent(new AABB());
 		
 		new GameObject("Updater") {
 			@Override
 			public void update() {
-				o.getTransform().setRotation(o.getTransform().getRotation() + 1f);
+				Collider c2 = o1.getComponent(Collider.class);
+				Collider c1 = o.getComponent(Collider.class);
+				
+				CollisionInfo info = c1.resolveCollision(c2);
+				
+				if(info != null) {
+					o.getTransform().getPos().add(-info.penetrateX, -info.penetrateY);
+				}
 			}
 		};
 		
