@@ -34,7 +34,11 @@ public class Window {
 		w.window.setTitle(name);
 		w.window.requestFocus();
 		w.window.addWindowListener(new WindowListener());
-		w.window.addKeyListener(new Input());
+		
+		Input in = new Input();
+		w.window.addKeyListener(in);
+		w.window.addMouseListener(in);
+		
 		w.window.setVisible(true);
 		
 		w.renderMethod = renderMethod;

@@ -10,8 +10,8 @@ import com.jogamp.opengl.util.texture.Texture;
 
 public class Graphics {
 
-	private static float r, g, b, a; 		//Colors
-	private static float rotation; 			//Rotation
+	private static float r = 1, g = 1, b = 1, a = 1; 		//Colors
+	private static float rotation = 0; 			//Rotation
 	private static float scaleX = 1, scaleY = 1;    //Scale
 	private static float antiscaleX = 1, anitscaleY = 1;
 	
@@ -23,8 +23,8 @@ public class Graphics {
 			return;
 		}
 		
-		gl.glScalef(scaleX, scaleY, 1);
 		gl.glTranslatef(x, y, 0);
+		gl.glScalef(scaleX, scaleY, 1);
 		gl.glRotatef(-rotation, 0, 0, 1);
 		
 		
@@ -41,18 +41,18 @@ public class Graphics {
 
 		
 		gl.glRotatef(rotation, 0, 0, 1);
-		gl.glTranslatef(-x, -y, 0);
 		gl.glScalef(antiscaleX, anitscaleY, 1);
+		gl.glTranslatef(-x, -y, 0);
 	}
 	
-	public static void drawRect(Vector2[] verts) {
+	public static void drawRect(Vector2[] verts, Vector2 mid) {
 		if(gl == null) {
 			Debug.LogWarning(Graphics.class, "gl - object is null");
 			return;
 		}
-		
+
+		gl.glTranslatef(mid.x, mid.y, 0);
 		gl.glScalef(scaleX, scaleY, 1);
-		//gl.glTranslatef(x, y, 0);
 		gl.glRotatef(-rotation, 0, 0, 1);
 		
 		
@@ -69,8 +69,8 @@ public class Graphics {
 
 		
 		gl.glRotatef(rotation, 0, 0, 1);
-		//gl.glTranslatef(-x, -y, 0);
 		gl.glScalef(antiscaleX, anitscaleY, 1);
+		gl.glTranslatef(-mid.x, -mid.y, 0);
 	}
 	
 	public static void drawImage(ImageResource image, Vector2[] verts, Vector2 mid) {
@@ -85,9 +85,9 @@ public class Graphics {
 			gl.glBindTexture(GL2.GL_TEXTURE_2D, tex.getTextureObject());
 		}
 		
-	
-		gl.glScalef(scaleX, scaleY, 1);
+
 		gl.glTranslatef(mid.x, mid.y, 0);
+		gl.glScalef(scaleX, scaleY, 1);
 		gl.glRotatef(-rotation, 0, 0, 1);
 		
 		
@@ -112,8 +112,8 @@ public class Graphics {
 		gl.glBindTexture(GL2.GL_TEXTURE_2D, 0);
 		
 		gl.glRotatef(rotation, 0, 0, 1);
-		gl.glTranslatef(-mid.x, -mid.y, 0);
 		gl.glScalef(antiscaleX, anitscaleY, 1);
+		gl.glTranslatef(-mid.x, -mid.y, 0);
 	}
 		
 	public static void drawImage(ImageResource image, float x, float y, float width, float height) {
@@ -124,6 +124,7 @@ public class Graphics {
 		}
 		
 		gl.glTranslatef(x, y, 0);
+		gl.glScalef(scaleX, scaleY, 1);
 		gl.glRotatef(-rotation, 0, 0, 1);
 		
 		
@@ -148,6 +149,7 @@ public class Graphics {
 		gl.glBindTexture(GL2.GL_TEXTURE_2D, 0);
 		
 		gl.glRotatef(rotation, 0, 0, 1);
+		gl.glScalef(antiscaleX, anitscaleY, 1);
 		gl.glTranslatef(-x, -y, 0);
 	}
 	
@@ -159,7 +161,7 @@ public class Graphics {
 	}
 	
 	public static void setColor(Color c) {
-		setColor((float)(c.getRed() / 255), (float)(c.getGreen() / 255), (float)(c.getBlue() / 255), (float)(c.getAlpha() / 255));
+		setColor((float)(c.getRed() / 255.0), (float)(c.getGreen() / 255.0), (float)(c.getBlue() / 255.0), (float)(c.getAlpha() / 255.0));
 	}
 	
 	public static void setRotation(float rotation) {

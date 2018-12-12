@@ -10,4 +10,17 @@ public class Settings {
 	
 	public static float unitSize = 10;
 	
+	public static float LEFT;
+	public static float RIGHT;
+	public static float BOTTOM;
+	public static float TOP;
+	
+	public static float getUnitsWidth() {
+		return RIGHT - LEFT;
+	}
+	
+	public static float getUnitsHeight() {
+		return TOP - BOTTOM;
+	}
+	
 }

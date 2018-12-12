@@ -2,6 +2,8 @@ package com.github.helperclasses.debug;
 
 import java.util.ArrayList;
 
+import com.github.helperclasses.controll.Input;
+
 public class Debug {
 
 	private static final String DEBUG_WARNING = "PHYSIENGINE -> DEBUG -> WARNING";
@@ -12,6 +14,10 @@ public class Debug {
 	private static final ArrayList<Class<?>> ignoreLog = new ArrayList<>();
 	private static final ArrayList<Class<?>> ignoreWarning = new ArrayList<>();
 	private static final ArrayList<Class<?>> ignoreError = new ArrayList<>();
+	
+	static {
+		Ignore(Input.class);
+	}
 	
 	
 	public static void Log(Class<?> from, String message) {
@@ -38,7 +44,7 @@ public class Debug {
 		if(ignoreError.contains(cls) == false) ignoreError.add(cls); 
 	}
 	
-	public static void IgnoreLog(Class<?> cls) {
+	public static void IgnoreLogs(Class<?> cls) {
 		if(ignoreLog.contains(cls) == false) ignoreLog.add(cls);
 	}
 	
@@ -50,6 +56,32 @@ public class Debug {
 		if(ignoreError.contains(cls) == false) ignoreError.add(cls);
 	}
 			
+	public static void ListenTo(Class<?> cls, boolean log, boolean warning, boolean error) {
+		if(log) {
+			if(ignoreLog.contains(cls)) {
+				ignoreLog.remove(cls);
+			}
+		}else {
+			IgnoreLogs(cls);
+		}
+		
+		if(warning) {
+			if(ignoreWarning.contains(cls)) {
+				ignoreWarning.remove(cls);
+			}
+		}else {
+			IgnoreWarnings(cls);
+		}
+		
+		if(error) {
+			if(ignoreError.contains(cls)) {
+				ignoreError.remove(cls);
+			}
+		}else {
+			IgnoreErrors(cls);
+		}
+	}
+	
 			
 	private interface Console{
 		public void print(String input);

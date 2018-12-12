@@ -12,16 +12,21 @@ import com.github.physiengine.gfx.Graphics;
 public class Image extends Component {
 
 	private ImageResource image;
-	private Color color;
+	private float r, g, b, a;
 	
 	public Image(String path) {
 		image = new ImageResource(path);
-		color = new Color(255, 255, 255, 255);
+		r = g = b = a = 1;
 		typ = ComponentTyp.GraphicsComponent;
 	}
 	
 	public Image(Color color) {
-		this.color = color;
+		this.setColor(color);
+		typ = ComponentTyp.GraphicsComponent;
+	}
+	
+	public Image(float r, float g, float b, float a) {
+		this.setColor(r, g, b, a);
 		typ = ComponentTyp.GraphicsComponent;
 	}
 
@@ -30,21 +35,36 @@ public class Image extends Component {
 		
 		if(model != null) {
 			Vector2[] rect = model.getVertecies();
+			Vector2 pos = Vector2.Add(parent.getTransform().getPos(), model.getOffset());
 			
 			Graphics.setScale(parent.getTransform().getScale());
 			Graphics.setRotation(parent.getTransform().getRotation());
-			Graphics.setColor(color);
+			Graphics.setColor(r, g, b, a);
 			
 			if(image != null) {
 				Graphics.drawImage(image, rect, parent.getTransform().getPos());
 			}else {
-				Graphics.drawRect(rect);
+				Graphics.drawRect(rect, pos);
 			}
 		}
 	}
 	
-	public void setColor(Color c) {
-		this.color = c;
+	public ImageResource getResource() {
+		return image;
+	}
+	
+	public void setColor(Color color) {
+		this.r = color.getRed() / 255.0f;
+		this.g = color.getGreen() / 255.0f;
+		this.b = color.getBlue() / 255.0f;
+		this.a = color.getAlpha() / 255.0f;
+	}
+	
+	public void setColor(float r, float g, float b, float a) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = a;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.math.Vector2;
 import com.github.helperclasses.math.Vector3;
-import com.github.physiengine.gfx.Window;
+import com.github.physiengine.PhysiSystem;
 import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
@@ -16,8 +16,6 @@ public class GamePlayer {
 	
 	private FPSAnimator animator;
 	
-	private Window window;
-	
 	public GamePlayer(GameStats stats) {
 		this.stats = stats;
 		this.spaces = new ArrayList<>();
@@ -27,7 +25,7 @@ public class GamePlayer {
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
 		
-		window = Window.Create(stats, render);
+		PhysiSystem.CreateWindow(stats, render);
 	}
 	
 	private UpdateMethod render = () -> {
@@ -43,7 +41,7 @@ public class GamePlayer {
 	}
 	
 	private UpdateMethod updateMethod = () -> {
-		window.getWindow().display();
+		PhysiSystem.getCurWindow().getWindow().display();
 		
 		for(int i=0;i<spaces.size();i++) {
 			updateSpace(spaces.get(i));

@@ -56,7 +56,12 @@ public class WindowUpdates implements GLEventListener {
 		
 		float unitsTall = window.getHeight() / (window.getWidth() / Settings.unitSize);
 		
-		gl.glOrtho(-Settings.unitSize/2, Settings.unitSize/2, -unitsTall/2, unitsTall/2, -1, 1);
+		Settings.LEFT = -Settings.unitSize/2;
+		Settings.RIGHT = Settings.unitSize/2;
+		Settings.BOTTOM = -unitsTall/2;
+		Settings.TOP = unitsTall/2;
+		
+		gl.glOrtho(Settings.LEFT, Settings.RIGHT, Settings.BOTTOM, Settings.TOP, -1, 1);
 		
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 	}

@@ -11,10 +11,10 @@ public class Controller_Keyboard extends Controller {
 	public Controller_Keyboard(float speed) {
 		super();
 		
-		this.keyUp = "UP";
-		this.keyLeft = "LEFT";
-		this.keyDown = "DOWN";
-		this.keyRight = "RIGHT";
+		this.keyUp = "W";
+		this.keyLeft = "A";
+		this.keyDown = "S";
+		this.keyRight = "D";
 		
 		this.speed = speed;
 	}

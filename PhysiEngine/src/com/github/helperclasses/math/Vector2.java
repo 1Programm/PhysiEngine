@@ -77,7 +77,7 @@ public class Vector2 {
 	// --------------------------------------------------------------------------------------------
 
 	@Override
-	protected Vector2 clone() {
+	public Vector2 clone() {
 		return new Vector2(this.x, this.y);
 	}
 	
@@ -99,6 +99,11 @@ public class Vector2 {
 	// Operating Methods
 	// --------------------------------------------------------------------------------------------
 
+	public void set(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	public void add(float x, float y) {
 		this.x += x;
 		this.y += y;

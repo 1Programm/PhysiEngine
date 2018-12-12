@@ -40,4 +40,8 @@ public class ImageResource {
 		return texture;
 	}
 	
+	public BufferedImage getImage() {
+		return image;
+	}
+	
 }
