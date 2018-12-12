@@ -9,6 +9,8 @@ public class Controller_Keyboard extends Controller {
 	private float speed;
 
 	public Controller_Keyboard(float speed) {
+		super();
+		
 		this.keyUp = "UP";
 		this.keyLeft = "LEFT";
 		this.keyDown = "DOWN";
@@ -18,6 +20,8 @@ public class Controller_Keyboard extends Controller {
 	}
 	
 	public Controller_Keyboard(String controll, float speed) {
+		super();
+		
 		String[] splittedKeys = controll.split(",");
 		
 		if(splittedKeys.length != 4) {

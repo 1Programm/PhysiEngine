@@ -17,7 +17,7 @@ public class ImageResource {
 	private BufferedImage image = null;
 	
 	public ImageResource(String path) {
-		URL url = ImageResource.class.getResource(path);
+		URL url = getClass().getResource(path);
 		
 		try {
 			image = ImageIO.read(url);

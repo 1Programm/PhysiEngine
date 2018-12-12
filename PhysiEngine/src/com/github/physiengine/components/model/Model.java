@@ -11,19 +11,7 @@ public class Model extends Component{
 	public void update() {}
 
 	public Vector2[] getVertecies() {
-		Vector2[] ret = new Vector2[vertecies.length];
-		
-		Vector2 parPos = parent.getTransform().getPos();
-		Vector2 parSize = parent.getTransform().getScale();
-		float parRot = parent.getTransform().getRotation();
-		
-		for(int i=0;i<vertecies.length;i++) {
-			ret[i] = (Vector2.Mul(vertecies[i], parSize));
-			ret[i].rotate(parRot);
-			ret[i].add(parPos);
-		}
-		
-		return ret;
+		return vertecies;
 	}
 	
 }

@@ -12,10 +12,17 @@ public class WindowUpdates implements GLEventListener {
 	public WindowUpdates(Window window) {
 		this.window = window;
 	}
-
+	
 	@Override
 	public void display(GLAutoDrawable drawable) {
-		Graphics.setGL(drawable.getGL().getGL2());
+		GL2 gl = drawable.getGL().getGL2();
+		Graphics.setGL(gl);
+		
+		gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+		
+		if(window.getRenderMethod() != null) {
+			window.getRenderMethod().update();
+		}
 	}
 
 	@Override

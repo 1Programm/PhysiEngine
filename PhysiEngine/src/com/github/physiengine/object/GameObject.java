@@ -3,6 +3,7 @@ package com.github.physiengine.object;
 import java.util.HashMap;
 
 import com.github.physiengine.components.Component;
+import com.github.physiengine.components.ComponentTyp;
 import com.github.physiengine.engine.ObjectSpace;
 
 public class GameObject {
@@ -42,7 +43,23 @@ public class GameObject {
 		}
 	}
 	
-	public void update() {}
+	public void update() {
+		for(String name : components.keySet()) {
+			Component c = components.get(name);
+			if(c.getTyp() == ComponentTyp.ControllingComponent) {
+				c.update();
+			}
+		}
+	}
+	
+	public void render() {
+		for(String name : components.keySet()) {
+			Component c = components.get(name);
+			if(c.getTyp() == ComponentTyp.GraphicsComponent) {
+				c.update();
+			}
+		}
+	}
 
 	public boolean addComponent(String name, Component c) {
 		if (components.containsKey(name)) {
@@ -91,7 +108,7 @@ public class GameObject {
 		
 		return null;
 	}
-
+	
 	public Transform getTransform() {
 		return transform;
 	}

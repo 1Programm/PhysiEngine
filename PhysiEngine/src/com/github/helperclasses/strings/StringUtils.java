@@ -1,11 +1,12 @@
 package com.github.helperclasses.strings;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.jogamp.newt.event.KeyEvent;
+
 public class StringUtils {
-	private static HashMap<String, Integer> keyboardKeys = new HashMap<>();
+	private static HashMap<String, Short> keyboardKeys = new HashMap<>();
 	
 	static {
 		keyboardKeys.put("Escape", KeyEvent.VK_ESCAPE);

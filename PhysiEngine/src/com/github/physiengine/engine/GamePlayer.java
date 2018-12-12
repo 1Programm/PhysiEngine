@@ -27,8 +27,16 @@ public class GamePlayer {
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
 		
-		window = Window.Create(stats);
+		window = Window.Create(stats, render);
 	}
+	
+	private UpdateMethod render = () -> {
+		for(int i=0;i<spaces.size();i++) {
+			for(int o=0;o<spaces.get(i).size();o++) {
+				spaces.get(i).get(o).render();
+			}
+		}
+	};
 	
 	public void startGame() {
 		animator.start();

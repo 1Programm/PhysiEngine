@@ -7,11 +7,14 @@ public abstract class Component {
 	protected String name;
 	protected GameObject parent;
 	protected boolean enabled;
+	
+	protected ComponentTyp typ;
 
 	public Component() {
 		setupName();
 		
 		this.enabled = true;
+		this.typ = null;
 	}
 	
 	private void setupName() {
@@ -38,6 +41,10 @@ public abstract class Component {
 	
 	public boolean isEnabled() {
 		return enabled;
+	}
+	
+	public ComponentTyp getTyp() {
+		return typ;
 	}
 	
 	public void setEnabled(boolean b) {
