@@ -41,6 +41,7 @@ public class Vector2 {
 
 	public void normalize() {
 		float l = this.getLength();
+		if(l == 0) l = 1;
 		this.x /= l;
 		this.y /= l;
 	}

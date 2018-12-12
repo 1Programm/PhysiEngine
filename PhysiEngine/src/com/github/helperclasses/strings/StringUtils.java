@@ -9,7 +9,6 @@ public class StringUtils {
 	private static HashMap<String, Short> keyboardKeys = new HashMap<>();
 	
 	static {
-		keyboardKeys.put("Escape", KeyEvent.VK_ESCAPE);
 		
 		keyboardKeys.put("F1", KeyEvent.VK_F1);
 		keyboardKeys.put("F2", KeyEvent.VK_F2);
@@ -35,42 +34,42 @@ public class StringUtils {
 		keyboardKeys.put("9", KeyEvent.VK_9);
 		keyboardKeys.put("0", KeyEvent.VK_0);
 		
-		keyboardKeys.put("Tab", KeyEvent.VK_TAB);
-		
-		keyboardKeys.put("Q", KeyEvent.VK_Q);
-		keyboardKeys.put("W", KeyEvent.VK_W);
-		keyboardKeys.put("E", KeyEvent.VK_E);
-		keyboardKeys.put("R", KeyEvent.VK_R);
-		keyboardKeys.put("T", KeyEvent.VK_T);
-		keyboardKeys.put("Z", KeyEvent.VK_Z);
-		keyboardKeys.put("U", KeyEvent.VK_U);
-		keyboardKeys.put("I", KeyEvent.VK_I);
-		keyboardKeys.put("O", KeyEvent.VK_O);
-		keyboardKeys.put("P", KeyEvent.VK_P);
-		
-		keyboardKeys.put("+", KeyEvent.VK_PLUS);
-		
-		keyboardKeys.put("Enter", KeyEvent.VK_ENTER);
-
 		keyboardKeys.put("A", KeyEvent.VK_A);
-		keyboardKeys.put("S", KeyEvent.VK_S);
+		keyboardKeys.put("B", KeyEvent.VK_B);
+		keyboardKeys.put("C", KeyEvent.VK_C);
 		keyboardKeys.put("D", KeyEvent.VK_D);
+		keyboardKeys.put("E", KeyEvent.VK_E);
 		keyboardKeys.put("F", KeyEvent.VK_F);
 		keyboardKeys.put("G", KeyEvent.VK_G);
 		keyboardKeys.put("H", KeyEvent.VK_H);
+		keyboardKeys.put("I", KeyEvent.VK_I);
 		keyboardKeys.put("J", KeyEvent.VK_J);
 		keyboardKeys.put("K", KeyEvent.VK_K);
 		keyboardKeys.put("L", KeyEvent.VK_L);
-
-		keyboardKeys.put("Shift", KeyEvent.VK_SHIFT);
-
-		keyboardKeys.put("Y", KeyEvent.VK_Y);
-		keyboardKeys.put("X", KeyEvent.VK_X);
-		keyboardKeys.put("C", KeyEvent.VK_C);
-		keyboardKeys.put("V", KeyEvent.VK_V);
-		keyboardKeys.put("B", KeyEvent.VK_B);
-		keyboardKeys.put("N", KeyEvent.VK_N);
 		keyboardKeys.put("M", KeyEvent.VK_M);
+		keyboardKeys.put("N", KeyEvent.VK_N);
+		keyboardKeys.put("O", KeyEvent.VK_O);
+		keyboardKeys.put("P", KeyEvent.VK_P);
+		keyboardKeys.put("Q", KeyEvent.VK_Q);
+		keyboardKeys.put("R", KeyEvent.VK_R);
+		keyboardKeys.put("S", KeyEvent.VK_S);
+		keyboardKeys.put("T", KeyEvent.VK_T);
+		keyboardKeys.put("U", KeyEvent.VK_U);
+		keyboardKeys.put("V", KeyEvent.VK_V);
+		keyboardKeys.put("W", KeyEvent.VK_W);
+		keyboardKeys.put("X", KeyEvent.VK_X);
+		keyboardKeys.put("Y", KeyEvent.VK_Y);
+		keyboardKeys.put("Z", KeyEvent.VK_Z);
+		
+		keyboardKeys.put("+", KeyEvent.VK_PLUS);
+		keyboardKeys.put("-", KeyEvent.VK_MINUS);
+
+		keyboardKeys.put("ESCAPE", KeyEvent.VK_ESCAPE);
+		keyboardKeys.put("SPACE", KeyEvent.VK_SPACE);
+		keyboardKeys.put("TAB", KeyEvent.VK_TAB);
+		keyboardKeys.put("ENTER", KeyEvent.VK_ENTER);
+		keyboardKeys.put("SHIFT", KeyEvent.VK_SHIFT);
+		keyboardKeys.put("CONTROL", KeyEvent.VK_CONTROL);
 		
 		keyboardKeys.put("UP", KeyEvent.VK_UP);
 		keyboardKeys.put("DOWN", KeyEvent.VK_DOWN);

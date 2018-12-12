@@ -1,16 +1,16 @@
-package com.github.physiengine.components.collision;
+package com.github.physiengine.components.collision.detection;
 
 import com.github.helperclasses.math.Vector2;
 
-public class Circle extends Collider{
+public class CircleCollider extends Collider{
 	
 	@Override
-	protected CollisionInfo collideWith(AABB other) {
+	protected CollisionInfo collideWith(AABBCollider other) {
 		return null;
 	}
 
 	@Override
-	protected CollisionInfo collideWith(Circle other) {
+	protected CollisionInfo collideWith(CircleCollider other) {
 		Vector2 distV = new Vector2(getPosition(), other.getPosition());
 		float dist = distV.getLength();
 		
@@ -22,6 +22,8 @@ public class Circle extends Collider{
 			
 			distV.normalize();
 			distV.mul(new Vector2(intersect, intersect));
+			
+			info.otherPosition = other.getPosition();
 			
 			info.penetrateX = distV.x;
 			info.penetrateY = distV.y;

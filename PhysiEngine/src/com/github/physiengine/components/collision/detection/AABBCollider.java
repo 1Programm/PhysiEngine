@@ -1,9 +1,9 @@
-package com.github.physiengine.components.collision;
+package com.github.physiengine.components.collision.detection;
 
-public class AABB extends Collider {
+public class AABBCollider extends Collider {
 
 	@Override
-	protected CollisionInfo collideWith(AABB other) {
+	protected CollisionInfo collideWith(AABBCollider other) {
 		float left1 = getX() - getWidth()/2;
 		float left2 = other.getX() - other.getWidth()/2;
 		
@@ -32,6 +32,8 @@ public class AABB extends Collider {
 		float dw = right1 - left2;
 		float dh = bottom1 - top2;
 		
+		info.otherPosition = other.getPosition();
+		
 		info.penetrateX = Math.abs(dx) < Math.abs(dw) ? -dx : dw;
 		info.penetrateY = Math.abs(dy) < Math.abs(dh) ? -dy : dh;
 		
@@ -45,7 +47,7 @@ public class AABB extends Collider {
 	}
 
 	@Override
-	protected CollisionInfo collideWith(Circle other) {
+	protected CollisionInfo collideWith(CircleCollider other) {
 		// TODO Auto-generated method stub
 		return null;
 	}

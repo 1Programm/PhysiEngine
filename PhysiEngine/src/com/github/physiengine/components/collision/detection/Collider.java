@@ -1,4 +1,4 @@
-package com.github.physiengine.components.collision;
+package com.github.physiengine.components.collision.detection;
 
 import com.github.helperclasses.math.Vector2;
 import com.github.physiengine.components.Component;
@@ -8,6 +8,8 @@ public abstract class Collider extends Component{
 	private Vector2 positionOffset;
 	private Vector2 size;
 	private float rotationOffset;
+	
+	private CollisionInfo info;
 
 	public Collider() {
 		this.positionOffset = new Vector2();
@@ -21,18 +23,16 @@ public abstract class Collider extends Component{
 		this.rotationOffset = rotationOffset;
 	}
 	
-	public CollisionInfo resolveCollision(Collider other) {
-		if(other instanceof AABB) {
-			return collideWith((AABB)other);
-		}else if(other instanceof Circle) {
-			return collideWith((Circle)other);
+	public void detectCollision(Collider other) {
+		if(other instanceof AABBCollider) {
+			info = collideWith((AABBCollider)other);
+		}else if(other instanceof CircleCollider) {
+			info = collideWith((CircleCollider)other);
 		}
-		
-		return null;
 	}
 	
-	protected abstract CollisionInfo collideWith(AABB other);
-	protected abstract CollisionInfo collideWith(Circle other);
+	protected abstract CollisionInfo collideWith(AABBCollider other);
+	protected abstract CollisionInfo collideWith(CircleCollider other);
 	
 	@Override
 	public void init() {}
@@ -40,7 +40,10 @@ public abstract class Collider extends Component{
 	@Override
 	public void update() {}
 	
-
+	public CollisionInfo getCollision() {
+		return info;
+	}
+	
 	public Vector2 getPosition() {
 		return Vector2.Add(parent.getTransform().getPos(), positionOffset);
 	}

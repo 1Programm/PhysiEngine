@@ -1,4 +1,4 @@
-package com.github.physiengine.world.prefabs;
+package com.github.physiengine.object.prefabs;
 
 import java.awt.Color;
 

@@ -55,4 +55,8 @@ public class Controller_Keyboard extends Controller {
 		
 		return newVec;
 	}
+	
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
 }

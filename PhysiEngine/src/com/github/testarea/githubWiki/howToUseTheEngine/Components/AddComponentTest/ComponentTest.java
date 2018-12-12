@@ -3,7 +3,7 @@ package com.github.testarea.githubWiki.howToUseTheEngine.Components.AddComponent
 import java.awt.Color;
 
 import com.github.physiengine.components.Component;
-import com.github.physiengine.components.collision.AABB;
+import com.github.physiengine.components.collision.detection.AABBCollider;
 import com.github.physiengine.components.controllers.Controller_Keyboard;
 import com.github.physiengine.components.gfx.Image;
 import com.github.physiengine.object.GameObject;
@@ -15,7 +15,7 @@ public class ComponentTest {
 	public static void main(String[] args) {
 		obj1 = new GameObject();
 		
-		obj1.addComponent("myCollider", new AABB());
+		obj1.addComponent("myCollider", new AABBCollider());
 		obj1.addComponent(new Controller_Keyboard(2));
 		obj1.addComponent(new Image(Color.BLACK));
 		
@@ -26,7 +26,7 @@ public class ComponentTest {
 			System.out.println("Getting the AABB component through its class:");
 			System.out.println("");
 			
-		AABB collider1 = obj1.getComponent(AABB.class);
+		AABBCollider collider1 = obj1.getComponent(AABBCollider.class);
 		
 			System.out.println("----> " + collider1.toString());
 			System.out.println("");
