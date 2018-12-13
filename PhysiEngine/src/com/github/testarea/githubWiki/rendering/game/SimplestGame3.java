@@ -5,6 +5,7 @@ import java.awt.Color;
 import com.github.physiengine.components.collision.detection.AABBCollider;
 import com.github.physiengine.components.collision.detection.Collider;
 import com.github.physiengine.components.collision.resolution.CircleForceResolver;
+import com.github.physiengine.components.collision.resolution.RectForceResolver;
 import com.github.physiengine.components.controllers.Controller_Keyboard;
 import com.github.physiengine.components.gfx.Image;
 import com.github.physiengine.components.model.Model_Rectangle;
@@ -35,7 +36,7 @@ public class SimplestGame3 {
 		o1.addComponent(new Model_Rectangle());
 		o1.addComponent(new Image(Color.gray));
 		o1.addComponent(new AABBCollider());
-		o1.addComponent(new CircleForceResolver(0.02f));
+		o1.addComponent(new RectForceResolver(0.02f));
 		
 		game.addObject(o);
 		game.addObject(o1);

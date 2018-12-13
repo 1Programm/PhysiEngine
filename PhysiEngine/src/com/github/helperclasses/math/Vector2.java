@@ -105,6 +105,11 @@ public class Vector2 {
 		this.y = y;
 	}
 	
+	public void set(Vector2 v) {
+		this.x = v.x;
+		this.y = v.y;
+	}
+	
 	public void add(float x, float y) {
 		this.x += x;
 		this.y += y;

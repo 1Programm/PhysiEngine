@@ -25,7 +25,7 @@ public class SimplestGame2 {
 		ObjectSpace space = new ObjectSpace(true);
 		
 		
-		for(int i=0;i<100;i++) {
+		for(int i=0;i<200;i++) {
 			createObject();
 		}
 		
