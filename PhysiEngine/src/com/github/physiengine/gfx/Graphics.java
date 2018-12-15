@@ -15,7 +15,7 @@ public class Graphics {
 	private static float scaleX = 1, scaleY = 1;    //Scale
 	private static float antiscaleX = 1, anitscaleY = 1;
 	
-	private static GL2 gl;
+	public static GL2 gl;
 	
 	public static void drawRect(float x, float y, float width, float height) {
 		if(gl == null) {
@@ -27,7 +27,6 @@ public class Graphics {
 		gl.glScalef(scaleX, scaleY, 1);
 		gl.glRotatef(-rotation, 0, 0, 1);
 		
-		
 		gl.glColor4f(r, g, b, a);
 		gl.glBegin(GL2.GL_QUADS);
 		
@@ -38,7 +37,7 @@ public class Graphics {
 		
 		gl.glEnd();
 		gl.glFlush();
-
+		
 		
 		gl.glRotatef(rotation, 0, 0, 1);
 		gl.glScalef(antiscaleX, anitscaleY, 1);

@@ -5,6 +5,7 @@ import com.github.physiengine.object.GameObject;
 
 public class ObjectSpaceTester {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		/*
 		 * Creating a Space which will automatically add GameObjects

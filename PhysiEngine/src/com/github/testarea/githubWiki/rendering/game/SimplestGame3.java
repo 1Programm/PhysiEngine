@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import com.github.physiengine.components.collision.detection.AABBCollider;
 import com.github.physiengine.components.collision.detection.Collider;
-import com.github.physiengine.components.collision.resolution.CircleForceResolver;
 import com.github.physiengine.components.collision.resolution.RectForceResolver;
 import com.github.physiengine.components.controllers.Controller_Keyboard;
 import com.github.physiengine.components.gfx.Image;

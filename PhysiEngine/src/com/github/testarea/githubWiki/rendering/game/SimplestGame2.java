@@ -74,9 +74,9 @@ public class SimplestGame2 {
 		
 		obj.addComponent(new Model_Rectangle());
 		obj.addComponent(new Image("/images/crystals/5.png"));
-		obj.getComponent(Image.class).setColor(1,1,1,1);
+		obj.getComponent(Image.class).setColor(1,1,1,0.5f);
 		obj.addComponent(new AABBCollider());
-		obj.addComponent(new CircleForceResolver(0.01f));
+		obj.addComponent(new CircleForceResolver(-0.01f));
 	}
 	
 }
