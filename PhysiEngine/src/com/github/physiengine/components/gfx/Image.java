@@ -2,20 +2,20 @@ package com.github.physiengine.components.gfx;
 
 import java.awt.Color;
 
-import com.github.helperclasses.gfx.ImageResource;
 import com.github.helperclasses.math.Vector2;
 import com.github.physiengine.components.Component;
 import com.github.physiengine.components.ComponentTyp;
 import com.github.physiengine.components.model.Model;
-import com.github.physiengine.gfx.Graphics;
+import com.github.physiengine.gfx.ModelLoader;
+import com.github.physiengine.gfx.ModelTexture;
 
 public class Image extends Component {
 
-	private ImageResource image;
+	private ModelTexture texture;
 	private float r, g, b, a;
 	
 	public Image(String path) {
-		image = new ImageResource(path);
+		texture = new ModelTexture(ModelLoader.loadTexture(path));
 		r = g = b = a = 1;
 		typ = ComponentTyp.GraphicsComponent;
 	}
@@ -37,7 +37,7 @@ public class Image extends Component {
 			Vector2[] rect = model.getVertecies();
 			Vector2 pos = Vector2.Add(parent.getTransform().getPos(), model.getOffset());
 			
-			Graphics.setScale(parent.getTransform().getScale());
+			/*Graphics.setScale(parent.getTransform().getScale());
 			Graphics.setRotation(parent.getTransform().getRotation());
 			Graphics.setColor(r, g, b, a);
 			
@@ -45,12 +45,8 @@ public class Image extends Component {
 				Graphics.drawImage(image, rect, parent.getTransform().getPos());
 			}else {
 				Graphics.drawRect(rect, pos);
-			}
+			}*/
 		}
-	}
-	
-	public ImageResource getResource() {
-		return image;
 	}
 	
 	public void setColor(Color color) {

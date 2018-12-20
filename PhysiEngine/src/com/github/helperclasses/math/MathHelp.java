@@ -2,7 +2,7 @@ package com.github.helperclasses.math;
 
 import java.awt.Color;
 
-import com.github.physiengine.PhysiSystem;
+import com.github.physiengine.gfx.DisplayManager;
 import com.github.physiengine.world.Settings;
 
 public class MathHelp {
@@ -32,14 +32,13 @@ public class MathHelp {
 	}
 	
 	public static float getGamePosX(float windowX) {
-		float x = (windowX / (PhysiSystem.getCurWindow().getWidth()));
-		
+		float x = (windowX / (DisplayManager.getWidth()));
 		
 		return x * (Settings.RIGHT - Settings.LEFT) + Settings.LEFT;
 	}
 	
 	public static float getGamePosY(float windowY) {
-		float y = (windowY / (PhysiSystem.getCurWindow().getHeight()));
+		float y = (windowY / (DisplayManager.getHeight()));
 		
 		return (y * (Settings.TOP - Settings.BOTTOM) + Settings.BOTTOM ) * (-1);
 	}

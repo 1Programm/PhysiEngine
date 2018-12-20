@@ -25,7 +25,7 @@ public class GamePlayer {
 		animator = new FPSAnimator(FPS);
 		animator.setUpdateMethod(updateMethod);
 		
-		PhysiSystem.CreateWindow(stats, render);
+		//PhysiSystem.CreateWindow(stats, render);
 	}
 	
 	private UpdateMethod render = () -> {
@@ -41,7 +41,7 @@ public class GamePlayer {
 	}
 	
 	private UpdateMethod updateMethod = () -> {
-		PhysiSystem.getCurWindow().getWindow().display();
+		//PhysiSystem.getCurWindow().getWindow().display();
 		
 		for(int i=0;i<spaces.size();i++) {
 			updateSpace(spaces.get(i));

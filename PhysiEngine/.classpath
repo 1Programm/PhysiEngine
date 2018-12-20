@@ -2,16 +2,13 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="res"/>
-	<classpathentry kind="lib" path="natives/jars/gluegen-rt.jar">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PhysiEngine/natives"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PhysiEngine/res/lib/natives"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="natives/jars/jogl-all.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PhysiEngine/natives"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="res/lib/jars/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="res/lib/jars/lwjgl.jar"/>
+	<classpathentry kind="lib" path="res/lib/jars/slick-util.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
