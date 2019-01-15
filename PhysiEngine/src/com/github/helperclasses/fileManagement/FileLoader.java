@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import com.github.helperclasses.interfaces.Loadable;
-import com.github.physiengine.engine.GameStats;
 
 public class FileLoader {
 
@@ -63,7 +62,6 @@ public class FileLoader {
 		return image;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T extends Loadable> T GetLoadedObject(String path, Class<T> cls) {
 		String[] content = getFile(path);
 		
@@ -76,13 +74,7 @@ public class FileLoader {
 		} catch (SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		} catch(NoSuchMethodException e) {
-			if(cls == GameStats.class) {
-				GameStats stats = GameStats.Empty();
-				stats.loadFromFile(content);
-				object = (T)stats;
-			}else {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
 		}
 		
 		return object;

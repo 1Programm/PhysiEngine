@@ -1,10 +1,10 @@
 package com.github.physiengine.world;
 
-import com.github.helperclasses.math.Vector2;
+import org.lwjgl.util.vector.Vector3f;
 
 public class Settings {
 
-	public static Vector2 GRAVITY = new Vector2(0, -0.8f);
+	public static Vector3f GRAVITY = new Vector3f(0, -0.8f, 0);
 
 	public static float airFriction = 0.2f; 
 	

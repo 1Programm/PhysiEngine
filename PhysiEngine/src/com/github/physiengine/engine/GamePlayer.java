@@ -2,57 +2,52 @@ package com.github.physiengine.engine;
 
 import java.util.ArrayList;
 
-import com.github.helperclasses.debug.Debug;
-import com.github.helperclasses.math.Vector2;
-import com.github.helperclasses.math.Vector3;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.github.helperclasses.fileManagement.Loader;
 import com.github.physiengine.PhysiSystem;
+import com.github.physiengine.gfx.components.Camera;
+import com.github.physiengine.gfx.renderer.DisplayManager;
+import com.github.physiengine.gfx.renderer.MasterRenderer;
 import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
-
-	private GameStats stats;
 	
 	private ArrayList<ObjectSpace> spaces;
 	
-	private FPSAnimator animator;
-	
-	public GamePlayer(GameStats stats) {
-		this.stats = stats;
+	public GamePlayer(PhysiSystem system) {
 		this.spaces = new ArrayList<>();
-		
-		int FPS = getFPS();
-		
-		animator = new FPSAnimator(FPS);
-		animator.setUpdateMethod(updateMethod);
-		
-		//PhysiSystem.CreateWindow(stats, render);
+
+		DisplayManager.createDisplay(system.name, system.fps_cap, system.width, system.height);
 	}
-	
-	private UpdateMethod render = () -> {
-		for(int i=0;i<spaces.size();i++) {
-			for(int o=0;o<spaces.get(i).size();o++) {
-				spaces.get(i).get(o).render();
-			}
-		}
-	};
 	
 	public void startGame() {
-		animator.start();
-	}
-	
-	private UpdateMethod updateMethod = () -> {
-		//PhysiSystem.getCurWindow().getWindow().display();
+		// initializing stuff
+		MasterRenderer.init();
 		
-		for(int i=0;i<spaces.size();i++) {
-			updateSpace(spaces.get(i));
+		Camera cam = new Camera(new Vector3f(0, 0, -30), new Vector3f());
+		
+		while(!Display.isCloseRequested()) {
+			
+			for(ObjectSpace space : spaces) {
+				for(GameObject obj : space.getObjects()) {
+					MasterRenderer.addGameObject(obj);
+				}
+			}
+			
+			MasterRenderer.render(cam);
+
+			DisplayManager.updateDisplay();
 		}
-	};
-	
-	private void updateSpace(ObjectSpace space) {
-		for(int i=0;i<space.size();i++) {
-			space.get(i).update();
-		}
+		
+		// Clean up after ending
+		
+		MasterRenderer.cleanUp();
+		Loader.cleanUp();
+		DisplayManager.closeDisplay();
 	}
+	
 	
 	public void addSpace(ObjectSpace space) {
 		this.spaces.add(space);
@@ -66,56 +61,4 @@ public class GamePlayer {
 		spaces.get(spaces.size() - 1).add(object);
 	}
 
-	public GameStats getStats() {
-		return stats;
-	}
-	
-	public int getFPS() {
-		Integer fps = stats.getVariable(GameStats.FPS, Integer.class);
-		
-		if(fps == null) {
-			Debug.LogWarning(GamePlayer.class, "The FPS - variable is not set.");
-			return -1;
-		}
-		
-		return fps;
-	}
-	
-	public Vector3 getBackgoundColor() {
-		return stats.getVariable(GameStats.BACKGROUND, Vector3.class);
-	}
-	
-	public String getBackgroundImagePath() {
-		return stats.getVariable(GameStats.BACKGROUND, String.class);
-	}
-	
-	public Vector2 getWindowSize() {
-		Vector2 ret = stats.getVariable(GameStats.WINDOW_SIZE, Vector2.class);
-		
-		if(ret == null) Debug.LogWarning(GamePlayer.class, "The WINDOW_SIZE - variable is not set");
-		
-		return ret;
-	}
-	
-	public int getWindowWidth() {
-		Vector2 size = getWindowSize();
-		
-		if(size == null) {
-			Debug.LogError(GamePlayer.class, "The Window Size is not set in the GameStats");
-			return -1;
-		}
-		
-		return (int)size.x;
-	}
-	
-	public int getWindowHeight() {
-		Vector2 size = getWindowSize();
-		
-		if(size == null) {
-			Debug.LogError(GamePlayer.class, "The Window Size is not set in the GameStats");
-			return -1;
-		}
-		
-		return (int)size.x;
-	}
 }

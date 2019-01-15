@@ -1,34 +1,41 @@
 package com.github.helperclasses.math;
 
-import java.awt.Color;
 
-import com.github.physiengine.gfx.DisplayManager;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
+
+import com.github.physiengine.gfx.renderer.DisplayManager;
 import com.github.physiengine.world.Settings;
 
 public class MathHelp {
-
-	public static float blendNumbers(float num1, float num2, float percentage) {
-		return num1 + (num2 - num1) * percentage;
-	}
 	
-	public static Vector2 blendVectors(Vector2 v1, Vector2 v2, float percentage) {
-		return new Vector2(blendNumbers(v1.x, v2.x, percentage), blendNumbers(v1.y, v2.y, percentage));
-	}
-	
-	public static Vector2 makeStep(Vector2 start, Vector2 end, float stepSize) {
-		Vector2 step = new Vector2(start, end);
-		step.normalize();
-		step.mul(stepSize);
+	public static Matrix4f createViewMatrix(Vector3f position, Vector3f rotation) {
+		Matrix4f viewMatrix = new Matrix4f();
+		viewMatrix.setIdentity();
 		
-		return Vector2.Add(start, step);
+		Matrix4f.rotate((float) Math.toRadians(rotation.x), new Vector3f(1, 0, 0), viewMatrix, viewMatrix);
+		Matrix4f.rotate((float) Math.toRadians(rotation.y), new Vector3f(0, 1, 0), viewMatrix, viewMatrix);
+		Matrix4f.rotate((float) Math.toRadians(rotation.z), new Vector3f(0, 0, 1), viewMatrix, viewMatrix);
+		
+		Vector3f negativPos = new Vector3f(-position.x, -position.y, -position.z);
+		Matrix4f.translate(negativPos, viewMatrix, viewMatrix);
+		return viewMatrix;
 	}
 	
-	public static Color getColor(Vector3 v) {
-		return new Color((int)v.x, (int)v.y, (int)v.z);
-	}
-	
-	public static float getRotationFrom(Vector2 p1, Vector2 p2) {
-		return Vector2.GetAngle(p1, p2);
+	public static Matrix4f createTransformationMatrix(Vector3f translation, Vector3f rotation, Vector3f scale) {
+		Matrix4f matrix = new Matrix4f();
+		
+		matrix.setIdentity();
+		
+		Matrix4f.translate(translation, matrix, matrix);
+		
+		Matrix4f.rotate((float)Math.toRadians(rotation.x), new Vector3f(1, 0, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rotation.y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(rotation.z), new Vector3f(0, 0, 1), matrix, matrix);
+		
+		Matrix4f.scale(scale, matrix, matrix);
+		
+		return matrix;
 	}
 	
 	public static float getGamePosX(float windowX) {
