@@ -11,6 +11,7 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.github.physiengine.gfx.components.Camera;
+import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.model.TexturedModel;
 import com.github.physiengine.gfx.shader.ObjectShader;
 import com.github.physiengine.object.GameObject;
@@ -22,21 +23,13 @@ public class MasterRenderer {
 	private static final float NEAR_PLANE = 0.1f;
 	private static final float FAR_PLANE = 1000f;
 	
-	private static final Vector3f skyColor = new Vector3f(1, 1, 1);
+	private static final Vector3f skyColor = new Vector3f(0.7f, 0.7f, 0.8f);
 
 	private static Matrix4f projectionMatrix;
 
-	private static ObjectShader objectsShader = new ObjectShader();
+	private static ObjectShader objectShader = new ObjectShader();
 	
 	private static Map<TexturedModel, List<GameObject>> objects = new HashMap<TexturedModel, List<GameObject>>();
-	
-	
-	public static void init() {
-		enableCulling();
-		createProjectionMatrix();
-		
-		ObjectRenderer.init(objectsShader, projectionMatrix);
-	}
 	
 	public static void enableCulling() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
@@ -47,20 +40,29 @@ public class MasterRenderer {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
 	
-	public static void render(Camera cam) {
+	public static void init() {
+		enableCulling();
+		createProjectionMatrix();
+		
+		ObjectRenderer.init(objectShader, projectionMatrix);
+	}
+	
+	public static void render(List<Light> lights, Camera cam) {
 		prepare();
 		
-		objectsShader.start();
-		objectsShader.loadViewMatrix(cam);
+		objectShader.start();
+		objectShader.loadSkyColor(skyColor);
+		objectShader.loadLights(lights);
+		objectShader.loadViewMatrix(cam);
 		ObjectRenderer.render(objects);
-		objectsShader.stop();
+		objectShader.stop();
 		
 		
 		objects.clear();
 	}
 	
 	public static void cleanUp() {
-		objectsShader.cleanUp();
+		objectShader.cleanUp();
 	}
 	
 	

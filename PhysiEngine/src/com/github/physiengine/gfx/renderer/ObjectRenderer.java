@@ -17,10 +17,11 @@ import com.github.physiengine.gfx.shader.ObjectShader;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.gfx.Model;
 
+
 public class ObjectRenderer {
 	
 	private static ObjectShader shader;
-
+	
 	public static void init(ObjectShader shader, Matrix4f projectionMatrix) {
 		ObjectRenderer.shader = shader;
 		
@@ -58,8 +59,12 @@ public class ObjectRenderer {
 			MasterRenderer.disableCulling();
 		}
 		
+		shader.loadFakeLightingVariable(texture.isUseFakeLighting());
+		shader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
+		
 		GL13.glActiveTexture(GL13.GL_TEXTURE0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getID());
+		
 	}
 	
 	private static void unbindTexturedModel() {
@@ -75,11 +80,11 @@ public class ObjectRenderer {
 	private static void prepareInstance(GameObject object) {
 		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(object.getPosition(), object.getRotation(), object.getScale());
 		shader.loadTransformationMatrix(transformationMatrix);
-		
 		Model model = object.getComponent(Model.class);
-		if(model != null) {
-			shader.loadOffset(model.getTextureXOffset(), model.getTextureYOffset());
-		}
+		shader.loadOffset(model.getTextureXOffset(), model.getTextureYOffset());
 	}
 	
+
+	
 }
+

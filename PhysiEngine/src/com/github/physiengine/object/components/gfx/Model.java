@@ -1,5 +1,7 @@
 package com.github.physiengine.object.components.gfx;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import com.github.helperclasses.fileManagement.OBJLoader;
 import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.gfx.model.RawModel;
@@ -10,10 +12,12 @@ public class Model extends Component{
 
 	private TexturedModel texturedModel;
 	private int textureID = 0;
+	private Vector3f color;
 	
 	public Model(String objFileName, ModelTexture texture) {
 		RawModel model = OBJLoader.loadOBJModel(objFileName);
 		texturedModel = new TexturedModel(model, texture);
+		this.color = new Vector3f(1, 1, 1);
 	}
 	
 	public TexturedModel getModel() {
@@ -32,6 +36,10 @@ public class Model extends Component{
 	public float getTextureYOffset() { 
 		int row = textureID / texturedModel.getTexture().getNumberOfRows();
 		return (float)row / (float)texturedModel.getTexture().getNumberOfRows();
+	}
+	
+	public Vector3f getColor() {
+		//TODO return color; und so in shader packen, damit man "färben" kann
 	}
 	
 	

@@ -1,29 +1,43 @@
 package com.github.physiengine.gfx.components;
 
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Light {
 
-	private Vector2f position;
+	private Vector3f position;
 	private Vector3f color;
-	private float strength;
 	
-	public Light(Vector2f position, Vector3f color, float strength) {
+	private Vector3f attenuation;
+	
+	public Light(Vector3f position, Vector3f color) {
 		this.position = position;
 		this.color = color;
-		this.strength = strength;
+		this.attenuation = new Vector3f(1, 0, 0);
+	}
+	
+	public Light(Vector3f position, Vector3f color, Vector3f attenuation) {
+		this.position = position;
+		this.color = color;
+		this.attenuation = attenuation;
+	}
+	
+	public Vector3f getAttenuation() {
+		return attenuation;
 	}
 
-	public Vector2f getPosition() {
+	public Vector3f getPosition() {
 		return position;
+	}
+
+	public void setPosition(Vector3f position) {
+		this.position = position;
 	}
 
 	public Vector3f getColor() {
 		return color;
 	}
 
-	public float getStrength() {
-		return strength;
+	public void setColor(Vector3f color) {
+		this.color = color;
 	}
 }

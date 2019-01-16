@@ -11,15 +11,14 @@ import com.github.physiengine.object.components.gfx.Model;
 public class Main {
 
 	public static void main(String[] args) {
-		GamePlayer player = new GamePlayer(new PhysiSystem("A tester", 1200, 800, 60, PhysiSystem.MODE_GAME_3D));
+		GamePlayer player = new GamePlayer(new PhysiSystem("A tester", 1200, 800, 120, PhysiSystem.MODE_GAME_3D));
 		
 		ObjectSpace space = new ObjectSpace(true);
 		
-		ModelTexture texture1 = new ModelTexture(Loader.loadTexture("crystals/11"));
+		ModelTexture texture1 = new ModelTexture(Loader.loadTexture("colors/White"));
 		
 		new GameObject()
 		.addComponent(new Model("Dragon", texture1));
-		
 		
 		player.addSpace(space);
 		player.startGame();
