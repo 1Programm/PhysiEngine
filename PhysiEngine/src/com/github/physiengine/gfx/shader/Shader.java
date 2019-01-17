@@ -12,6 +12,8 @@ import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import com.github.helperclasses.fileManagement.PATHS;
+
 public abstract class Shader {
 
 	private int programID;
@@ -20,9 +22,9 @@ public abstract class Shader {
 	
 	private static FloatBuffer matrixBuffer = BufferUtils.createFloatBuffer(16);
 	
-	public Shader(String vertexFile, String fragmentFile) {
-		vertexShaderID = loadShader(vertexFile, GL20.GL_VERTEX_SHADER);
-		fragmentShaderID = loadShader(fragmentFile, GL20.GL_FRAGMENT_SHADER);
+	public Shader(String shaderFile) {
+		vertexShaderID = loadShader(PATHS._SHADERS + shaderFile + ".vs", GL20.GL_VERTEX_SHADER);
+		fragmentShaderID = loadShader(PATHS._SHADERS + shaderFile + ".fs", GL20.GL_FRAGMENT_SHADER);
 		
 		programID = GL20.glCreateProgram();
 		

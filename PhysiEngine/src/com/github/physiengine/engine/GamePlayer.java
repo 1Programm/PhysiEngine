@@ -8,9 +8,9 @@ import org.lwjgl.opengl.Display;
 import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.fileManagement.Loader;
 import com.github.physiengine.PhysiSystem;
+import com.github.physiengine.gfx.DisplayManager;
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
-import com.github.physiengine.gfx.renderer.DisplayManager;
 import com.github.physiengine.gfx.renderer.MasterRenderer;
 import com.github.physiengine.object.GameObject;
 

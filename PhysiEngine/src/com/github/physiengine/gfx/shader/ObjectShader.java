@@ -14,8 +14,7 @@ public class ObjectShader extends Shader {
 	
 	private static final int MAX_LIGHTS = 4;
 
-	private static final String VERTEX_FILE = "res/shaders/staticShader.vs";
-	private static final String FRAGMENT_FILE = "res/shaders/staticShader.fs";
+	private static final String shaderFile = "StaticShader";
 	
 	private int loc_transformationMatrix;
 	private int loc_projectionMatrix;
@@ -32,7 +31,7 @@ public class ObjectShader extends Shader {
 	private int loc_offset;
 	
 	public ObjectShader() {
-		super(VERTEX_FILE, FRAGMENT_FILE);
+		super(shaderFile);
 	}
 
 	@Override

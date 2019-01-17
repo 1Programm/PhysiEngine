@@ -12,8 +12,12 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
+import com.github.physiengine.gfx.components.particles.Particle;
+import com.github.physiengine.gfx.components.particles.ParticleSystem;
+import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.gfx.model.TexturedModel;
 import com.github.physiengine.gfx.shader.ObjectShader;
+import com.github.physiengine.gfx.shader.ParticleShader;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.gfx.Texture;
 
@@ -28,8 +32,10 @@ public class MasterRenderer {
 	private static Matrix4f projectionMatrix;
 
 	private static ObjectShader objectShader = new ObjectShader();
+	private static ParticleShader particleShader = new ParticleShader();
 	
-	private static Map<TexturedModel, List<GameObject>> objects = new HashMap<TexturedModel, List<GameObject>>();
+	private static Map<TexturedModel, List<GameObject>> objects = new HashMap<>();
+	private static Map<ModelTexture, List<Particle>> particles = new HashMap<>();
 	
 	public static void enableCulling() {
 		GL11.glEnable(GL11.GL_CULL_FACE);
@@ -45,6 +51,7 @@ public class MasterRenderer {
 		createProjectionMatrix();
 		
 		ObjectRenderer.init(objectShader, projectionMatrix);
+		ParticleRenderer.init(particleShader);
 	}
 	
 	public static void render(List<Light> lights, Camera cam) {
@@ -57,12 +64,18 @@ public class MasterRenderer {
 		ObjectRenderer.render(objects);
 		objectShader.stop();
 		
+		particleShader.start();
+		ParticleRenderer.render(particles);
+		particleShader.stop();
+		
 		
 		objects.clear();
+		particles.clear();
 	}
 	
 	public static void cleanUp() {
 		objectShader.cleanUp();
+		particleShader.cleanUp();
 	}
 	
 	
@@ -80,6 +93,20 @@ public class MasterRenderer {
 				}else {
 					objs.add(obj);
 				}
+			}
+		}
+	}
+	
+	public static void addParticleSystem(ParticleSystem system) {
+		for(Particle particle : system.getParticles()) {
+			List<Particle> parts = particles.get(particle.texture);
+			
+			if(parts == null) {
+				parts = new ArrayList<>();
+				parts.add(particle);
+				particles.put(particle.texture, parts);
+			}else {
+				parts.add(particle);
 			}
 		}
 	}

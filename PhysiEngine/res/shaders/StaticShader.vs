@@ -28,6 +28,8 @@ void main(void) {
 	vec4 worldPosition = transformationMatrix * vec4(position, 1.0);
 	vec4 positionRelativeToCam = viewMatrix * worldPosition;
 	gl_Position = projectionMatrix * positionRelativeToCam;
+	
+	
 	pass_textureCoords = (textureCoords / numberOfRows) + offset;
 	
 	vec3 actualNormal = normal;

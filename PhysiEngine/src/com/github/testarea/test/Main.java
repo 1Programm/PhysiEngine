@@ -8,6 +8,9 @@ import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
+import com.github.physiengine.gfx.components.particles.ParticleSystem_Fountain;
+import com.github.physiengine.object.GameObject;
+import com.github.physiengine.object.components.gfx.ParticleProducer;
 import com.github.physiengine.object.prefabs.TestPlayer;
 
 public class Main {
@@ -25,6 +28,8 @@ public class Main {
 				ObjectSpace space = new ObjectSpace(true);
 				
 				new TestPlayer(new Vector3f(0, 0, 0), "Dragon", "test");
+				
+				//new GameObject().addComponent(new ParticleProducer(new ParticleSystem_Fountain(new Vector3f(0, 0, 0), 100, "test")));
 				
 				return new ObjectSpace[] {space};
 			}
@@ -44,7 +49,8 @@ public class Main {
 			@Override
 			public String[] getUsedTextures() {
 				return new String[] {
-						"test"
+						"test",
+						"colors/White"
 				};
 			}
 			

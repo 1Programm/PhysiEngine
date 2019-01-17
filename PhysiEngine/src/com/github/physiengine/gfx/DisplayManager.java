@@ -1,4 +1,4 @@
-package com.github.physiengine.gfx.renderer;
+package com.github.physiengine.gfx;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.ContextAttribs;

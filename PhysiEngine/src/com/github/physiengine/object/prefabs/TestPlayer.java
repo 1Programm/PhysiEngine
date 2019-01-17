@@ -16,7 +16,7 @@ public class TestPlayer extends GameObject{
 		}else {
 			addComponent(new Texture(textureName));
 		}
-		addComponent(new ObjectController_Keyboard(new Vector3f(2, 0, 20), ObjectController_Keyboard.MODE_TURNED_MOVEMENT));
+		addComponent(new ObjectController_Keyboard(new Vector3f(2, 0, 20), ObjectController_Keyboard.MODE_LINEAR_MOVEMENT));
 	}
 	
 	public TestPlayer(Vector3f position, String modelName, String textureName) {
@@ -28,7 +28,7 @@ public class TestPlayer extends GameObject{
 		}else {
 			addComponent(new Texture(textureName));
 		}
-		addComponent(new ObjectController_Keyboard(new Vector3f(2, 0, 20), ObjectController_Keyboard.MODE_TURNED_MOVEMENT));
+		addComponent(new ObjectController_Keyboard(new Vector3f(2, 0, 20), ObjectController_Keyboard.MODE_LINEAR_MOVEMENT));
 	}
 	
 }

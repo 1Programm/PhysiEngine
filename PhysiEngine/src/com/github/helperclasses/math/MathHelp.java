@@ -4,7 +4,7 @@ package com.github.helperclasses.math;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.physiengine.gfx.renderer.DisplayManager;
+import com.github.physiengine.gfx.DisplayManager;
 import com.github.physiengine.world.Settings;
 
 public class MathHelp {
