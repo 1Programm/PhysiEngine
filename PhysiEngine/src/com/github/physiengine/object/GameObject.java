@@ -21,6 +21,7 @@ public class GameObject {
 	public GameObject(Vector3f position) { init(position, new Vector3f(1, 1, 1), new Vector3f());	}
 	public GameObject(float x, float y, float z, float scale) { init(new Vector3f(x, y, z), new Vector3f(scale, scale, scale), new Vector3f());	}
 	public GameObject(Vector3f position, Vector3f scale) { init(position, scale, new Vector3f());	}
+	public GameObject(Vector3f position, Vector3f scale, Vector3f rotation) { init(position, scale, rotation);	}
 	
 	private void init(Vector3f position, Vector3f scale, Vector3f rotation) {
 		this.transform = new Transform(position, scale, rotation);

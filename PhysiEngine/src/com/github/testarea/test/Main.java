@@ -9,6 +9,7 @@ import com.github.physiengine.engine.Scene;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Fountain;
 import com.github.physiengine.object.GameObject;
+import com.github.physiengine.object.components.Component;
 import com.github.physiengine.object.components.body.Model;
 import com.github.physiengine.object.components.controllers.ObjectController_Keyboard;
 import com.github.physiengine.object.components.gfx.CameraComponent;
@@ -29,14 +30,27 @@ public class Main {
 			public ObjectSpace[] initObjects() {
 				ObjectSpace space = new ObjectSpace(true);
 				
-				new GameObject()
-				.addComponent(new Model("Dragon"))
-				.addComponent(new Texture("test"));
+//				new GameObject()
+//				.addComponent(new Model("Dragon"))
+//				.addComponent(new Texture("test"));
 				
-				new GameObject()
-				.addComponent(new ParticleProducer(new ParticleSystem_Fountain(new Vector3f(0, 0, 0), 100, "test")));
+				new GameObject(new Vector3f(0, 0, 0), new Vector3f(10, 1, 10), new Vector3f(0, 0, 0))
+				.addComponent(new ParticleProducer(new ParticleSystem_Fountain(1000000, "test")))
+				.addComponent(new Component() {
+					
+					@Override
+					public void update() {
+						//parent.getTransform().addRotation(0, 0.1f, 0);
+					}
+					
+					@Override
+					public void receiveMessage(Component sender, String msg) {}
+					
+					@Override
+					public void init() {}
+				});
 				
-				new GameObject(0, 0, 0, 0.5f)
+				new GameObject(0, 0, 0, 0.2f)
 				.addComponent(new Model("Dragon"))
 				.addComponent(new Texture("colors/White"))
 				.addComponent(new CameraComponent())

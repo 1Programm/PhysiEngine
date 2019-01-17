@@ -19,7 +19,7 @@ public class GamePlayer {
 	private static Camera cam;
 	
 	public static void setCamera(Camera cam) {
-		if(cam != null) {
+		if(GamePlayer.cam != null) {
 			Debug.Log(GamePlayer.class, "Camera is overwritten by new one");
 		}
 		

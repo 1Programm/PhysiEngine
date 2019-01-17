@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
+import com.github.helperclasses.debug.Debug;
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.Particle;
@@ -20,6 +21,8 @@ import com.github.physiengine.gfx.shader.ObjectShader;
 import com.github.physiengine.gfx.shader.ParticleShader;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.gfx.Texture;
+import com.github.physiengine.world.Time;
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class MasterRenderer {
 	
@@ -54,7 +57,15 @@ public class MasterRenderer {
 		ParticleRenderer.init(particleShader, projectionMatrix);
 	}
 	
+	private static float time = 0;
+	private static long first = 0;
+	
 	public static void render(List<Light> lights, Camera cam) {
+		time += Time.getDelta();
+		if(first == 0) {
+			first = System.nanoTime();
+		}
+		
 		prepare();
 		
 		objectShader.start();
@@ -65,13 +76,20 @@ public class MasterRenderer {
 		objectShader.stop();
 		
 		particleShader.start();
-		particleShader.loadViewMatrix(cam);
-		ParticleRenderer.render(particles);
+		ParticleRenderer.render(particles, cam);
 		particleShader.stop();
 		
 		
 		objects.clear();
 		particles.clear();
+		
+		
+		if(time >= 1) {
+			time = 0;
+			long second = System.nanoTime();
+			//Debug.Log(MasterRenderer.class, "Time Passed: " + ((second - first) / 1000000000.0));
+			first = 0;
+		}
 	}
 	
 	public static void cleanUp() {

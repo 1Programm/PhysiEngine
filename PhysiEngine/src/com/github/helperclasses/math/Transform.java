@@ -22,6 +22,12 @@ public class Transform {
 		this.rotation = rotation;
 	}
 	
+	public void set(Transform transform) {
+		this.position = transform.position;
+		this.scale = transform.scale;
+		this.rotation = transform.rotation;
+	}
+	
 	public void set(Vector3f position, Vector3f scale, Vector3f rotation) {
 		this.position = position;
 		this.scale = scale;

@@ -7,6 +7,7 @@ import com.github.physiengine.world.Time;
 public class Particle {
 
 	public Transform transform;
+	public Transform parentTransform;
 	
 	public ModelTexture texture;
 	

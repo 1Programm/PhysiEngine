@@ -8,9 +8,11 @@ import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
 
 import com.github.helperclasses.fileManagement.Loader;
 import com.github.helperclasses.math.MathHelp;
+import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.particles.Particle;
 import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.gfx.model.RawModel;
@@ -38,7 +40,9 @@ public class ParticleRenderer {
 		shader.stop();
 	}
 	
-	public static void render(Map<ModelTexture, List<Particle>> particles) {
+	public static void render(Map<ModelTexture, List<Particle>> particles, Camera camera) {
+		Matrix4f viewMatrix = MathHelp.createViewMatrix(camera.getPosition(), camera.getRotation());
+		
 		GL30.glBindVertexArray(rectModel.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
 		
@@ -47,7 +51,7 @@ public class ParticleRenderer {
 			
 			List<Particle> parts = particles.get(texture);
 			for(Particle particle : parts) {
-				prepareInstance(particle);
+				updateModelViewMatrix(particle, viewMatrix);
 				GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, rectModel.getVertexCount());
 			}
 			
@@ -72,9 +76,29 @@ public class ParticleRenderer {
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, texture.getID());
 	}
 	
-	private static void prepareInstance(Particle particle) {
-		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(particle.transform);
-		shader.loadTransformationMatrix(transformationMatrix);
+	private static void updateModelViewMatrix(Particle particle, Matrix4f viewMatrix) {
+		Matrix4f modelMatrix = new Matrix4f();
+		
+		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().x), new Vector3f(1, 0, 0), modelMatrix, modelMatrix);
+		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().y), new Vector3f(0, 1, 0), modelMatrix, modelMatrix);
+		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
+		Matrix4f.scale(particle.parentTransform.getScale(), modelMatrix, modelMatrix);
+		Matrix4f.translate(Vector3f.add(particle.transform.getPosition(), particle.parentTransform.getPosition(), null), modelMatrix, modelMatrix);
+		
+		modelMatrix.m00 = viewMatrix.m00;
+		modelMatrix.m01 = viewMatrix.m10;
+		modelMatrix.m02 = viewMatrix.m20;
+		modelMatrix.m10 = viewMatrix.m01;
+		modelMatrix.m11 = viewMatrix.m11;
+		modelMatrix.m12 = viewMatrix.m21;
+		modelMatrix.m20 = viewMatrix.m02;
+		modelMatrix.m21 = viewMatrix.m12;
+		modelMatrix.m22 = viewMatrix.m22;
+		Matrix4f.rotate((float)Math.toRadians(particle.transform.getRotation().z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
+		Matrix4f.scale(particle.transform.getScale(), modelMatrix, modelMatrix);
+		
+		Matrix4f modelViewMatrix = Matrix4f.mul(viewMatrix, modelMatrix, null);
+		shader.loadModelViewMatrix(modelViewMatrix);
 	}
 	
 }

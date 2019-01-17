@@ -14,13 +14,12 @@ public class ParticleProducer extends Component{
 	
 	@Override
 	public void init() {
-		
+		system.initParent(parent);
 	}
 
 	@Override
 	public void update() {
 		MasterRenderer.addParticleSystem(system);
-		
 		system.update();
 	}
 
