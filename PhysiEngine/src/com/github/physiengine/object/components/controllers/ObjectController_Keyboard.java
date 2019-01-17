@@ -61,13 +61,13 @@ public class ObjectController_Keyboard extends ObjectController{
 			float runspeed = 0;
 			
 			if(is(forwards)) {
-				runspeed += speeds.x;
-			}
-			if(is(backwards)) {
 				runspeed -= speeds.x;
 			}
+			if(is(backwards)) {
+				runspeed += speeds.x;
+			}
 			if(is(left)) {
-				//transform.getPosition().x -= speed;
+				//transform.getPosition().x -= speed;abc
 				transform.getRotation().y += speeds.z;
 			}
 			if(is(right)) {

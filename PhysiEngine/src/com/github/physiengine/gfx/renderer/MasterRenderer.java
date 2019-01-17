@@ -51,7 +51,7 @@ public class MasterRenderer {
 		createProjectionMatrix();
 		
 		ObjectRenderer.init(objectShader, projectionMatrix);
-		ParticleRenderer.init(particleShader);
+		ParticleRenderer.init(particleShader, projectionMatrix);
 	}
 	
 	public static void render(List<Light> lights, Camera cam) {
@@ -65,6 +65,7 @@ public class MasterRenderer {
 		objectShader.stop();
 		
 		particleShader.start();
+		particleShader.loadViewMatrix(cam);
 		ParticleRenderer.render(particles);
 		particleShader.stop();
 		

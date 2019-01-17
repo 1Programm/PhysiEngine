@@ -29,9 +29,13 @@ public class ParticleRenderer {
 	private static ParticleShader shader;
 	private static RawModel rectModel;
 	
-	public static void init(ParticleShader shader) {
+	public static void init(ParticleShader shader, Matrix4f projectionMatrix) {
 		ParticleRenderer.shader = shader;
 		ParticleRenderer.rectModel = Loader.loadToVAO(VERTS, 2);
+
+		shader.start();
+		shader.loadProjectionMatrix(projectionMatrix);
+		shader.stop();
 	}
 	
 	public static void render(Map<ModelTexture, List<Particle>> particles) {

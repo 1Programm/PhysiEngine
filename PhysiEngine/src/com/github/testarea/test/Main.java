@@ -6,12 +6,14 @@ import com.github.physiengine.PhysiSystem;
 import com.github.physiengine.engine.GamePlayer;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
-import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Fountain;
 import com.github.physiengine.object.GameObject;
+import com.github.physiengine.object.components.body.Model;
+import com.github.physiengine.object.components.controllers.ObjectController_Keyboard;
+import com.github.physiengine.object.components.gfx.CameraComponent;
 import com.github.physiengine.object.components.gfx.ParticleProducer;
-import com.github.physiengine.object.prefabs.TestPlayer;
+import com.github.physiengine.object.components.gfx.Texture;
 
 public class Main {
 
@@ -27,9 +29,18 @@ public class Main {
 			public ObjectSpace[] initObjects() {
 				ObjectSpace space = new ObjectSpace(true);
 				
-				new TestPlayer(new Vector3f(0, 0, 0), "Dragon", "test");
+				new GameObject()
+				.addComponent(new Model("Dragon"))
+				.addComponent(new Texture("test"));
 				
-				//new GameObject().addComponent(new ParticleProducer(new ParticleSystem_Fountain(new Vector3f(0, 0, 0), 100, "test")));
+				new GameObject()
+				.addComponent(new ParticleProducer(new ParticleSystem_Fountain(new Vector3f(0, 0, 0), 100, "test")));
+				
+				new GameObject(0, 0, 0, 0.5f)
+				.addComponent(new Model("Dragon"))
+				.addComponent(new Texture("colors/White"))
+				.addComponent(new CameraComponent())
+				.addComponent(new ObjectController_Keyboard(new Vector3f(-2, 0, 40), ObjectController_Keyboard.MODE_TURNED_MOVEMENT));
 				
 				return new ObjectSpace[] {space};
 			}
@@ -39,11 +50,6 @@ public class Main {
 				return new Light[] {
 						new Light(new Vector3f(-20000, 50000, 1000), new Vector3f(1, 1, 1))
 				};
-			}
-			
-			@Override
-			public Camera initCamera() {
-				return new Camera(new Vector3f(0, 5, -20), new Vector3f(0, 180, 0));
 			}
 			
 			@Override

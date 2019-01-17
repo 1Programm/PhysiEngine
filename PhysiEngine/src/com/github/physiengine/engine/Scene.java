@@ -1,6 +1,5 @@
 package com.github.physiengine.engine;
 
-import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
 
 public interface Scene {
@@ -15,7 +14,6 @@ public interface Scene {
 	String[] getUsedTextures();
 	String[] getUsedModels();
 	
-	Camera initCamera();
 	Light[] initLights();
 	ObjectSpace[] initObjects();
 	

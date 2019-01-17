@@ -16,10 +16,20 @@ import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
 	
+	private static Camera cam;
+	
+	public static void setCamera(Camera cam) {
+		if(cam != null) {
+			Debug.Log(GamePlayer.class, "Camera is overwritten by new one");
+		}
+		
+		GamePlayer.cam = cam;
+	}
+	
+	
 	private Scene curScene;
 	
 	private List<Light> lights;
-	private Camera cam;
 	private ArrayList<ObjectSpace> spaces;
 	
 	public GamePlayer(PhysiSystem system) {
@@ -47,8 +57,6 @@ public class GamePlayer {
 			lights.add(l);
 		}
 		
-		cam = scene.initCamera();
-		
 		spaces.clear();
 		for(ObjectSpace s : scene.initObjects()) {
 			spaces.add(s);
@@ -62,6 +70,11 @@ public class GamePlayer {
 		}
 		// initializing stuff
 		MasterRenderer.init();
+		
+		if(cam == null) {
+			Debug.Log(getClass(), "returned ERROR - Camera is not initialized");
+			return;
+		}
 		
 		while(!Display.isCloseRequested()) {
 			for(ObjectSpace space : spaces) {
