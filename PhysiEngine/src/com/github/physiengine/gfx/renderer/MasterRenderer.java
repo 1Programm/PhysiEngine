@@ -15,7 +15,7 @@ import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.model.TexturedModel;
 import com.github.physiengine.gfx.shader.ObjectShader;
 import com.github.physiengine.object.GameObject;
-import com.github.physiengine.object.components.gfx.Model;
+import com.github.physiengine.object.components.gfx.Texture;
 
 public class MasterRenderer {
 	
@@ -67,17 +67,19 @@ public class MasterRenderer {
 	
 	
 	public static void addGameObject(GameObject obj) {
-		Model model = obj.getComponent(Model.class);
+		Texture texture = obj.getComponent(Texture.class);
 		
-		if(model != null) {
-			List<GameObject> objs = objects.get(model.getModel());
-			
-			if(objs == null) {
-				objs = new ArrayList<>();
-				objs.add(obj);
-				objects.put(model.getModel(), objs);
-			}else {
-				objs.add(obj);
+		if(texture != null) {
+			if(texture.getModel() != null) {
+				List<GameObject> objs = objects.get(texture.getModel());
+				
+				if(objs == null) {
+					objs = new ArrayList<>();
+					objs.add(obj);
+					objects.put(texture.getModel(), objs);
+				}else {
+					objs.add(obj);
+				}
 			}
 		}
 	}

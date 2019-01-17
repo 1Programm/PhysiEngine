@@ -20,6 +20,7 @@ public class ObjectShader extends Shader {
 	private int loc_transformationMatrix;
 	private int loc_projectionMatrix;
 	private int loc_viewMatrix;
+	private int loc_objectColor;
 	private int loc_lightPosition[];
 	private int loc_lightColor[];
 	private int loc_lightAttenuation[];
@@ -46,6 +47,7 @@ public class ObjectShader extends Shader {
 		loc_transformationMatrix = super.getUniformLocation("transformationMatrix");
 		loc_projectionMatrix = super.getUniformLocation("projectionMatrix");
 		loc_viewMatrix = super.getUniformLocation("viewMatrix");
+		loc_objectColor = super.getUniformLocation("objectColor");
 		loc_shineDamper = super.getUniformLocation("shineDamper");
 		loc_reflectivity = super.getUniformLocation("reflectivity");
 		loc_useFakeLighting = super.getUniformLocation("useFakeLighting");
@@ -83,6 +85,10 @@ public class ObjectShader extends Shader {
 	public void loadShineVariables(float damper, float reflectivity) {
 		super.loadFloat(loc_shineDamper, damper);
 		super.loadFloat(loc_reflectivity, reflectivity);
+	}
+	
+	public void loadObjectColor(Vector3f color) {
+		super.loadVector3(loc_objectColor, color);
 	}
 
 	public void loadTransformationMatrix(Matrix4f matrix) {

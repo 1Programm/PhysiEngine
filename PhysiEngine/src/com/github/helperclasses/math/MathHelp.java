@@ -38,6 +38,22 @@ public class MathHelp {
 		return matrix;
 	}
 	
+	public static Matrix4f createTransformationMatrix(Transform transform) {
+		Matrix4f matrix = new Matrix4f();
+		
+		matrix.setIdentity();
+		
+		Matrix4f.translate(transform.getPosition(), matrix, matrix);
+		
+		Matrix4f.rotate((float)Math.toRadians(transform.getRotation().x), new Vector3f(1, 0, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(transform.getRotation().y), new Vector3f(0, 1, 0), matrix, matrix);
+		Matrix4f.rotate((float)Math.toRadians(transform.getRotation().z), new Vector3f(0, 0, 1), matrix, matrix);
+		
+		Matrix4f.scale(transform.getScale(), matrix, matrix);
+		
+		return matrix;
+	}
+	
 	public static float getGamePosX(float windowX) {
 		float x = (windowX / (DisplayManager.getWidth()));
 		

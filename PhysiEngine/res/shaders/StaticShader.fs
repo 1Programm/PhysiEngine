@@ -9,6 +9,7 @@ in float visibility;
 out vec4 out_Color;
 
 uniform sampler2D textureSampler;
+uniform vec3 objectColor;
 uniform vec3 lightColor[4];
 uniform vec3 lightAttenuation[4];
 uniform float shineDamper;
@@ -49,5 +50,5 @@ void main(void) {
 	}
 	
 	out_Color = vec4(totalDiffuse, 1.0) * textureColor + vec4(totalSpecular, 1.0);
-	out_Color = mix(vec4(skyColor, 1.0), out_Color, visibility);
+	out_Color = mix(vec4(skyColor, 1.0), out_Color, visibility) * objectColor;
 }

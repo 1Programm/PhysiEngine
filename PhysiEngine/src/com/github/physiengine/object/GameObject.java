@@ -5,15 +5,13 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import com.github.helperclasses.math.Transform;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.object.components.Component;
 
 public class GameObject {
 	
-	protected Vector3f position;
-	protected Vector3f scale;
-	protected Vector3f rotation;
-	
+	protected Transform transform;
 	
 	private List<Component> components;
 
@@ -25,10 +23,7 @@ public class GameObject {
 	public GameObject(Vector3f position, Vector3f scale) { init(position, scale, new Vector3f());	}
 	
 	private void init(Vector3f position, Vector3f scale, Vector3f rotation) {
-		this.position = position;
-		this.scale = scale;
-		this.rotation = rotation;
-		
+		this.transform = new Transform(position, scale, rotation);
 		this.components = new ArrayList<>();
 		
 		if(ObjectSpace.curOpenSpace != null) {
@@ -44,6 +39,7 @@ public class GameObject {
 
 	public GameObject addComponent(Component c) {
 		components.add(c);
+		c.setParent(this);
 		return this;
 	}
 	
@@ -74,16 +70,16 @@ public class GameObject {
 		return null;
 	}
 	
-	public Vector3f getPosition() {
-		return position;
+	public <T extends Component> void sendMessage(Class<T> cls, Component sender, String msg) {
+		for(Component component : components) {
+			if(component.getClass() == cls) {
+				component.receiveMessage(sender, msg);
+			}
+		}
 	}
 	
-	public Vector3f getScale() {
-		return scale;
-	}
-	
-	public Vector3f getRotation() {
-		return rotation;
+	public Transform getTransform() {
+		return transform;
 	}
 	
 }

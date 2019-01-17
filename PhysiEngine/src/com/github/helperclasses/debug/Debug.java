@@ -2,8 +2,6 @@ package com.github.helperclasses.debug;
 
 import java.util.ArrayList;
 
-import com.github.helperclasses.controll.Input;
-
 public class Debug {
 
 	private static final String DEBUG_WARNING = "PHYSIENGINE -> DEBUG -> WARNING";
@@ -15,9 +13,7 @@ public class Debug {
 	private static final ArrayList<Class<?>> ignoreWarning = new ArrayList<>();
 	private static final ArrayList<Class<?>> ignoreError = new ArrayList<>();
 	
-	static {
-		Ignore(Input.class);
-	}
+	
 	
 	
 	public static void Log(Class<?> from, String message) {

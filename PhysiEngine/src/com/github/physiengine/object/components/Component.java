@@ -25,7 +25,7 @@ public abstract class Component {
 
 	public abstract void init();
 	public abstract void update();
-	
+	public abstract void receiveMessage(Component sender, String msg);
 	
 	public GameObject getParent() {
 		return parent;

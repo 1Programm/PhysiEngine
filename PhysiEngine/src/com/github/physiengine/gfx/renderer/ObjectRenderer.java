@@ -15,8 +15,7 @@ import com.github.physiengine.gfx.model.RawModel;
 import com.github.physiengine.gfx.model.TexturedModel;
 import com.github.physiengine.gfx.shader.ObjectShader;
 import com.github.physiengine.object.GameObject;
-import com.github.physiengine.object.components.gfx.Model;
-
+import com.github.physiengine.object.components.gfx.Texture;
 
 public class ObjectRenderer {
 	
@@ -78,10 +77,12 @@ public class ObjectRenderer {
 	}
 	
 	private static void prepareInstance(GameObject object) {
-		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(object.getPosition(), object.getRotation(), object.getScale());
+		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(object.getTransform());
 		shader.loadTransformationMatrix(transformationMatrix);
-		Model model = object.getComponent(Model.class);
-		shader.loadOffset(model.getTextureXOffset(), model.getTextureYOffset());
+		
+		Texture texture = object.getComponent(Texture.class);
+		shader.loadOffset(texture.getTextureXOffset(), texture.getTextureYOffset());
+		shader.loadObjectColor(texture.getColor());
 	}
 	
 

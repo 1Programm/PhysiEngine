@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector3f;
 
+import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.fileManagement.Loader;
 import com.github.physiengine.PhysiSystem;
 import com.github.physiengine.gfx.components.Camera;
@@ -16,8 +16,10 @@ import com.github.physiengine.object.GameObject;
 
 public class GamePlayer {
 	
-	private List<Light> lights;
+	private Scene curScene;
 	
+	private List<Light> lights;
+	private Camera cam;
 	private ArrayList<ObjectSpace> spaces;
 	
 	public GamePlayer(PhysiSystem system) {
@@ -25,27 +27,49 @@ public class GamePlayer {
 		this.spaces = new ArrayList<>();
 
 		DisplayManager.createDisplay(system.name, system.fps_cap, system.width, system.height);
+		
+		AssetsLoader.init();
+	}
+	
+	public void loadScene(Scene scene) {
+		if(scene == null) {
+			Debug.LogWarning(GamePlayer.class, "Could not load Scene. Scene is null");
+			return;
+		}
+		
+		this.curScene = scene;
+		
+		AssetsLoader.loadTextures(scene.getUsedTextures());
+		AssetsLoader.loadModels(scene.getUsedModels());
+		
+		lights.clear();
+		for(Light l : scene.initLights()) {
+			lights.add(l);
+		}
+		
+		cam = scene.initCamera();
+		
+		spaces.clear();
+		for(ObjectSpace s : scene.initObjects()) {
+			spaces.add(s);
+		}
 	}
 	
 	public void startGame() {
+		if(curScene == null) {
+			Debug.LogWarning(GamePlayer.class, "There is no loaded Scene !");
+			return;
+		}
 		// initializing stuff
 		MasterRenderer.init();
 		
-
-		lights.add(new Light(new Vector3f(0, 10000, -7000), new Vector3f(1f, 1f, 1f)));
-		
-		Camera cam = new Camera(new Vector3f(0, 5, -20), new Vector3f(0, 180, 0));
-		
 		while(!Display.isCloseRequested()) {
-			
-			//cam.getRotation().y += 0.1f;
 			for(ObjectSpace space : spaces) {
 				for(GameObject obj : space.getObjects()) {
-					obj.getRotation().y += 0.1f;
 					MasterRenderer.addGameObject(obj);
+					obj.update();
 				}
 			}
-			
 			
 			MasterRenderer.render(lights, cam);
 
@@ -53,12 +77,10 @@ public class GamePlayer {
 		}
 		
 		// Clean up after ending
-		
 		MasterRenderer.cleanUp();
 		Loader.cleanUp();
 		DisplayManager.closeDisplay();
 	}
-	
 	
 	public void addSpace(ObjectSpace space) {
 		this.spaces.add(space);

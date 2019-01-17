@@ -7,6 +7,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
+import com.github.physiengine.world.Time;
+
 public class DisplayManager {
 	
 	public static int WIDTH;
@@ -32,11 +34,15 @@ public class DisplayManager {
 		}
 		
 		GL11.glViewport(0, 0, WIDTH, HEIGHT);
+		
+		Time.init();
 	}
 	
 	public static void updateDisplay() {
 		Display.sync(FPS);
 		Display.update();
+		
+		Time.updateDelta();
 	}
 	
 	public static void closeDisplay() {
