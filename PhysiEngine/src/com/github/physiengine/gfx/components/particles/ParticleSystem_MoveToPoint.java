@@ -4,17 +4,20 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.github.physiengine.engine.AssetsLoader;
 import com.github.physiengine.gfx.model.ModelTexture;
+import com.github.physiengine.world.Time;
 
 public class ParticleSystem_MoveToPoint extends ParticleSystem{
 
 	private ModelTexture texture;
 	private Vector3f point;
+	private float length;
 	
 	public ParticleSystem_MoveToPoint(int size, String textureName, Vector3f point) {
 		super(size);
 		
 		texture = AssetsLoader.getTexture(textureName);
 		this.point = point;
+		this.length = point.length() / 2.0f;
 	}
 
 	@Override
@@ -32,13 +35,13 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 		particle.init(
 				x, y, z,
 				dx, dy, dz,
-				0.05f, 0.05f,
+				0.06f, 0.06f,
 				0, 0,
 				(float)(Math.random() * 90),
 				0,
 				texture,
 				0, 0, 0, 0,
-				3
+				length 
 		);
 	}
 
@@ -49,6 +52,8 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 		if(particle.passedTime >= particle.lifeLength) {
 			return false;
 		}
+		
+		point.y = (float) (Math.sin(Time.getSinTime() * length*2) * length + length);
 		
 		particle.movePositionByVelocity();
 		

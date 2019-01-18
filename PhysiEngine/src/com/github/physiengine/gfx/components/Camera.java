@@ -94,13 +94,13 @@ public class Camera {
 	public void setViewMode(int MODE) {
 		switch(MODE) {
 		case THIRD_PERSON:
-			this.distanceFromObject = 50;
+			this.distanceFromObject = 40;
 			this.angleAroundObject = 0;
 			this.update();
 			this.controllable = true;
 			break;
 		case THIRD_PERSON_LOCKED:
-			this.distanceFromObject = 40;
+			this.distanceFromObject = 30;
 			this.angleAroundObject = 0;
 			this.rotation.x = 25;
 			this.update();

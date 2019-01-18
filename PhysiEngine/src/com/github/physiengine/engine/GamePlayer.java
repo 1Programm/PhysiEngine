@@ -53,8 +53,11 @@ public class GamePlayer {
 		AssetsLoader.loadModels(scene.getUsedModels());
 		
 		lights.clear();
-		for(Light l : scene.initLights()) {
-			lights.add(l);
+		Light[] inLights = scene.initLights();
+		if(inLights != null) {
+			for(Light l : inLights) {
+				lights.add(l);
+			}
 		}
 		
 		spaces.clear();

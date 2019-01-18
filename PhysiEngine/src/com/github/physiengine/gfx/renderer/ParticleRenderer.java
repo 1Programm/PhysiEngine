@@ -48,7 +48,7 @@ public class ParticleRenderer {
 		
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDepthMask(false);
+		//GL11.glDepthMask(false);
 		
 		for(ModelTexture texture : particles.keySet()) {
 			prepareTexture(texture);
@@ -63,7 +63,7 @@ public class ParticleRenderer {
 			unbindTexturedModel();
 		}
 		
-		GL11.glDepthMask(true);
+		//GL11.glDepthMask(true);
 		GL11.glDisable(GL11.GL_BLEND);
 		GL20.glDisableVertexAttribArray(0);
 		GL30.glBindVertexArray(0);
@@ -100,10 +100,16 @@ public class ParticleRenderer {
 		modelMatrix.m20 = viewMatrix.m02;
 		modelMatrix.m21 = viewMatrix.m12;
 		modelMatrix.m22 = viewMatrix.m22;
+		
+		
 		Matrix4f.rotate((float)Math.toRadians(particle.transform.getRotation().z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
 		Matrix4f.scale(particle.transform.getScale(), modelMatrix, modelMatrix);
 		
+
+		
 		Matrix4f modelViewMatrix = Matrix4f.mul(viewMatrix, modelMatrix, null);
+		
+		
 		shader.loadModelViewMatrix(modelViewMatrix);
 	}
 	
