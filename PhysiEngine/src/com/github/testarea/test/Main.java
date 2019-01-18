@@ -7,7 +7,9 @@ import com.github.physiengine.engine.GamePlayer;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
 import com.github.physiengine.gfx.components.Light;
-import com.github.physiengine.gfx.components.particles.ParticleSystem_Fountain;
+import com.github.physiengine.gfx.components.particles.ParticleSystem_ScalingSphere;
+import com.github.physiengine.gfx.components.particles.ParticleSystem_Upstream;
+import com.github.physiengine.gfx.components.particles.ParticleSystem_Wave;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.Component;
 import com.github.physiengine.object.components.body.Model;
@@ -30,17 +32,16 @@ public class Main {
 			public ObjectSpace[] initObjects() {
 				ObjectSpace space = new ObjectSpace(true);
 				
-//				new GameObject()
-//				.addComponent(new Model("Dragon"))
-//				.addComponent(new Texture("test"));
-				
-				new GameObject(new Vector3f(0, 0, 0), new Vector3f(10, 1, 10), new Vector3f(0, 0, 0))
-				.addComponent(new ParticleProducer(new ParticleSystem_Fountain(1000000, "test")))
+				new GameObject(new Vector3f(0, 0, 0), new Vector3f(10, 10, 10), new Vector3f(0, 0, 0))
+				//.addComponent(new ParticleProducer(new ParticleSystem_Upstream(1000, "colors/White", 0, 1, 0.05f, 0)))
+				//.addComponent(new ParticleProducer(new ParticleSystem_Wave(10000, "colors/White")))
+				.addComponent(new ParticleProducer(new ParticleSystem_ScalingSphere(1000, "colors/White")))
+				.addComponent(new CameraComponent())
 				.addComponent(new Component() {
 					
 					@Override
 					public void update() {
-						//parent.getTransform().addRotation(0, 0.1f, 0);
+						//parent.getTransform().addRotation(0, 0.1f, 0.2f);
 					}
 					
 					@Override
@@ -50,11 +51,6 @@ public class Main {
 					public void init() {}
 				});
 				
-				new GameObject(0, 0, 0, 0.2f)
-				.addComponent(new Model("Dragon"))
-				.addComponent(new Texture("colors/White"))
-				.addComponent(new CameraComponent())
-				.addComponent(new ObjectController_Keyboard(new Vector3f(-2, 0, 40), ObjectController_Keyboard.MODE_TURNED_MOVEMENT));
 				
 				return new ObjectSpace[] {space};
 			}

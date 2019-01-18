@@ -4,11 +4,11 @@ import com.github.physiengine.engine.AssetsLoader;
 import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.world.Time;
 
-public class ParticleSystem_Fountain extends ParticleSystem{
+public class ParticleSystem_Wave extends ParticleSystem{
 
 	private ModelTexture texture;
 	
-	public ParticleSystem_Fountain(int size, String textureName) {
+	public ParticleSystem_Wave(int size, String textureName) {
 		super(size);
 		
 		texture = AssetsLoader.getTexture(textureName);
@@ -25,7 +25,8 @@ public class ParticleSystem_Fountain extends ParticleSystem{
 				0.02f, 0.02f,
 				(float)(Math.random() * 180),
 				texture,
-				(float)(Math.random() * 8)
+				0, 0, 0, 0,
+				(float)(Math.random() * 5)
 				);
 	}
 
@@ -37,10 +38,12 @@ public class ParticleSystem_Fountain extends ParticleSystem{
 			return false;
 		}
 		
-		particle.transform.getPosition().y = (float) (Math.sin(Time.getSinTime() * particle.lifeLength * 3) * particle.lifeLength);
+		particle.transform.getPosition().y = (float) (Math.sin(Time.getSinTime() * particle.lifeLength * 4) * particle.lifeLength);
 		
 		particle.transform.addRotation(0, 0, 5);
-		particle.transform.addScale(0.0001f, 0.0001f, 0);
+		
+		float scale = 0.1f + particle.getPercentage() * (0 - 0.1f);
+		particle.transform.getScale().set(scale, scale, 1);
 		
 		
 		return true;

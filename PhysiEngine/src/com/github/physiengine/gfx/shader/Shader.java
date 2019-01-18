@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 import com.github.helperclasses.fileManagement.PATHS;
 
@@ -85,6 +86,10 @@ public abstract class Shader {
 	
 	protected void loadVector3(int location, Vector3f value) {
 		GL20.glUniform3f(location, value.x, value.y, value.z);
+	}
+	
+	protected void loadVector4(int location, Vector4f value) {
+		GL20.glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 	
 	protected void loadBoolean(int location, boolean value) {

@@ -46,25 +46,31 @@ public class ParticleRenderer {
 		GL30.glBindVertexArray(rectModel.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
 		
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glDepthMask(false);
+		
 		for(ModelTexture texture : particles.keySet()) {
 			prepareTexture(texture);
 			
 			List<Particle> parts = particles.get(texture);
 			for(Particle particle : parts) {
 				updateModelViewMatrix(particle, viewMatrix);
+				shader.loadColor(particle.color);
 				GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, rectModel.getVertexCount());
 			}
 			
 			unbindTexturedModel();
 		}
+		
+		GL11.glDepthMask(true);
+		GL11.glDisable(GL11.GL_BLEND);
+		GL20.glDisableVertexAttribArray(0);
+		GL30.glBindVertexArray(0);
 	}
 		
 	private static void unbindTexturedModel() {
 		MasterRenderer.enableCulling();
-		
-		GL20.glDisableVertexAttribArray(0);
-		
-		GL30.glBindVertexArray(0);
 	}
 	
 	private static void prepareTexture(ModelTexture texture) {
