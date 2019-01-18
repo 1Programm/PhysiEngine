@@ -1,17 +1,20 @@
 package com.github.physiengine.gfx.components.particles;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import com.github.physiengine.engine.AssetsLoader;
 import com.github.physiengine.gfx.model.ModelTexture;
-import com.github.physiengine.world.Time;
 
-public class ParticleSystem_ScalingSphere extends ParticleSystem{
+public class ParticleSystem_MoveToPoint extends ParticleSystem{
 
 	private ModelTexture texture;
+	private Vector3f point;
 	
-	public ParticleSystem_ScalingSphere(int size, String textureName) {
+	public ParticleSystem_MoveToPoint(int size, String textureName, Vector3f point) {
 		super(size);
 		
 		texture = AssetsLoader.getTexture(textureName);
+		this.point = point;
 	}
 
 	@Override
@@ -22,20 +25,20 @@ public class ParticleSystem_ScalingSphere extends ParticleSystem{
 		
 		float speed = (float)(Math.random() * 1f);
 		
-		float dx = -x * speed;
-		float dy = -y * speed;
-		float dz = -z * speed;
+		float dx = (point.x - x) * speed;
+		float dy = (point.y - y) * speed;
+		float dz = (point.z - z) * speed;
 		
 		particle.init(
 				x, y, z,
 				dx, dy, dz,
-				0.1f, 0.1f,
+				0.05f, 0.05f,
 				0, 0,
 				(float)(Math.random() * 90),
 				0,
 				texture,
 				0, 0, 0, 0,
-				5
+				3
 		);
 	}
 
@@ -47,14 +50,15 @@ public class ParticleSystem_ScalingSphere extends ParticleSystem{
 			return false;
 		}
 		
-		float vx = particle.velocities.getPosition().x * Time.getDelta();
-		float vy = particle.velocities.getPosition().y * Time.getDelta();
-		float vz = particle.velocities.getPosition().z * Time.getDelta();
+		particle.movePositionByVelocity();
 		
-		particle.transform.addPosition(vx, vy, vz);
+		float scale = 0.05f - (0.05f - 0.001f) * particle.getPercentage();
+		
+		particle.transform.getScale().x = scale;
+		particle.transform.getScale().y = scale;
 		
 		
-		//particle.color.w = (1 - particle.getPercentage());
+		particle.color.w = - particle.getPercentage();
 		particle.color.x = (1 - particle.getPercentage());
 		particle.color.z = particle.getPercentage();
 		

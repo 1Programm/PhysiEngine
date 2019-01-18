@@ -7,7 +7,7 @@ import com.github.physiengine.engine.GamePlayer;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
 import com.github.physiengine.gfx.components.Light;
-import com.github.physiengine.gfx.components.particles.ParticleSystem_ScalingSphere;
+import com.github.physiengine.gfx.components.particles.ParticleSystem_MoveToPoint;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Upstream;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Wave;
 import com.github.physiengine.object.GameObject;
@@ -32,10 +32,10 @@ public class Main {
 			public ObjectSpace[] initObjects() {
 				ObjectSpace space = new ObjectSpace(true);
 				
-				new GameObject(new Vector3f(0, 0, 0), new Vector3f(10, 10, 10), new Vector3f(0, 0, 0))
+				new GameObject(new Vector3f(0, -10, 0), new Vector3f(10, 1, 10), new Vector3f(0, 0, 0))
 				//.addComponent(new ParticleProducer(new ParticleSystem_Upstream(1000, "colors/White", 0, 1, 0.05f, 0)))
 				//.addComponent(new ParticleProducer(new ParticleSystem_Wave(10000, "colors/White")))
-				.addComponent(new ParticleProducer(new ParticleSystem_ScalingSphere(1000, "colors/White")))
+				.addComponent(new ParticleProducer(new ParticleSystem_MoveToPoint(1000, "colors/Black", new Vector3f(0, 10, 0))))
 				.addComponent(new CameraComponent())
 				.addComponent(new Component() {
 					
@@ -66,7 +66,8 @@ public class Main {
 			public String[] getUsedTextures() {
 				return new String[] {
 						"test",
-						"colors/White"
+						"colors/White",
+						"colors/Black"
 				};
 			}
 			

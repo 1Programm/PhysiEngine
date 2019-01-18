@@ -60,6 +60,30 @@ public class Particle {
 		this.passedTime = 0;
 	}
 	
+	public void movePositionByVelocity() {
+		float vx = velocities.getPosition().x * Time.getDelta();
+		float vy = velocities.getPosition().y * Time.getDelta();
+		float vz = velocities.getPosition().z * Time.getDelta();
+		
+		transform.addPosition(vx, vy, vz);
+	}
+	
+	public void moveScaleByVelocity() {
+		float vx = velocities.getScale().x * Time.getDelta();
+		float vy = velocities.getScale().y * Time.getDelta();
+		float vz = velocities.getScale().z * Time.getDelta();
+		
+		transform.addScale(vx, vy, vz);
+	}
+	
+	public void moveRotationByVelocity() {
+		float vx = velocities.getRotation().x * Time.getDelta();
+		float vy = velocities.getRotation().y * Time.getDelta();
+		float vz = velocities.getRotation().z * Time.getDelta();
+		
+		transform.addRotation(vx, vy, vz);
+	}
+	
 	public void updateTime() {
 		passedTime += Time.getDelta();
 	}
