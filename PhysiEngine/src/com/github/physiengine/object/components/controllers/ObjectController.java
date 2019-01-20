@@ -15,22 +15,12 @@ public abstract class ObjectController extends Component{
 	}
 	
 	public abstract Transform getTransformation(Vector3f speeds);
-	
-	@Override
-	public void init() {
-		
-	}
 
 	@Override
 	public void update() {
 		Transform transform = getTransformation(new Vector3f(speeds.x * Time.getDelta(), speeds.y * Time.getDelta(), speeds.z * Time.getDelta()));
 		
 		parent.getTransform().addTransform(transform);
-	}
-
-	@Override
-	public void receiveMessage(Component sender, String msg) {
-		
 	}
 
 }

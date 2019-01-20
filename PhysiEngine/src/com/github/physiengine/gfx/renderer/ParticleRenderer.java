@@ -85,11 +85,17 @@ public class ParticleRenderer {
 	private static void updateModelViewMatrix(Particle particle, Matrix4f viewMatrix) {
 		Matrix4f modelMatrix = new Matrix4f();
 		
+
+		Matrix4f.translate(particle.parentTransform.getPosition(), modelMatrix, modelMatrix);
+
 		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().x), new Vector3f(1, 0, 0), modelMatrix, modelMatrix);
 		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().y), new Vector3f(0, 1, 0), modelMatrix, modelMatrix);
 		Matrix4f.rotate((float)Math.toRadians(particle.parentTransform.getRotation().z), new Vector3f(0, 0, 1), modelMatrix, modelMatrix);
 		Matrix4f.scale(particle.parentTransform.getScale(), modelMatrix, modelMatrix);
-		Matrix4f.translate(Vector3f.add(particle.transform.getPosition(), particle.parentTransform.getPosition(), null), modelMatrix, modelMatrix);
+		
+		
+		
+		Matrix4f.translate(particle.transform.getPosition(), modelMatrix, modelMatrix);
 		
 		modelMatrix.m00 = viewMatrix.m00;
 		modelMatrix.m01 = viewMatrix.m10;

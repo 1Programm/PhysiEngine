@@ -19,7 +19,7 @@ public class Camera {
 	
 	private float distanceFromObject;
 	private float angleAroundObject;
-	private float eyeHeight = 6;
+	private float eyeHeight = 0;
 	
 	private boolean controllable;
 	
@@ -91,27 +91,35 @@ public class Camera {
 		return rotation;
 	}
 	
+	public void setEyeHeight(int height) {
+		this.eyeHeight = height;
+	}
+	
+	public void setDist(float distanceFromObject) {
+		this.distanceFromObject = distanceFromObject;
+	}
+	
 	public void setViewMode(int MODE) {
 		switch(MODE) {
 		case THIRD_PERSON:
-			this.distanceFromObject = 40;
+			this.distanceFromObject = 15;
 			this.angleAroundObject = 0;
+			this.rotation.x = 20;
 			this.update();
 			this.controllable = true;
 			break;
 		case THIRD_PERSON_LOCKED:
-			this.distanceFromObject = 30;
+			this.distanceFromObject = 20;
 			this.angleAroundObject = 0;
 			this.rotation.x = 25;
 			this.update();
 			this.controllable = false;
 			break;
 		case FIRST_PERSON:
-			this.distanceFromObject = -1;
+			this.distanceFromObject = 0;
 			this.angleAroundObject = 0;
-			this.rotation.x = 4.6f;
+			this.rotation.x = 0;
 			this.update();
-			this.controllable = false;
 			break;
 		}
 	}

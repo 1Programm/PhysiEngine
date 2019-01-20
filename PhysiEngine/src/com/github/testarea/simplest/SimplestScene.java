@@ -26,7 +26,7 @@ public class SimplestScene {
 				new GameObject()
 				.addComponent(new Model("Dragon"))
 				.addComponent(new Texture("test"))
-				.addComponent(new CameraComponent());
+				.addComponent(new CameraComponent(20));
 				
 				return new ObjectSpace[] {space};
 			}
@@ -35,7 +35,7 @@ public class SimplestScene {
 			public Light[] initLights() { return new Light[] {new Light(new Vector3f(0, 100, 0), new Vector3f(1, 1, 1))}; }
 			
 			@Override
-			public String[] getUsedTextures() { return new String[] {"test"}; }
+			public String[] getUsedTextures() { return new String[] {"test", "colors/White"}; }
 			
 			@Override
 			public String[] getUsedModels() { return new String[] {"Dragon"}; }

@@ -11,13 +11,15 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 	private ModelTexture texture;
 	private Vector3f point;
 	private float length;
+	private float offset;
 	
-	public ParticleSystem_MoveToPoint(int size, String textureName, Vector3f point) {
+	public ParticleSystem_MoveToPoint(int size, String textureName, Vector3f point, float offset) {
 		super(size);
 		
 		texture = AssetsLoader.getTexture(textureName);
 		this.point = point;
 		this.length = point.length() / 2.0f;
+		this.offset = offset;
 	}
 
 	@Override
@@ -40,7 +42,7 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 				(float)(Math.random() * 90),
 				0,
 				texture,
-				0, 0, 0, 0,
+				1, 0, 0, 0,
 				length 
 		);
 	}
@@ -53,7 +55,7 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 			return false;
 		}
 		
-		point.y = (float) (Math.sin(Time.getSinTime() * length*2) * length + length);
+		point.y = (float) (Math.sin((Time.getSinTime() + offset) * length*2) * length + length);
 		
 		particle.movePositionByVelocity();
 		

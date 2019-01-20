@@ -5,6 +5,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.github.helperclasses.math.Transform;
 import com.github.helperclasses.strings.StringUtils;
+import com.github.physiengine.object.components.Component;
 
 public class ObjectController_Keyboard extends ObjectController{
 
@@ -39,6 +40,11 @@ public class ObjectController_Keyboard extends ObjectController{
 		this.left = keys[2];
 		this.right = keys[3];
 	}
+	
+	@Override
+	public void init() {
+		
+	}
 
 	@Override
 	public Transform getTransformation(Vector3f speeds) {
@@ -61,21 +67,18 @@ public class ObjectController_Keyboard extends ObjectController{
 			float runspeed = 0;
 			
 			if(is(forwards)) {
-				runspeed -= speeds.x;
-			}
-			if(is(backwards)) {
 				runspeed += speeds.x;
 			}
+			if(is(backwards)) {
+				runspeed -= speeds.x;
+			}
 			if(is(left)) {
-				//transform.getPosition().x -= speed;abc
 				transform.getRotation().y += speeds.z;
 			}
 			if(is(right)) {
-				//transform.getPosition().x += speed;
 				transform.getRotation().y -= speeds.z;
 			}
 			
-
 			float dx = (float) (runspeed * Math.sin(Math.toRadians(parent.getTransform().getRotation().y)));
 			float dz = (float) (runspeed * Math.cos(Math.toRadians(parent.getTransform().getRotation().y)));
 			
@@ -90,5 +93,8 @@ public class ObjectController_Keyboard extends ObjectController{
 	private boolean is(String name) {
 		return Keyboard.isKeyDown(StringUtils.keyCharToKeyCode(name));
 	}
+	
+	@Override
+	public void receiveMessage(Component sender, String msg) {}
 
 }

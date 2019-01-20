@@ -25,11 +25,13 @@ public class AssetsLoader {
 	public static void loadTextures(String[] textures) {
 		Map<String, ModelTexture> tmpTextures = new HashMap<>();
 		
-		for(String t : textures) {
-			if(!tmpTextures.containsKey(t)) {
-				tmpTextures.put(t, new ModelTexture(Loader.loadTexture(t)));
-			}else {
-				Debug.Log(AssetsLoader.class, "Double Texture names: " + t);
+		if(textures != null) {
+			for(String t : textures) {
+				if(!tmpTextures.containsKey(t)) {
+					tmpTextures.put(t, new ModelTexture(Loader.loadTexture(t)));
+				}else {
+					Debug.Log(AssetsLoader.class, "Double Texture names: " + t);
+				}
 			}
 		}
 		
@@ -39,11 +41,13 @@ public class AssetsLoader {
 	public static void loadModels(String[] models) {
 		Map<String, RawModel> tmpModels = new HashMap<>();
 		
-		for(String m : models) {
-			if(!tmpModels.containsKey(m)) {
-				tmpModels.put(m, OBJLoader.loadOBJModel(m));
-			}else {
-				Debug.Log(AssetsLoader.class, "Double Model names: " + m);
+		if(models != null) {
+			for(String m : models) {
+				if(!tmpModels.containsKey(m)) {
+					tmpModels.put(m, OBJLoader.loadOBJModel(m));
+				}else {
+					Debug.Log(AssetsLoader.class, "Double Model names: " + m);
+				}
 			}
 		}
 		

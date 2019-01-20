@@ -7,26 +7,34 @@ import com.github.physiengine.world.Time;
 public class ParticleSystem_Wave extends ParticleSystem{
 
 	private ModelTexture texture;
+	private float rTimeOffset;
 	
-	public ParticleSystem_Wave(int size, String textureName) {
+	public ParticleSystem_Wave(int size, String textureName, boolean randomTimeOffset) {
 		super(size);
 		
 		texture = AssetsLoader.getTexture(textureName);
+		
+		if(randomTimeOffset) {
+			this.rTimeOffset = (float)(Math.random() * 2 - 1);
+		}
 	}
 
 	@Override
 	protected void initParticle(Particle particle) {
-		float x = (float)(Math.random() * 2 - 1);
-		float y = (float)(Math.random() * 2 - 1);
-		float z = (float)(Math.random() * 2 - 1);
+		float lifeLength = (float)(Math.random() * 3 + 2);
+		
+		float y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * lifeLength * 4) / 2);
+		float x = (float)(Math.random() - 0.5);
+		float z = (float)(Math.random() - 0.5);
+		
 		
 		particle.init(
 				x, y, z,
-				0.02f, 0.02f,
+				0.1f, 0.1f,
 				(float)(Math.random() * 180),
 				texture,
 				0, 0, 0, 0,
-				(float)(Math.random() * 5)
+				lifeLength
 				);
 	}
 
@@ -38,7 +46,7 @@ public class ParticleSystem_Wave extends ParticleSystem{
 			return false;
 		}
 		
-		particle.transform.getPosition().y = (float) (Math.sin(Time.getSinTime() * particle.lifeLength * 4) * particle.lifeLength);
+		particle.transform.getPosition().y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * particle.lifeLength * 4) / 2);
 		
 		particle.transform.addRotation(0, 0, 5);
 		

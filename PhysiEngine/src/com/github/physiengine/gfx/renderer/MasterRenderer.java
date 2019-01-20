@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.helperclasses.debug.Debug;
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.Particle;
@@ -22,7 +21,6 @@ import com.github.physiengine.gfx.shader.ParticleShader;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.gfx.Texture;
 import com.github.physiengine.world.Time;
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
 
 public class MasterRenderer {
 	
@@ -86,7 +84,7 @@ public class MasterRenderer {
 		
 		if(time >= 1) {
 			time = 0;
-			long second = System.nanoTime();
+			//long second = System.nanoTime();
 			//Debug.Log(MasterRenderer.class, "Time Passed: " + ((second - first) / 1000000000.0));
 			first = 0;
 		}
