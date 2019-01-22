@@ -8,10 +8,11 @@ public interface Scene {
 	 * 	Gravity, Background Color / Image, UsedMusikClips, UsedAnimations, ...
 	 * 
 	 */
+
+	ObjectSpace[] initObjects();
 	
 	String[] getUsedTextures();
 	String[] getUsedModels();
 	
-	ObjectSpace[] initObjects();
 	
 }
