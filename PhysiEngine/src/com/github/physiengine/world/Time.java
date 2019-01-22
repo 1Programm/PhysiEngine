@@ -30,7 +30,11 @@ public class Time {
 	}
 	
 	public static float getSinTime() {
-		return (float)Math.sin(sinTime) * 0.5f + 0.5f;
+		return (float)(Math.sin(sinTime) * 0.5 + 0.5);
+	}
+	
+	public static float getSinTime(float offset, float scale) {
+		return (float)(Math.sin((sinTime + offset) * scale) * 0.5 + 0.5);
 	}
 	
 	private static long getCurrentTime() {

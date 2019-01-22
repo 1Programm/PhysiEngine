@@ -106,7 +106,7 @@ public class ObjectShader extends Shader {
 	public void loadLights(List<Light> lights) {
 		for(int i=0;i<MAX_LIGHTS;i++) {
 			if(i<lights.size()) {
-				super.loadVector3(loc_lightPosition[i], lights.get(i).getPosition());
+				super.loadVector3(loc_lightPosition[i], lights.get(i).getParentPosition());
 				super.loadVector3(loc_lightColor[i], lights.get(i).getColor());
 				super.loadVector3(loc_lightAttenuation[i], lights.get(i).getAttenuation());
 			}else {

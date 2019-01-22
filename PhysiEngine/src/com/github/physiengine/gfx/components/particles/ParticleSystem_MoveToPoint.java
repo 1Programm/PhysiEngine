@@ -55,7 +55,8 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 			return false;
 		}
 		
-		point.y = (float) (Math.sin((Time.getSinTime() + offset) * length*2) * length + length);
+//		point.y = (float) (Math.sin((Time.getSinTime() + offset) * length*3) * length + length);
+		point.y = Time.getSinTime(offset, 5) * length * 3;
 		
 		particle.movePositionByVelocity();
 		

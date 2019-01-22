@@ -46,7 +46,9 @@ public class ParticleSystem_Wave extends ParticleSystem{
 			return false;
 		}
 		
-		particle.transform.getPosition().y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * particle.lifeLength * 4) / 2);
+		//particle.transform.getPosition().y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * particle.lifeLength * 4) / 2);
+		particle.transform.getPosition().y = Time.getSinTime(rTimeOffset, 2) * particle.lifeLength;
+		
 		
 		particle.transform.addRotation(0, 0, 5);
 		

@@ -66,4 +66,12 @@ public class MathHelp {
 		return (y * (Settings.TOP - Settings.BOTTOM) + Settings.BOTTOM ) * (-1);
 	}
 	
+	public static float getDistance(Vector3f p1, Vector3f p2) {
+		float dx = p2.x - p1.x;
+		float dy = p2.y - p1.y;
+		float dz = p2.z - p1.z;
+		
+		return (float)(Math.sqrt(dx * dx + dy * dy + dz * dz));
+	}
+	
 }

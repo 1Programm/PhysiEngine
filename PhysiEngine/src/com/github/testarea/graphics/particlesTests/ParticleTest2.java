@@ -13,6 +13,7 @@ import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.body.Model;
 import com.github.physiengine.object.components.controllers.ObjectController_Camera;
 import com.github.physiengine.object.components.gfx.CameraComponent;
+import com.github.physiengine.object.components.gfx.LightProducer;
 import com.github.physiengine.object.components.gfx.ParticleProducer;
 import com.github.physiengine.object.components.gfx.Texture;
 
@@ -33,23 +34,22 @@ public class ParticleTest2 implements Scene{
 				"Cube"
 		};
 	}
-
-	@Override
-	public Light[] initLights() {
-		return new Light[] { new Light( new Vector3f(0, 10, 0), new Vector3f(1, 0.5f, 0.5f), new Vector3f(0.1f, 0.1f, 0.01f)) };
-	}
-
+	
 	@Override
 	public ObjectSpace[] initObjects() {
 		ObjectSpace space = new ObjectSpace(true);
 		
+		for(int i=-4;i<4;i++) {
+			new GameObject(i * 40, 10, 0)
+			.addComponent(new LightProducer(new Light(new Vector3f(1, 0.5f, 0.5f), new Vector3f(0.1f, 0.1f, 0.01f))));
+		}
+		
 		new GameObject()
-		//.addComponent(new ObjectController_Keyboard(new Vector3f(5, 0, 50), ObjectController_Keyboard.MODE_TURNED_MOVEMENT))
 		.addComponent(new ObjectController_Camera(new Vector3f(20, 0, 0)))
 		.addComponent(new CameraComponent(0));
 		
-		for(int x=-2;x<=2;x++) {
-			for(int y=-2;y<=2;y++) {
+		for(int x=-4;x<=4;x++) {
+			for(int y=-4;y<=4;y++) {
 				new GameObject(new Vector3f(x * 40, -1, y * 40), new Vector3f(40, 1, 40), new Vector3f())
 				.addComponent(new Model("Cube"))
 				.addComponent(new Texture("test"));

@@ -6,7 +6,6 @@ import com.github.physiengine.PhysiSystem;
 import com.github.physiengine.engine.GamePlayer;
 import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
-import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_MoveToPoint;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Upstream;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_Wave;
@@ -61,13 +60,6 @@ public class ParticleTest1 {
 				
 				
 				return new ObjectSpace[] {space};
-			}
-			
-			@Override
-			public Light[] initLights() {
-				return new Light[] {
-						new Light(new Vector3f(-20000, 50000, 1000), new Vector3f(1, 1, 1))
-				};
 			}
 			
 			@Override

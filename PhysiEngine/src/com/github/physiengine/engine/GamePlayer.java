@@ -53,16 +53,11 @@ public class GamePlayer {
 		AssetsLoader.loadModels(scene.getUsedModels());
 		
 		lights.clear();
-		Light[] inLights = scene.initLights();
-		if(inLights != null) {
-			for(Light l : inLights) {
-				lights.add(l);
-			}
-		}
-		
 		spaces.clear();
+		
 		for(ObjectSpace s : scene.initObjects()) {
 			spaces.add(s);
+			lights.addAll(s.getLights());
 		}
 	}
 	
@@ -96,18 +91,6 @@ public class GamePlayer {
 		MasterRenderer.cleanUp();
 		Loader.cleanUp();
 		DisplayManager.closeDisplay();
-	}
-	
-	public void addSpace(ObjectSpace space) {
-		this.spaces.add(space);
-	}
-	
-	public void addObject(GameObject object) {
-		if(spaces.size() == 0) {
-			spaces.add(new ObjectSpace(false));
-		}
-		
-		spaces.get(spaces.size() - 1).add(object);
 	}
 
 }
