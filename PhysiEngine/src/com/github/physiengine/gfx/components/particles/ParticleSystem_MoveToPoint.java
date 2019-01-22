@@ -14,7 +14,7 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 	private float offset;
 	
 	public ParticleSystem_MoveToPoint(int size, String textureName, Vector3f point, float offset) {
-		super(size);
+		super(size, true);
 		
 		texture = AssetsLoader.getTexture(textureName);
 		this.point = point;
@@ -23,7 +23,7 @@ public class ParticleSystem_MoveToPoint extends ParticleSystem{
 	}
 
 	@Override
-	protected void initParticle(Particle particle) {
+	protected void initParticle(Particle particle, Vector3f center) {
 		float x = (float)(Math.random() - 0.5);
 		float y = (float)(Math.random() - 0.5);
 		float z = (float)(Math.random() - 0.5);

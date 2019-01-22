@@ -3,18 +3,23 @@ package com.github.physiengine.gfx.components.particles;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import com.github.helperclasses.math.Transform;
 import com.github.physiengine.object.GameObject;
 
 public abstract class ParticleSystem {
 
+	private boolean usesParentTransform;
 	private Transform parentTransform;
 	
 	private Particle[] particles;
 	protected int pointer;
 	
-	public ParticleSystem(int size) {
+	public ParticleSystem(int size, boolean usesParentTransform) {
+		this.usesParentTransform = usesParentTransform;
 		this.parentTransform = new Transform();
+		
 		particles = new Particle[size];
 		pointer = 0;
 	}
@@ -33,7 +38,7 @@ public abstract class ParticleSystem {
 			boolean alive = updateParticle(particles[i]);
 			
 			if(!alive) {
-				initParticle(particles[i]);
+				initParticle(particles[i], parentTransform.getPosition());
 			}
 		}
 	}
@@ -53,12 +58,14 @@ public abstract class ParticleSystem {
 	
 	private Particle initParticle() {
 		Particle particle = new Particle();
-		particle.parentTransform = parentTransform;
-		initParticle(particle);
+		if(usesParentTransform) {
+			particle.parentTransform = parentTransform;
+		}
+		initParticle(particle, parentTransform.getPosition());
 		return particle;
 	}
 	
-	protected abstract void initParticle(Particle particle);
+	protected abstract void initParticle(Particle particle, Vector3f center);
 	
 	protected abstract boolean updateParticle(Particle particle);
 	

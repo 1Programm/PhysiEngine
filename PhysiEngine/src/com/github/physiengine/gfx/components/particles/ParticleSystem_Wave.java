@@ -1,5 +1,7 @@
 package com.github.physiengine.gfx.components.particles;
 
+import org.lwjgl.util.vector.Vector3f;
+
 import com.github.physiengine.engine.AssetsLoader;
 import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.world.Time;
@@ -10,7 +12,7 @@ public class ParticleSystem_Wave extends ParticleSystem{
 	private float rTimeOffset;
 	
 	public ParticleSystem_Wave(int size, String textureName, boolean randomTimeOffset) {
-		super(size);
+		super(size, true);
 		
 		texture = AssetsLoader.getTexture(textureName);
 		
@@ -20,7 +22,7 @@ public class ParticleSystem_Wave extends ParticleSystem{
 	}
 
 	@Override
-	protected void initParticle(Particle particle) {
+	protected void initParticle(Particle particle, Vector3f center) {
 		float lifeLength = (float)(Math.random() * 3 + 2);
 		
 		//float y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * lifeLength * 4) / 2);

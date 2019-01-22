@@ -35,6 +35,8 @@ public class Particle {
 		
 		velocities = Transform.ZERO();
 		
+		parentTransform = Transform.ZERO();
+		
 		this.texture = texture;
 		this.color.set(r, g, b, a);
 		this.lifeLength = lifeLength;
@@ -45,13 +47,13 @@ public class Particle {
 		transform.set(
 				x, y, z,
 				w, h, 1,
-				0, rot, 0
+				0, 0, rot
 		);
 		
 		velocities.set(
 				vx, vy, vz,
 				vw, vh, 0,
-				0, vr, 0
+				0, 0, vr
 		);
 		
 		this.texture = texture;
@@ -90,6 +92,16 @@ public class Particle {
 	
 	public float getPercentage() {
 		return passedTime / lifeLength;
+	}
+	
+	public boolean isTimeDead() {
+		updateTime();
+		
+		if(passedTime >= lifeLength) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 }
