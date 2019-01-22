@@ -1,6 +1,7 @@
 package com.github.physiengine.object.components.controllers;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import com.github.helperclasses.debug.Debug;
@@ -31,17 +32,38 @@ public class ObjectController_Camera extends ObjectController{
 		Transform transform = Transform.ZERO();
 		
 		if(cam != null) {
-			float runspeed = 0;
+			Vector2f runspeeds = new Vector2f();
+			boolean pressedX = false;
+			boolean pressedY = false;
 			
 			if(Keyboard.isKeyDown(StringUtils.keyCharToKeyCode("W"))) {
-				runspeed += speeds.x;
+				runspeeds.x += 1;
+				pressedX = true;
 			}
 			if(Keyboard.isKeyDown(StringUtils.keyCharToKeyCode("S"))) {
-				runspeed -= speeds.x;
+				runspeeds.x -= 1;
+				pressedX = !pressedX;
+			}
+			if(Keyboard.isKeyDown(StringUtils.keyCharToKeyCode("A"))) {
+				runspeeds.y += 1;
+				pressedY = true;
+			}
+			if(Keyboard.isKeyDown(StringUtils.keyCharToKeyCode("D"))) {
+				runspeeds.y -= 1;
+				pressedY = !pressedY;
 			}
 			
-			float dx = (float) (runspeed * Math.cos(Math.toRadians(cam.getRotation().y - 90)));
-			float dz = (float) (runspeed * Math.sin(Math.toRadians(cam.getRotation().y - 90)));
+			if(pressedX || pressedY) {
+				runspeeds.normalise();
+				runspeeds.x *= speeds.x;
+				runspeeds.y *= speeds.x;
+			}
+			
+			double c = Math.cos(Math.toRadians(cam.getRotation().y - 90));
+			double s = Math.sin(Math.toRadians(cam.getRotation().y - 90));
+			
+			float dx = (float) (s * runspeeds.y + c * runspeeds.x);
+			float dz = (float) (-c * runspeeds.y + s * runspeeds.x);
 			
 			transform.getPosition().x = dx;
 			transform.getPosition().z = dz;

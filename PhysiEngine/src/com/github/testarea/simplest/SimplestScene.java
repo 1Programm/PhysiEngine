@@ -25,14 +25,10 @@ public class SimplestScene {
 				
 				space.addLight(new Vector3f(0, 100, 0), new Light(new Vector3f(1, 1, 1)));
 				
-				GameObject o = new GameObject()
+				new GameObject()
 				.addComponent(new Model("Dragon"))
 				.addComponent(new Texture("test"))
 				.addComponent(new CameraComponent(20));
-				
-			
-				o.getComponent(Texture.class).getModel().getTexture().setReflectivity(2);
-				o.getComponent(Texture.class).getModel().getTexture().setShineDamper(0.1f);
 				
 				return new ObjectSpace[] {space};
 			}
@@ -41,7 +37,7 @@ public class SimplestScene {
 			public String[] getUsedTextures() { return new String[] {"test", "colors/White"}; }
 			
 			@Override
-			public String[] getUsedModels() { return new String[] {"Dragon"}; }
+			public String[] getUsedModels() { return new String[] {"Dragon", "Cube"}; }
 		});
 		
 		player.startGame();

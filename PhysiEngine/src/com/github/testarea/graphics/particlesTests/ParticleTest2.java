@@ -56,26 +56,27 @@ public class ParticleTest2 implements Scene{
 			}
 		}
 		
+		float height = 5;
 		
-		new GameObject(new Vector3f(0, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
-		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
-		
-		new GameObject(new Vector3f(5, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(0, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 		
-		new GameObject(new Vector3f(10, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(5, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
+		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
+		
+		new GameObject(new Vector3f(10, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 
-		new GameObject(new Vector3f(15, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(15, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 
-		new GameObject(new Vector3f(-5, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(-5, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 
-		new GameObject(new Vector3f(-10, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(-10, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 
-		new GameObject(new Vector3f(-15, 5, 19), new Vector3f(2, 10, 2), new Vector3f(0, 0, 0))
+		new GameObject(new Vector3f(-15, 0, 20), new Vector3f(2, height, 2), new Vector3f(0, 0, 0))
 		.addComponent(new ParticleProducer(new ParticleSystem_Wave(500, "colors/Black", true)));
 		
 		

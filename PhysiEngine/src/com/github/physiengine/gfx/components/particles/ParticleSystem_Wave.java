@@ -23,7 +23,8 @@ public class ParticleSystem_Wave extends ParticleSystem{
 	protected void initParticle(Particle particle) {
 		float lifeLength = (float)(Math.random() * 3 + 2);
 		
-		float y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * lifeLength * 4) / 2);
+		//float y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * lifeLength * 4) / 2);
+		float y = calcYPos(lifeLength);
 		float x = (float)(Math.random() - 0.5);
 		float z = (float)(Math.random() - 0.5);
 		
@@ -47,7 +48,7 @@ public class ParticleSystem_Wave extends ParticleSystem{
 		}
 		
 		//particle.transform.getPosition().y = (float) (Math.sin((Time.getSinTime() + rTimeOffset) * particle.lifeLength * 4) / 2);
-		particle.transform.getPosition().y = Time.getSinTime(rTimeOffset, 2) * particle.lifeLength;
+		particle.transform.getPosition().y = calcYPos(particle.lifeLength);
 		
 		
 		particle.transform.addRotation(0, 0, 5);
@@ -59,4 +60,8 @@ public class ParticleSystem_Wave extends ParticleSystem{
 		return true;
 	}
 
+	private float calcYPos(float length) {
+		return Time.getSinTime(rTimeOffset, length);
+	}
+	
 }
