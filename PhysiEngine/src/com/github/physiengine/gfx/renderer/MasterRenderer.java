@@ -10,7 +10,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.helperclasses.debug.Debug;
 import com.github.physiengine.gfx.components.Camera;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.Particle;
