@@ -11,7 +11,7 @@ public class ParticleSystem_MovementLine extends ParticleSystem{
 	private ModelTexture texture;
 	
 	public ParticleSystem_MovementLine(int size, int length, String texture) {
-		super(size, false);
+		super(size);
 		this.length = length;
 		this.texture = AssetsLoader.getTexture(texture);
 	}

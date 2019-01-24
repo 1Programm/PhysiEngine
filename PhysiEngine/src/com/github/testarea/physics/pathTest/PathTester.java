@@ -10,6 +10,7 @@ import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_MovementLine;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.body.Model;
+import com.github.physiengine.object.components.controllers.Mover;
 import com.github.physiengine.object.components.controllers.ObjectController_Path;
 import com.github.physiengine.object.components.gfx.CameraComponent;
 import com.github.physiengine.object.components.gfx.ParticleProducer;
@@ -38,10 +39,14 @@ public class PathTester implements Scene{
 			}
 		}
 		
+		Path<Vector3f> p = new Path<Vector3f>(new Vector3f(0, 0, 0), new Vector3f(0, 10, 0), new Vector3f(10, 10, 0), new Vector3f(10, 0, 0), new Vector3f(0, 0, 0));
+		
+		
 		new GameObject()
 		.addComponent(new Model("Cube"))
 		.addComponent(new Texture("test"))
-		.addComponent(new ObjectController_Path(new Path<Vector3f>(new Vector3f(0, 0, 0), new Vector3f(0, 10, 0), new Vector3f(10, 10, 0), new Vector3f(10, 0, 0), new Vector3f(0, 0, 0))))
+		.addComponent(new Mover())
+		.addComponent(new ObjectController_Path(p, ObjectController_Path.MODE_REVERSE_AFTER_RUN))
 		.addComponent(new ParticleProducer(new ParticleSystem_MovementLine(5000, 40, "colors/Black")));
 		
 		

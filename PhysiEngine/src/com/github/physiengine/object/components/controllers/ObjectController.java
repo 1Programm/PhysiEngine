@@ -14,13 +14,13 @@ public abstract class ObjectController extends Component{
 		this.speeds = speeds;
 	}
 	
-	public abstract Transform getTransformation(Vector3f speeds);
+	public abstract Transform getTransformation(float posSpeed, float rotSpeed, float scaleSpeed);
 
 	@Override
 	public void update() {
-		Transform transform = getTransformation(new Vector3f(speeds.x * Time.getDelta(), speeds.y * Time.getDelta(), speeds.z * Time.getDelta()));
+		Transform transform = getTransformation(speeds.x * Time.getDelta(), speeds.y * Time.getDelta(), speeds.z * Time.getDelta());
 		
-		parent.getTransform().addTransform(transform);
+		parent.transform(transform);
 	}
 
 }

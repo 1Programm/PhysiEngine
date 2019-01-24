@@ -5,27 +5,22 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.helperclasses.math.Transform;
 import com.github.physiengine.object.GameObject;
 
 public abstract class ParticleSystem {
-
-	private boolean usesParentTransform;
-	private Transform parentTransform;
 	
 	private Particle[] particles;
 	protected int pointer;
 	
-	public ParticleSystem(int size, boolean usesParentTransform) {
-		this.usesParentTransform = usesParentTransform;
-		this.parentTransform = new Transform();
-		
+	private GameObject parent;
+	
+	public ParticleSystem(int size) {
 		particles = new Particle[size];
 		pointer = 0;
 	}
 	
-	public void initParent(GameObject object) {
-		this.parentTransform.set(object.getTransform());
+	public void initParent(GameObject parent) {
+		this.parent = parent;
 	}
 	
 	public void update() {
@@ -38,7 +33,7 @@ public abstract class ParticleSystem {
 			boolean alive = updateParticle(particles[i]);
 			
 			if(!alive) {
-				initParticle(particles[i], parentTransform.getPosition());
+				initParticle(particles[i], parent.getPosition());
 			}
 		}
 	}
@@ -52,16 +47,9 @@ public abstract class ParticleSystem {
 		return parts;
 	}
 	
-	public Transform getTransform() {
-		return parentTransform;
-	}
-	
 	private Particle initParticle() {
 		Particle particle = new Particle();
-		if(usesParentTransform) {
-			particle.parentTransform = parentTransform;
-		}
-		initParticle(particle, parentTransform.getPosition());
+		initParticle(particle, parent.getPosition());
 		return particle;
 	}
 	

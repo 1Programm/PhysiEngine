@@ -46,14 +46,14 @@ public class Particle {
 	public void init(float x, float y, float z, float vx, float vy, float vz, float w, float h, float vw, float vh, float rot, float vr, ModelTexture texture, float r, float g, float b, float a, float lifeLength) {
 		transform.set(
 				x, y, z,
-				w, h, 1,
-				0, 0, rot
+				0, 0, rot,
+				w, h, 1
 		);
 		
 		velocities.set(
 				vx, vy, vz,
-				vw, vh, 0,
-				0, 0, vr
+				0, 0, vr,
+				vw, vh, 0
 		);
 		
 		this.texture = texture;

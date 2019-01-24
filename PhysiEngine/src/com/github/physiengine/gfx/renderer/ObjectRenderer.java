@@ -80,7 +80,7 @@ public class ObjectRenderer {
 	}
 	
 	private static void prepareInstance(GameObject object) {
-		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(object.getTransform());
+		Matrix4f transformationMatrix = MathHelp.createTransformationMatrix(object.getPosition(), object.getRotation(), object.getScale());
 		shader.loadTransformationMatrix(transformationMatrix);
 		
 		Texture texture = object.getComponent(Texture.class);
@@ -101,7 +101,7 @@ public class ObjectRenderer {
 			id = -1;
 			
 			for(int o=0;o<copy.size();o++) {
-				float dist2 = MathHelp.getDistance(object.getTransform().getPosition(), copy.get(o).getParentPosition());
+				float dist2 = MathHelp.getDistance(object.getPosition(), copy.get(o).getParentPosition());
 				
 				if(id == -1) {
 					dist = dist2;

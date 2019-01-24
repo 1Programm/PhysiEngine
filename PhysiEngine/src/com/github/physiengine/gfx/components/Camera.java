@@ -43,7 +43,7 @@ public class Camera {
 		
 		calculateCamPos(horDist, vertDist);
 		
-		this.rotation.y = 180 - (toFollow.getTransform().getRotation().y + angleAroundObject);
+		this.rotation.y = 180 - (toFollow.getRotationY() + angleAroundObject);
 	}
 	
 	private float calculateHorizontalDist() {
@@ -55,13 +55,13 @@ public class Camera {
 	}
 	
 	private void calculateCamPos(float horDist, float vertDist) {
-		float angle = toFollow.getTransform().getRotation().y + angleAroundObject;
+		float angle = toFollow.getRotationY() + angleAroundObject;
 		float offsetX = (float) (horDist * Math.sin(Math.toRadians(angle)));
 		float offsetZ = (float) (horDist * Math.cos(Math.toRadians(angle)));
 		
-		position.x = toFollow.getTransform().getPosition().x - offsetX;
-		position.y = toFollow.getTransform().getPosition().y + vertDist + eyeHeight;
-		position.z = toFollow.getTransform().getPosition().z - offsetZ;
+		position.x = toFollow.getPositionX() - offsetX;
+		position.y = toFollow.getPositionY() + vertDist + eyeHeight;
+		position.z = toFollow.getPositionZ() - offsetZ;
 	}
 	
 	private void calculateZoom() {

@@ -1,7 +1,5 @@
 package com.github.physiengine.object.components.controllers;
 
-import java.util.Iterator;
-
 import org.lwjgl.util.vector.Vector3f;
 
 import com.github.helperclasses.math.Transform;
@@ -10,44 +8,64 @@ import com.github.physiengine.physics.Path;
 
 public class ObjectController_Path extends ObjectController{
 
-	private static final Vector3f SPEEDS = new Vector3f(1, 0, 0);
+	private static final Vector3f SPEEDS = new Vector3f(5, 0, 0);
+	private static final float minDist = 0.1f;
 	
-	private Iterator<Vector3f> pathIterator;
+	public static final int MODE_END_AFTER_RUN = 0;
+	public static final int MODE_LOOP_AFTER_RUN = 1;
+	public static final int MODE_REVERSE_AFTER_RUN = 2;
+	
+	
+	private Path<Vector3f> path;
 	private Vector3f next;
 	
-	private boolean goal;
+	private int mode;
+	private boolean running;
 	
-	public ObjectController_Path(Path<Vector3f> path) {
+	public ObjectController_Path(Path<Vector3f> path, int mode) {
 		super(SPEEDS);
-		this.pathIterator = path.iterator();
-		this.next = pathIterator.next();
-		this.goal = false;
+		this.path = path;
+		next = path.next();
+		this.mode = mode;
+		this.running = true;
 	}
 
 	@Override
-	public Transform getTransformation(Vector3f speeds) {
+	public Transform getTransformation(float posSpeed, float rotSpeed, float scaleSpeed) {
 		Transform transform = Transform.ZERO();
 		
-		if(goal == false) {
+		if(running) {
 			Vector3f dir = new Vector3f();
-			Vector3f.sub(next, parent.getTransform().getPosition(), dir);
+			Vector3f.sub(next, parent.getPosition(), dir);
 			
 			float dist = dir.length();
 			
-			if(dist < 1) {
-				if(pathIterator.hasNext() == false) {
-					goal = true;
+			if(dist < minDist) {
+				if(path.hasNext() == false) {
+					goal();
 				}else {
-					next = pathIterator.next();
+					next = path.next();
 				}
 			}else {
 				dir.normalise();
 				
-				transform.getPosition().set(dir.x * speeds.x, dir.y * speeds.x, dir.z * speeds.z);
+				transform.getPosition().set(dir.x * posSpeed, dir.y * posSpeed, dir.z * posSpeed);
 			}
 		}
 		
 		return transform;
+	}
+	
+	private void goal() {
+		if(mode == MODE_END_AFTER_RUN) {
+			running = false;
+		}else if(mode == MODE_LOOP_AFTER_RUN) {
+			path.reset();
+			next = path.next();
+		}else if(mode == MODE_REVERSE_AFTER_RUN) {
+			path = path.getReversed();
+			next = path.next();
+		}
 	}
 
 	@Override

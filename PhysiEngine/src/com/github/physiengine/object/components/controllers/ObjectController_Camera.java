@@ -28,7 +28,7 @@ public class ObjectController_Camera extends ObjectController{
 	}
 
 	@Override
-	public Transform getTransformation(Vector3f speeds) {
+	public Transform getTransformation(float posSpeed, float rotSpeed, float scaleSpeed) {
 		Transform transform = Transform.ZERO();
 		
 		if(cam != null) {
@@ -55,8 +55,8 @@ public class ObjectController_Camera extends ObjectController{
 			
 			if(pressedX || pressedY) {
 				runspeeds.normalise();
-				runspeeds.x *= speeds.x;
-				runspeeds.y *= speeds.x;
+				runspeeds.x *= posSpeed;
+				runspeeds.y *= posSpeed;
 			}
 			
 			double c = Math.cos(Math.toRadians(cam.getRotation().y - 90));

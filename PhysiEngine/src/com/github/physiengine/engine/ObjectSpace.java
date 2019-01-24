@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.object.GameObject;
+import com.github.physiengine.object.tags.Tag;
 
 public class ObjectSpace {
 
@@ -73,6 +74,28 @@ public class ObjectSpace {
 	
 	public int size() {
 		return objects.size();
+	}
+	
+	public List<GameObject> getObjects(Tag... tags) {
+		List<GameObject> objs = new ArrayList<>();
+		
+		for(GameObject o : objects) {
+			if(o.hasTags(tags)) {
+				objs.add(o);
+			}
+		}
+		
+		return objs;
+	}
+	
+	public GameObject getObject(Tag tag) {
+		for(GameObject o : objects) {
+			if(o.hasTag(tag)) {
+				return o;
+			}
+		}
+		
+		return null;
 	}
 	
 	public GameObject get(int i) {

@@ -47,40 +47,40 @@ public class ObjectController_Keyboard extends ObjectController{
 	}
 
 	@Override
-	public Transform getTransformation(Vector3f speeds) {
+	public Transform getTransformation(float posSpeed, float rotSpeed, float scaleSpeed) {
 		Transform transform = Transform.ZERO();
 		
 		if(mode == MODE_LINEAR_MOVEMENT) {
 			if(is(forwards)) {
-				transform.getPosition().z += speeds.x;
+				transform.getPosition().z += posSpeed;
 			}
 			if(is(backwards)) {
-				transform.getPosition().z -= speeds.x;
+				transform.getPosition().z -= posSpeed;
 			}
 			if(is(left)) {
-				transform.getPosition().x += speeds.x;
+				transform.getPosition().x += posSpeed;
 			}
 			if(is(right)) {
-				transform.getPosition().x -= speeds.x;
+				transform.getPosition().x -= posSpeed;
 			}
 		}else if(mode == MODE_TURNED_MOVEMENT) {
 			float runspeed = 0;
 			
 			if(is(forwards)) {
-				runspeed += speeds.x;
+				runspeed += posSpeed;
 			}
 			if(is(backwards)) {
-				runspeed -= speeds.x;
+				runspeed -= posSpeed;
 			}
 			if(is(left)) {
-				transform.getRotation().y += speeds.z;
+				transform.getRotation().y += rotSpeed;
 			}
 			if(is(right)) {
-				transform.getRotation().y -= speeds.z;
+				transform.getRotation().y -= rotSpeed;
 			}
 			
-			float dx = (float) (runspeed * Math.sin(Math.toRadians(parent.getTransform().getRotation().y)));
-			float dz = (float) (runspeed * Math.cos(Math.toRadians(parent.getTransform().getRotation().y)));
+			float dx = (float) (runspeed * Math.sin(Math.toRadians(parent.getRotationY())));
+			float dz = (float) (runspeed * Math.cos(Math.toRadians(parent.getRotationY())));
 			
 			transform.getPosition().x = dx;
 			transform.getPosition().z = dz;
