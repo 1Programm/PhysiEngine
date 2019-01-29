@@ -8,20 +8,39 @@ import com.github.physiengine.object.components.controllers.ObjectController_Cam
 public class CameraComponent extends Component{
 	
 	private float distanceFromObject;
+	private float eyeHeight;
+	private float zoomSpeed;
 	
 	private Camera cam;
 	
 	
 	public CameraComponent(float distanceFromObject) {
 		this.distanceFromObject = distanceFromObject;
+		this.eyeHeight = 0;
+	}
+	
+	public CameraComponent(float distanceFromObject, float eyeheight) {
+		this.distanceFromObject = distanceFromObject;
+		this.eyeHeight = eyeheight;
+	}
+	
+	public CameraComponent(float distanceFromObject, float eyeheight, float zoomSpeed) {
+		this.distanceFromObject = distanceFromObject;
+		this.eyeHeight = eyeheight;
+		this.zoomSpeed = zoomSpeed;
 	}
 	
 	@Override
 	public void init() {
 		this.cam = new Camera(parent);
 		cam.setViewMode(Camera.FIRST_PERSON);
-		cam.setEyeHeight(3);
+		cam.setEyeHeight(eyeHeight);
 		cam.setDist(distanceFromObject);
+		
+		if(zoomSpeed != 0) {
+			cam.setZoomSpeed(zoomSpeed);
+		}
+		
 		GamePlayer.setCamera(cam);
 		
 		parent.sendMessage(ObjectController_Camera.class, this, "Init Camera");

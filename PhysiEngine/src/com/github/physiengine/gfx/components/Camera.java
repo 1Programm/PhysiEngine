@@ -21,12 +21,16 @@ public class Camera {
 	private float angleAroundObject;
 	private float eyeHeight = 0;
 	
+	private float zoomSpeed;
+	
 	private boolean controllable;
 	
 	public Camera(GameObject toFollow) {
 		this.toFollow = toFollow;
 		this.position = new Vector3f();
 		this.rotation = new Vector3f();
+		
+		this.zoomSpeed = 0.1f;
 		
 		setViewMode(THIRD_PERSON);
 	}
@@ -65,7 +69,7 @@ public class Camera {
 	}
 	
 	private void calculateZoom() {
-		float zoomLevel = Mouse.getDWheel() * 0.1f;
+		float zoomLevel = Mouse.getDWheel() * zoomSpeed;
 		distanceFromObject -= zoomLevel;
 	}
 	
@@ -82,6 +86,10 @@ public class Camera {
 			angleAroundObject -= angleChange;
 		}
 	}
+	
+	public void setZoomSpeed(float zoomSpeed) {
+		this.zoomSpeed = zoomSpeed;
+	}
 
 	public Vector3f getPosition() {
 		return position;
@@ -91,7 +99,7 @@ public class Camera {
 		return rotation;
 	}
 	
-	public void setEyeHeight(int height) {
+	public void setEyeHeight(float height) {
 		this.eyeHeight = height;
 	}
 	
