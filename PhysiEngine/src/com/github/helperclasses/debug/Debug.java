@@ -1,6 +1,9 @@
 package com.github.helperclasses.debug;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Debug {
 
@@ -9,15 +12,37 @@ public class Debug {
 	
 	private static final Console console = (in) -> {System.out.println(in);};
 	
-	private static final ArrayList<Class<?>> ignoreLog = new ArrayList<>();
-	private static final ArrayList<Class<?>> ignoreWarning = new ArrayList<>();
-	private static final ArrayList<Class<?>> ignoreError = new ArrayList<>();
+	private static final List<Class<?>> ignoreLog = new ArrayList<>();
+	private static final List<Class<?>> ignoreWarning = new ArrayList<>();
+	private static final List<Class<?>> ignoreError = new ArrayList<>();
 	
-	
+	private static final Map<Class<?>, List<String>> ignoreOtherMessages = new HashMap<>();
 	
 	
 	public static void Log(Class<?> from, String message) {
 		if(ignoreLog.contains(from)) return;
+		
+		console.print("Log: [" + from + "] -> " + message);
+	}
+	
+	public static void Log(Class<?> from, String message, boolean ignoreOthers) {
+		if(ignoreLog.contains(from)) return;
+		
+		if(ignoreOthers) {
+			List<String> ignoreMessages = ignoreOtherMessages.get(from); 
+			
+			if(ignoreMessages == null) {
+				ignoreMessages = new ArrayList<>();
+				ignoreMessages.add(message);
+				ignoreOtherMessages.put(from, ignoreMessages);
+			}else {
+				if(ignoreMessages.contains(message)) {
+					return;
+				}else {
+					ignoreMessages.add(message);
+				}
+			}
+		}
 		
 		console.print("Log: [" + from + "] -> " + message);
 	}
@@ -28,8 +53,52 @@ public class Debug {
 		console.print(DEBUG_WARNING + ": [" + from + "] -> " + message);
 	}
 	
+	public static void LogWarning(Class<?> from, String message, boolean ignoreOthers) {
+		if(ignoreWarning.contains(from)) return;
+		
+		if(ignoreOthers) {
+			List<String> ignoreMessages = ignoreOtherMessages.get(from); 
+			
+			if(ignoreMessages == null) {
+				ignoreMessages = new ArrayList<>();
+				ignoreMessages.add(message);
+				ignoreOtherMessages.put(from, ignoreMessages);
+			}else {
+				if(ignoreMessages.contains(message)) {
+					return;
+				}else {
+					ignoreMessages.add(message);
+				}
+			}
+		}
+		
+		console.print(DEBUG_WARNING + ": [" + from + "] -> " + message);
+	}
+	
 	public static void LogError(Class<?> from, String message) {
 		if(ignoreError.contains(from)) return;
+		
+		console.print(DEBUG_ERROR + ": [" + from + "] -> " + message);
+	}
+	
+	public static void LogError(Class<?> from, String message, boolean ignoreOthers) {
+		if(ignoreError.contains(from)) return;
+		
+		if(ignoreOthers) {
+			List<String> ignoreMessages = ignoreOtherMessages.get(from); 
+			
+			if(ignoreMessages == null) {
+				ignoreMessages = new ArrayList<>();
+				ignoreMessages.add(message);
+				ignoreOtherMessages.put(from, ignoreMessages);
+			}else {
+				if(ignoreMessages.contains(message)) {
+					return;
+				}else {
+					ignoreMessages.add(message);
+				}
+			}
+		}
 		
 		console.print(DEBUG_ERROR + ": [" + from + "] -> " + message);
 	}

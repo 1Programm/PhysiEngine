@@ -25,7 +25,7 @@ public class LightProducer extends Component{
 	@Override
 	public void init() {
 		light.setParentPosition(parent.getPosition());
-		ObjectSpace.curOpenSpace.addLight(light);
+		ObjectSpace.curOpenSpace.addLight(light); //TODO: This is wrong... curOpenSpace wont be the same ....
 	}
 
 	@Override

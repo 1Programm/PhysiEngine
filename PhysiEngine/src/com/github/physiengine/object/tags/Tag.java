@@ -41,12 +41,6 @@ public class Tag {
 	
 	private List<Tag> parents;
 	
-	public Tag(String name, int weight) {
-		this.name = name;
-		this.weight = weight;
-		this.parents = null;
-	}
-	
 	public Tag(String name, int weight, Tag... parents) {
 		this.name = name;
 		this.weight = weight;

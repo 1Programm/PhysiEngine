@@ -6,6 +6,10 @@ import java.util.List;
 
 public class Path <T> implements Iterator<T>{
 	
+	public static final int MODE_END_AFTER_RUN = 0;
+	public static final int MODE_LOOP_AFTER_RUN = 1;
+	public static final int MODE_REVERSE_AFTER_RUN = 2;
+	
 	private T[] points;
 	private int pointer;
 

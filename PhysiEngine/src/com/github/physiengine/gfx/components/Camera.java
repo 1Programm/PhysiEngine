@@ -107,6 +107,10 @@ public class Camera {
 		this.distanceFromObject = distanceFromObject;
 	}
 	
+	public void rotateY(float rotY) {
+		angleAroundObject += rotY;
+	}
+	
 	public void setViewMode(int MODE) {
 		switch(MODE) {
 		case THIRD_PERSON:
@@ -127,6 +131,31 @@ public class Camera {
 			this.distanceFromObject = 0;
 			this.angleAroundObject = 0;
 			this.rotation.x = 0;
+			this.update();
+			break;
+		}
+	}
+	
+	public void setViewMode(int MODE, float distFromObj, float yRot, float xRot) {
+		switch(MODE) {
+		case THIRD_PERSON:
+			this.distanceFromObject = distFromObj;
+			this.angleAroundObject = yRot;
+			this.rotation.x = xRot;
+			this.update();
+			this.controllable = true;
+			break;
+		case THIRD_PERSON_LOCKED:
+			this.distanceFromObject = distFromObj;
+			this.angleAroundObject = yRot;
+			this.rotation.x = xRot;
+			this.update();
+			this.controllable = false;
+			break;
+		case FIRST_PERSON:
+			this.distanceFromObject = distFromObj;
+			this.angleAroundObject = yRot;
+			this.rotation.x = xRot;
 			this.update();
 			break;
 		}

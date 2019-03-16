@@ -2,6 +2,7 @@ package com.github.physiengine.engine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -36,6 +37,7 @@ public class ObjectSpace {
 	
 	private List<GameObject> objects;
 	private List<Light> lights;
+	private Supplier<Scene> getScene;
 	
 	public ObjectSpace(boolean isOpen) {
 		objects = new ArrayList<>();
@@ -44,6 +46,14 @@ public class ObjectSpace {
 		if(isOpen) {
 			curOpenSpace = this;
 		}
+	}
+	
+	public void init(Supplier<Scene> getScene) {
+		this.getScene = getScene;
+	}
+	
+	public Supplier<Scene> getSceneProvider(){
+		return getScene;
 	}
 	
 	public void add(GameObject object) {

@@ -2,12 +2,14 @@ package com.github.physiengine.object;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.lwjgl.util.vector.Vector3f;
 
 import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.math.Transform;
 import com.github.physiengine.engine.ObjectSpace;
+import com.github.physiengine.engine.Scene;
 import com.github.physiengine.object.components.Component;
 import com.github.physiengine.object.components.controllers.Mover;
 import com.github.physiengine.object.tags.Tag;
@@ -19,6 +21,8 @@ public class GameObject {
 	private List<Component> components;
 	
 	private List<Tag> tags; 
+	
+	protected Supplier<Scene> getScene;
 
 	
 	public GameObject() { init(new Vector3f(), new Vector3f(), new Vector3f(1, 1, 1));	}
@@ -31,18 +35,22 @@ public class GameObject {
 	private void init(Vector3f position, Vector3f rotation, Vector3f scale) {
 		this.transform = new Transform(position, rotation, scale);
 		this.components = new ArrayList<>();
+		this.tags = new ArrayList<>();
 		
 		if(ObjectSpace.curOpenSpace != null) {
 			ObjectSpace.curOpenSpace.add(this);
+			this.getScene = ObjectSpace.curOpenSpace.getSceneProvider();
 		}
 	}
 	
-	public void addTags(Tag... tags) {
+	public GameObject addTags(Tag... tags) {
 		for(Tag tag : tags) {
 			if(!this.tags.contains(tag)) {
 				this.tags.add(tag);
 			}
 		}
+		
+		return this;
 	}
 	
 	public boolean hasTag(Tag tag) {
@@ -85,13 +93,13 @@ public class GameObject {
 		if(mover != null) {
 			mover.addVelocity(transformation);
 		}else {
-			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move");
+			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
 		}
 	}
 
 	public GameObject addComponent(Component c) {
 		components.add(c);
-		c.setParent(this);
+		c.setParent(this, getScene);
 		return this;
 	}
 	

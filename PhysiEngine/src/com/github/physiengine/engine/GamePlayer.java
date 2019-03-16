@@ -1,7 +1,9 @@
 package com.github.physiengine.engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.lwjgl.opengl.Display;
 
@@ -27,21 +29,28 @@ public class GamePlayer {
 	}
 	
 	
+	private Map<String, Scene> scenes;
 	private Scene curScene;
 	
+	private ObjectSpace objectSpace;
 	private List<Light> lights;
-	private ArrayList<ObjectSpace> spaces;
 	
 	public GamePlayer(PhysiSystem system) {
+		this.scenes = new HashMap<>();
 		this.lights = new ArrayList<>();
-		this.spaces = new ArrayList<>();
 
 		DisplayManager.createDisplay(system.name, system.fps_cap, system.width, system.height);
 		
 		AssetsLoader.init();
 	}
 	
-	public void loadScene(Scene scene) {
+	public void addScene(String name, Scene scene) {
+		scenes.put(name, scene);
+	}
+	
+	public void loadScene(String sceneName) {
+		Scene scene = scenes.get(sceneName);
+		
 		if(scene == null) {
 			Debug.LogWarning(GamePlayer.class, "Could not load Scene. Scene is null");
 			return;
@@ -52,13 +61,11 @@ public class GamePlayer {
 		AssetsLoader.loadTextures(scene.getUsedTextures());
 		AssetsLoader.loadModels(scene.getUsedModels());
 		
-		lights.clear();
-		spaces.clear();
-		
-		for(ObjectSpace s : scene.initObjects()) {
-			spaces.add(s);
-			lights.addAll(s.getLights());
-		}
+		this.objectSpace = scene.getObjectSpace();
+		this.objectSpace.init(this::getScene);
+
+		this.lights.clear();
+		this.lights.addAll(objectSpace.getLights());
 	}
 	
 	public void startGame() {
@@ -75,11 +82,9 @@ public class GamePlayer {
 		}
 		
 		while(!Display.isCloseRequested()) {
-			for(ObjectSpace space : spaces) {
-				for(GameObject obj : space.getObjects()) {
-					MasterRenderer.addGameObject(obj);
-					obj.update();
-				}
+			for(GameObject obj : objectSpace.getObjects()) {
+				MasterRenderer.addGameObject(obj);
+				obj.update();
 			}
 			
 			MasterRenderer.render(lights, cam);
@@ -91,6 +96,10 @@ public class GamePlayer {
 		MasterRenderer.cleanUp();
 		Loader.cleanUp();
 		DisplayManager.closeDisplay();
+	}
+	
+	private Scene getScene() {
+		return curScene;
 	}
 
 }

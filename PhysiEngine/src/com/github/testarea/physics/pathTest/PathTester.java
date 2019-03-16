@@ -17,16 +17,10 @@ import com.github.physiengine.object.components.gfx.ParticleProducer;
 import com.github.physiengine.object.components.gfx.Texture;
 import com.github.physiengine.physics.Path;
 
-public class PathTester implements Scene{
-
-	public static void main(String[] args) {
-		GamePlayer player = new GamePlayer(new PhysiSystem("Path Tester", 900, 600, 60));
-		player.loadScene(new PathTester());
-		player.startGame();
-	}
+public class PathTester extends Scene{
 	
 	@Override
-	public ObjectSpace[] initObjects() {
+	protected ObjectSpace initObjects() {
 		ObjectSpace space = new ObjectSpace(true);
 		
 		space.addLight(new Vector3f(10, 100, 0), new Light(new Vector3f(1, 1, 1)));
@@ -46,24 +40,39 @@ public class PathTester implements Scene{
 		.addComponent(new Model("Cube"))
 		.addComponent(new Texture("test"))
 		.addComponent(new Mover())
-		.addComponent(new ObjectController_Path(p, ObjectController_Path.MODE_REVERSE_AFTER_RUN))
+		.addComponent(new ObjectController_Path(p, 5, Path.MODE_REVERSE_AFTER_RUN))
 		.addComponent(new ParticleProducer(new ParticleSystem_MovementLine(5000, 40, "colors/Black")));
 		
 		
 		new GameObject()
 		.addComponent(new CameraComponent(10));
 		
-		return new ObjectSpace[] {space};
+		
+		return space;
 	}
 
 	@Override
-	public String[] getUsedTextures() {
+	protected String[] initUsedTextures() {
 		return new String[] { "test", "colors/Black"};
 	}
 
 	@Override
-	public String[] getUsedModels() {
+	protected String[] initUsedModels() {
 		return new String[] { "Cube" };
+	}
+	
+	
+	
+
+	
+
+	public static void main(String[] args) {
+		GamePlayer player = new GamePlayer(new PhysiSystem("Path Tester", 900, 600, 60));
+		
+		player.addScene("Path Test Scene", new PathTester());
+		player.loadScene("Path Test Scene");
+		
+		player.startGame();
 	}
 	
 }

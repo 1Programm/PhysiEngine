@@ -8,13 +8,7 @@ import com.github.physiengine.physics.Path;
 
 public class ObjectController_Path extends ObjectController{
 
-	private static final Vector3f SPEEDS = new Vector3f(5, 0, 0);
 	private static final float minDist = 0.1f;
-	
-	public static final int MODE_END_AFTER_RUN = 0;
-	public static final int MODE_LOOP_AFTER_RUN = 1;
-	public static final int MODE_REVERSE_AFTER_RUN = 2;
-	
 	
 	private Path<Vector3f> path;
 	private Vector3f next;
@@ -22,8 +16,8 @@ public class ObjectController_Path extends ObjectController{
 	private int mode;
 	private boolean running;
 	
-	public ObjectController_Path(Path<Vector3f> path, int mode) {
-		super(SPEEDS);
+	public ObjectController_Path(Path<Vector3f> path, float speed, int mode) {
+		super(new Vector3f(speed, 0, 0));
 		this.path = path;
 		next = path.next();
 		this.mode = mode;
@@ -57,12 +51,12 @@ public class ObjectController_Path extends ObjectController{
 	}
 	
 	private void goal() {
-		if(mode == MODE_END_AFTER_RUN) {
+		if(mode == Path.MODE_END_AFTER_RUN) {
 			running = false;
-		}else if(mode == MODE_LOOP_AFTER_RUN) {
+		}else if(mode == Path.MODE_LOOP_AFTER_RUN) {
 			path.reset();
 			next = path.next();
-		}else if(mode == MODE_REVERSE_AFTER_RUN) {
+		}else if(mode == Path.MODE_REVERSE_AFTER_RUN) {
 			path = path.getReversed();
 			next = path.next();
 		}
