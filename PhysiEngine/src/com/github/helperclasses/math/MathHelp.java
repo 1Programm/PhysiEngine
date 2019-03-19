@@ -1,11 +1,7 @@
 package com.github.helperclasses.math;
 
-
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
-
-import com.github.physiengine.gfx.DisplayManager;
-import com.github.physiengine.world.Settings;
 
 public class MathHelp {
 	
@@ -52,18 +48,6 @@ public class MathHelp {
 		Matrix4f.scale(transform.getScale(), matrix, matrix);
 		
 		return matrix;
-	}
-	
-	public static float getGamePosX(float windowX) {
-		float x = (windowX / (DisplayManager.getWidth()));
-		
-		return x * (Settings.RIGHT - Settings.LEFT) + Settings.LEFT;
-	}
-	
-	public static float getGamePosY(float windowY) {
-		float y = (windowY / (DisplayManager.getHeight()));
-		
-		return (y * (Settings.TOP - Settings.BOTTOM) + Settings.BOTTOM ) * (-1);
 	}
 	
 	public static float getDistance(Vector3f p1, Vector3f p2) {

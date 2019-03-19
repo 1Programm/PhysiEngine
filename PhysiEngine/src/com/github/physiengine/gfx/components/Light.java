@@ -2,34 +2,29 @@ package com.github.physiengine.gfx.components;
 
 import org.lwjgl.util.vector.Vector3f;
 
-public class Light {
+import com.github.physiengine.object.GameObject;
 
-	private Vector3f parentPosition;
-	
+public class Light extends GameObject{
+
 	private Vector3f color;
-	
 	private Vector3f attenuation;
 	
-	public Light(Vector3f color) {
+	public Light(Vector3f position, Vector3f color) {
+		super(position);
+		
 		this.color = color;
 		this.attenuation = new Vector3f(1, 0, 0);
 	}
 	
-	public Light(Vector3f color, Vector3f attenuation) {
+	public Light(Vector3f position, Vector3f color, Vector3f attenuation) {
+		super(position);
+		
 		this.color = color;
 		this.attenuation = attenuation;
 	}
 	
 	public Vector3f getAttenuation() {
 		return attenuation;
-	}
-
-	public Vector3f getParentPosition() {
-		return parentPosition;
-	}
-
-	public void setParentPosition(Vector3f parentPosition) {
-		this.parentPosition = parentPosition;
 	}
 
 	public Vector3f getColor() {

@@ -32,6 +32,8 @@ public class ObjectRenderer {
 	}
 	
 	public static void render(Map<TexturedModel, List<GameObject>> objects, List<Light> lights) {
+		MasterRenderer.enableCulling();
+		
 		for(TexturedModel model : objects.keySet()) {
 			prepareTexturedModel(model);
 			List<GameObject> instances = objects.get(model);
@@ -43,6 +45,8 @@ public class ObjectRenderer {
 			}
 			unbindTexturedModel();
 		}
+		
+		MasterRenderer.disableCulling();
 	}
 	
 	private static void prepareTexturedModel(TexturedModel model) {
@@ -70,7 +74,7 @@ public class ObjectRenderer {
 	}
 	
 	private static void unbindTexturedModel() {
-		MasterRenderer.enableCulling();
+		//MasterRenderer.enableCulling();
 		
 		GL20.glDisableVertexAttribArray(0);
 		GL20.glDisableVertexAttribArray(1);
@@ -101,7 +105,7 @@ public class ObjectRenderer {
 			id = -1;
 			
 			for(int o=0;o<copy.size();o++) {
-				float dist2 = MathHelp.getDistance(object.getPosition(), copy.get(o).getParentPosition());
+				float dist2 = MathHelp.getDistance(object.getPosition(), copy.get(o).getPosition());
 				
 				if(id == -1) {
 					dist = dist2;

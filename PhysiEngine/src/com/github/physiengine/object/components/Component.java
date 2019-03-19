@@ -1,8 +1,5 @@
 package com.github.physiengine.object.components;
 
-import java.util.function.Supplier;
-
-import com.github.physiengine.engine.Scene;
 import com.github.physiengine.object.GameObject;
 
 public abstract class Component {
@@ -10,8 +7,6 @@ public abstract class Component {
 	protected String name;
 	protected GameObject parent;
 	protected boolean enabled;
-	
-	private Supplier<Scene> getScene;
 
 	public Component() {
 		setupName();
@@ -36,9 +31,8 @@ public abstract class Component {
 		return parent;
 	}
 
-	public void setParent(GameObject parent, Supplier<Scene> getScene) {
+	public void setParent(GameObject parent) {
 		this.parent = parent;
-		this.getScene = getScene;
 		init();
 	}
 	
@@ -52,10 +46,6 @@ public abstract class Component {
 
 	public String getName() {
 		return name;
-	}
-	
-	protected Scene getScene() {
-		return getScene.get();
 	}
 	
 	@Override

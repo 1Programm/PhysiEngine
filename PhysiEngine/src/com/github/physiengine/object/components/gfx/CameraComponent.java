@@ -13,6 +13,10 @@ public class CameraComponent extends Component{
 	
 	private Camera cam;
 	
+	public CameraComponent() {
+		this.distanceFromObject = 10;
+		this.eyeHeight = 0;
+	}
 	
 	public CameraComponent(float distanceFromObject) {
 		this.distanceFromObject = distanceFromObject;
@@ -33,7 +37,7 @@ public class CameraComponent extends Component{
 	@Override
 	public void init() {
 		this.cam = new Camera(parent);
-		cam.setViewMode(Camera.FIRST_PERSON);
+		cam.setViewMode(Camera.THIRD_PERSON);
 		cam.setEyeHeight(eyeHeight);
 		cam.setDist(distanceFromObject);
 		

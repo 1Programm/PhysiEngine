@@ -47,7 +47,6 @@ public class MasterRenderer {
 	}
 	
 	public static void init() {
-		enableCulling();
 		createProjectionMatrix();
 		
 		ObjectRenderer.init(objectShader, projectionMatrix);
@@ -55,8 +54,6 @@ public class MasterRenderer {
 	}
 	
 	public static void render(List<Light> lights, Camera cam) {
-		//long a = System.nanoTime();
-		
 		prepare();
 		
 		
@@ -76,9 +73,6 @@ public class MasterRenderer {
 		particles.clear();
 		
 		
-		//long b = System.nanoTime();
-		
-		//Debug.Log(MasterRenderer.class, "Passed: " + ((b - a) / 1000000000.0));
 	}
 	
 	public static void cleanUp() {

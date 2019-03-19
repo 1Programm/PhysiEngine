@@ -10,7 +10,9 @@ public class Debug {
 	private static final String DEBUG_WARNING = "PHYSIENGINE -> DEBUG -> WARNING";
 	private static final String DEBUG_ERROR = "PHYSIENGINE -> DEBUG -> ERROR";
 	
-	private static final Console console = (in) -> {System.out.println(in);};
+	
+	
+	private static final ConsoleOut console = new SystemConsole();
 	
 	private static final List<Class<?>> ignoreLog = new ArrayList<>();
 	private static final List<Class<?>> ignoreWarning = new ArrayList<>();
@@ -145,11 +147,6 @@ public class Debug {
 		}else {
 			IgnoreErrors(cls);
 		}
-	}
-	
-			
-	private interface Console{
-		public void print(String input);
 	}
 	
 }

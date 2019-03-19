@@ -7,42 +7,51 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
+import com.github.physiengine.EngineSettings;
 import com.github.physiengine.world.Time;
 
 public class DisplayManager {
+
+	private static EngineSettings settings;
 	
-	public static int WIDTH;
-	public static int HEIGHT;
+	private static float timer;
+	private static int updates;
 
-	public static String NAME;
-	public static int FPS;
-
-	public static void createDisplay(String name, int fps, int width, int height) {
-		DisplayManager.NAME = name;
-		DisplayManager.FPS = fps;
-		DisplayManager.WIDTH = width;
-		DisplayManager.HEIGHT = height;
+	public static void createDisplay(EngineSettings settings) {
+		DisplayManager.settings = settings;
 		
-		ContextAttribs attribs = new ContextAttribs(3, 2).withForwardCompatible(true).withProfileCore(true);
+		ContextAttribs attribs = 
+				new ContextAttribs(3, 2)
+				.withForwardCompatible(true)
+				.withProfileCore(true);
 		
 		try {
-			Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
+			Display.setDisplayMode(
+					new DisplayMode(settings.getWindowWidth(), settings.getWindowHeight())
+			);
 			Display.create(new PixelFormat(), attribs);
-			Display.setTitle(NAME);
+			Display.setTitle(settings.getWindowTitle());
 		} catch (LWJGLException e) {
 			e.printStackTrace();
 		}
 		
-		GL11.glViewport(0, 0, WIDTH, HEIGHT);
-		
-		Time.init();
+		GL11.glViewport(0, 0, settings.getWindowWidth(), settings.getWindowHeight());
 	}
 	
 	public static void updateDisplay() {
-		Display.sync(FPS);
+		Display.sync(settings.getGameFpsCap());
 		Display.update();
 		
-		Time.updateDelta();
+		if(settings.isPrintFPS()) {
+			timer += Time.getDelta();
+			updates++;
+			
+			if(timer >= 1.0) {
+				timer = 0;
+				settings.getFpsLogConsole().println("Updates: " + updates);
+				updates = 0;
+			}
+		}
 	}
 	
 	public static void closeDisplay() {

@@ -2,13 +2,11 @@ package com.github.testarea.physics.pathTest;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.physiengine.PhysiSystem;
+import com.github.physiengine.EngineSettings;
 import com.github.physiengine.engine.GamePlayer;
-import com.github.physiengine.engine.ObjectSpace;
 import com.github.physiengine.engine.Scene;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.gfx.components.particles.ParticleSystem_MovementLine;
-import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.components.body.Model;
 import com.github.physiengine.object.components.controllers.Mover;
 import com.github.physiengine.object.components.controllers.ObjectController_Path;
@@ -19,15 +17,23 @@ import com.github.physiengine.physics.Path;
 
 public class PathTester extends Scene{
 	
+	private static String[] textures = {
+			"test", 
+			"colors/Black"};
+	
+	private static String[] models = {"Cube"};
+	
+	public PathTester() {
+		super(textures, models);
+	}
+	
 	@Override
-	protected ObjectSpace initObjects() {
-		ObjectSpace space = new ObjectSpace(true);
-		
-		space.addLight(new Vector3f(10, 100, 0), new Light(new Vector3f(1, 1, 1)));
+	protected void init() {
+		registerLight(new Light(new Vector3f(10, 100, 0), new Vector3f(1, 1, 1)));
 		
 		for(int x=-10;x<10;x++) {
 			for(int y=-10;y<10;y++) {
-				new GameObject(x, -1, y)
+				createEmpty(x, -1, y)
 				.addComponent(new Model("Cube"))
 				.addComponent(new Texture("test"));
 			}
@@ -36,7 +42,7 @@ public class PathTester extends Scene{
 		Path<Vector3f> p = new Path<Vector3f>(new Vector3f(0, 0, 0), new Vector3f(0, 10, 0), new Vector3f(10, 10, 0), new Vector3f(10, 0, 0), new Vector3f(0, 0, 0));
 		
 		
-		new GameObject()
+		createEmpty()
 		.addComponent(new Model("Cube"))
 		.addComponent(new Texture("test"))
 		.addComponent(new Mover())
@@ -44,21 +50,9 @@ public class PathTester extends Scene{
 		.addComponent(new ParticleProducer(new ParticleSystem_MovementLine(5000, 40, "colors/Black")));
 		
 		
-		new GameObject()
+		createEmpty()
 		.addComponent(new CameraComponent(10));
 		
-		
-		return space;
-	}
-
-	@Override
-	protected String[] initUsedTextures() {
-		return new String[] { "test", "colors/Black"};
-	}
-
-	@Override
-	protected String[] initUsedModels() {
-		return new String[] { "Cube" };
 	}
 	
 	
@@ -67,7 +61,7 @@ public class PathTester extends Scene{
 	
 
 	public static void main(String[] args) {
-		GamePlayer player = new GamePlayer(new PhysiSystem("Path Tester", 900, 600, 60));
+		GamePlayer player = new GamePlayer(new EngineSettings("Physics: \"Path Test\""));
 		
 		player.addScene("Path Test Scene", new PathTester());
 		player.loadScene("Path Test Scene");

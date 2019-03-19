@@ -116,14 +116,14 @@ public class Camera {
 		case THIRD_PERSON:
 			this.distanceFromObject = 15;
 			this.angleAroundObject = 0;
-			this.rotation.x = 20;
+			this.rotation.x = 30;
 			this.update();
 			this.controllable = true;
 			break;
 		case THIRD_PERSON_LOCKED:
 			this.distanceFromObject = 20;
 			this.angleAroundObject = 0;
-			this.rotation.x = 25;
+			this.rotation.x = 35;
 			this.update();
 			this.controllable = false;
 			break;
@@ -132,32 +132,22 @@ public class Camera {
 			this.angleAroundObject = 0;
 			this.rotation.x = 0;
 			this.update();
+			this.controllable = true;
 			break;
 		}
 	}
 	
-	public void setViewMode(int MODE, float distFromObj, float yRot, float xRot) {
-		switch(MODE) {
-		case THIRD_PERSON:
-			this.distanceFromObject = distFromObj;
-			this.angleAroundObject = yRot;
-			this.rotation.x = xRot;
+	public void setView(float distFromObj, float yRot, float xRot, boolean controllable) {
+		this.distanceFromObject = distFromObj;
+		this.angleAroundObject = yRot;
+		this.rotation.x = xRot;
+		
+		if(controllable == false) {
 			this.update();
-			this.controllable = true;
-			break;
-		case THIRD_PERSON_LOCKED:
-			this.distanceFromObject = distFromObj;
-			this.angleAroundObject = yRot;
-			this.rotation.x = xRot;
+			this.controllable = controllable;
+		}else {
+			this.controllable = controllable;
 			this.update();
-			this.controllable = false;
-			break;
-		case FIRST_PERSON:
-			this.distanceFromObject = distFromObj;
-			this.angleAroundObject = yRot;
-			this.rotation.x = xRot;
-			this.update();
-			break;
 		}
 	}
 	
