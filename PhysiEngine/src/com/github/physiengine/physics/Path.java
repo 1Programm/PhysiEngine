@@ -4,44 +4,47 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Path <T> implements Iterator<T>{
+public class Path<T> implements Iterator<T>{
 	
 	public static final int MODE_END_AFTER_RUN = 0;
 	public static final int MODE_LOOP_AFTER_RUN = 1;
 	public static final int MODE_REVERSE_AFTER_RUN = 2;
 	
-	private T[] points;
+	private List<T> elements;
 	private int pointer;
 
-	@SuppressWarnings("unchecked")
-	public Path(T... points) {
-		this.points = points;
+	public Path() {
+		this.elements = new ArrayList<>();
 		this.pointer = 0;
+	}
+	
+	public Path<T> add(T element){
+		elements.add(element);
+		
+		return this;
 	}
 	
 	@Override
 	public boolean hasNext() {
-		return (pointer >= 0 && pointer < points.length);
+		return (pointer >= 0 && pointer < elements.size());
 	}
 
 	@Override
 	public T next() {
-		return points[pointer++];
+		return elements.get(pointer++);
 	}
 	
 	public void reset() {
 		this.pointer = 0;
 	}
-	
+
 	public Path<T> getReversed() {
-		List<T> points = new ArrayList<T>();
-		for(int i=this.points.length-1;i>=0;i--) {
-			points.add(this.points[i]);
+		Path<T> path = new Path<>();
+		
+		for(int i=this.elements.size()-1;i>=0;i--) {
+			path.add(this.elements.get(i));
 		}
 		
-		T[] ts = this.points;
-		
-		Path<T> path = new Path<>(points.toArray(ts));
 		return path;
 	}
 	

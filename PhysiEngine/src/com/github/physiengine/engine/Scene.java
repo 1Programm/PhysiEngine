@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
+import com.github.helperclasses.debug.Debug;
 import com.github.physiengine.gfx.components.Light;
 import com.github.physiengine.object.GameObject;
 import com.github.physiengine.object.tags.Tag;
@@ -50,6 +51,10 @@ public abstract class Scene {
 	
 	protected void registerLight(Light light) {
 		lights.add(light);
+		
+		if(lights.size() >= 4) {
+			Debug.Log(Scene.class, "Remember There can only be 4 lights used at the same time for 1 Object", true);
+		}
 	}
 	
 	protected GameObject createEmpty() {

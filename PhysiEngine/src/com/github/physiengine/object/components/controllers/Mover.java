@@ -7,33 +7,33 @@ import com.github.physiengine.object.components.Component;
 
 public class Mover extends Component{
 	
-	private Transform velocities;
+	private Transform transformations;
 	
 	public Mover() {
-		velocities = Transform.ZERO();
+		transformations = Transform.ZERO();
 	}
 
-	public void addVelocity(Transform vel) {
-		velocities.addTransform(vel);
+	public void addTransformation(Transform vel) {
+		transformations.addTransform(vel);
 	}
 	
-	public void addPosition(Vector3f pos) {
-		velocities.addPosition(pos);
+	public void addVelocity(Vector3f posVel) {
+		transformations.addPosition(posVel);
 	}
 	
-	public void addRotation(Vector3f rot) {
-		velocities.addRotation(rot);
+	public void addRotationVel(Vector3f rotVel) {
+		transformations.addRotation(rotVel);
 	}
 	
-	public void addScale(Vector3f scale) {
-		velocities.addScale(scale);
+	public void addScaleVel(Vector3f scaleVel) {
+		transformations.addScale(scaleVel);
 	}
 	
-	public Transform getVelocity() {
+	public Transform getTransformations() {
 		Transform t = Transform.ZERO();
-		t.set(velocities);
+		t.set(transformations);
 		
-		velocities.set(0, 0, 0, 0, 0, 0, 0, 0, 0);
+		transformations.set(0, 0, 0, 0, 0, 0, 0, 0, 0);
 		return t;
 	}
 	

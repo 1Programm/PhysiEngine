@@ -18,8 +18,10 @@ public class GameObject {
 	
 	private boolean enabled;
 
-	private List<Component> components;
 	private GameObject parent;
+	private boolean relativeToParent;
+	
+	private List<Component> components;
 	private List<GameObject> children;
 	
 	public GameObject() { init(new Vector3f(), new Vector3f(), new Vector3f(1, 1, 1));	}
@@ -33,8 +35,9 @@ public class GameObject {
 		this.transform = new Transform(position, rotation, scale);
 		this.tags = new ArrayList<>();
 		this.enabled = true;
-		this.components = new ArrayList<>();
 		this.parent = null;
+		this.relativeToParent = false;
+		this.components = new ArrayList<>();
 		this.children = new ArrayList<>();
 	}
 	
@@ -73,7 +76,7 @@ public class GameObject {
 		Mover mover = getComponent(Mover.class);
 		
 		if(mover != null) {
-			Transform velocity = mover.getVelocity();
+			Transform velocity = mover.getTransformations();
 			
 			// Check for collision ... (TODO)
 			
@@ -87,22 +90,40 @@ public class GameObject {
 	public void transform(Transform transformation) {
 		Mover mover = getComponent(Mover.class);
 		if(mover != null) {
-			mover.addVelocity(transformation);
+			mover.addTransformation(transformation);
 		}else {
 			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
 		}
 	}
-
-	public GameObject addChildren(GameObject... objs) {
-		if(objs != null) {
-			for(int i=0;i<objs.length;i++) {
-				children.add(objs[i]);
-			}
+	
+	public void transformPosition(Vector3f velocity) {
+		Mover mover = getComponent(Mover.class);
+		if(mover != null) {
+			mover.addVelocity(velocity);
+		}else {
+			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
 		}
-		
-		return this;
 	}
 	
+	public void transformRotation(Vector3f velocity) {
+		Mover mover = getComponent(Mover.class);
+		if(mover != null) {
+			mover.addRotationVel(velocity);
+		}else {
+			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+		}
+	}
+	
+	public void transformScale(Vector3f velocity) {
+		Mover mover = getComponent(Mover.class);
+		if(mover != null) {
+			mover.addScaleVel(velocity);
+		}else {
+			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+		}
+	}
+	
+	/*
 	public List<GameObject> getChildren(Tag... tags) {
 		if(tags == null) {
 			return children;
@@ -117,7 +138,7 @@ public class GameObject {
 			
 			return list;
 		}
-	}
+	}*/
 
 	public GameObject addComponent(Component c) {
 		components.add(c);
@@ -160,12 +181,32 @@ public class GameObject {
 		}
 	}
 	
-	public void setParent(GameObject parent) {
+	public void setParent(GameObject parent, boolean relativeToParent) {
+		if(this.parent != null) {
+			this.parent.children.remove(this);
+		}
+		
 		this.parent = parent;
+		this.relativeToParent = relativeToParent;
+		
+		this.parent.children.add(this);
+	}
+	
+	public void removeParent() {
+		this.relativeToParent = false;
+		
+		if(this.parent != null) {
+			this.parent.children.remove(this);
+			this.parent = null;
+		}
 	}
 	
 	public GameObject getParent() {
 		return parent;
+	}
+	
+	public boolean isRelativeToParent() {
+		return relativeToParent;
 	}
 	
 	public void setEnabled(boolean enabled) {
@@ -177,19 +218,30 @@ public class GameObject {
 	}
 	
 	public Vector3f getPosition() {
-		return new Vector3f(transform.getPosition());
+		Vector3f position = transform.getPosition();
+		
+		if(relativeToParent && parent != null) {
+			Vector3f parentPos = parent.getPosition();
+			
+			return new Vector3f(
+					position.x + parentPos.x,
+					position.y + parentPos.y,
+					position.z + parentPos.z);
+		}
+		
+		return new Vector3f(position);
 	}
 	
 	public float getPositionX() {
-		return transform.getPosition().x;
+		return getPosition().x;
 	}
 	
 	public float getPositionY() {
-		return transform.getPosition().y;
+		return getPosition().y;
 	}
 	
 	public float getPositionZ() {
-		return transform.getPosition().z;
+		return getPosition().z;
 	}
 	
 	public Vector3f getRotation() {

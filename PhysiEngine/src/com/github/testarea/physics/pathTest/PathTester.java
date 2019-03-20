@@ -39,7 +39,12 @@ public class PathTester extends Scene{
 			}
 		}
 		
-		Path<Vector3f> p = new Path<Vector3f>(new Vector3f(0, 0, 0), new Vector3f(0, 10, 0), new Vector3f(10, 10, 0), new Vector3f(10, 0, 0), new Vector3f(0, 0, 0));
+		Path<Vector3f> p = new Path<Vector3f>()
+				.add(new Vector3f(0, 0, 0))
+				.add(new Vector3f(0, 10, 0))
+				.add(new Vector3f(10, 10, 0))
+				.add(new Vector3f(10, 0, 0))
+				.add(new Vector3f(0, 0, 0));
 		
 		
 		createEmpty()
