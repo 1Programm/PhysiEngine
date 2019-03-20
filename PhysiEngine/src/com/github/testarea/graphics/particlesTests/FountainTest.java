@@ -28,7 +28,7 @@ public class FountainTest extends Scene{
 		createEmpty(new Vector3f(0, -1, 0), new Vector3f(10, 1, 10))
 		.addComponent(new Model("Cube"))
 		.addComponent(new Texture("colors/White"))
-		.addComponent(new CameraComponent(10));
+		.addComponent(new CameraComponent(15));
 		
 		createEmpty(new Vector3f(), new Vector3f(1, 10, 1))
 		.addComponent(new ParticleProducer(new ParticleSystem_Fountain(1000, "colors/White")));

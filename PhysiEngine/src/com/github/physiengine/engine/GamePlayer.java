@@ -1,6 +1,7 @@
 package com.github.physiengine.engine;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.lwjgl.opengl.Display;
@@ -76,8 +77,20 @@ public class GamePlayer {
 		
 		while(!Display.isCloseRequested()) {
 			for(GameObject obj : curScene.getObjects()) {
-				MasterRenderer.addGameObject(obj);
-				obj.update();
+				if(obj.isEnabled()) {
+					MasterRenderer.addGameObject(obj);
+					obj.update();
+					
+					List<GameObject> children = obj.getChildren();
+					if(children != null) {
+						for(GameObject child : children) {
+							if(child.isEnabled()) {
+								MasterRenderer.addGameObject(child);
+								child.update();
+							}
+						}
+					}
+				}
 			}
 			
 			MasterRenderer.render(curScene.getLights(), cam);

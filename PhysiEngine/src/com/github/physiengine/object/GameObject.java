@@ -14,11 +14,13 @@ import com.github.physiengine.object.tags.Tag;
 public class GameObject {
 	
 	private Transform transform;
-	
-	private List<Component> components;
-	
 	private List<Tag> tags; 
+	
+	private boolean enabled;
 
+	private List<Component> components;
+	private GameObject parent;
+	private List<GameObject> children;
 	
 	public GameObject() { init(new Vector3f(), new Vector3f(), new Vector3f(1, 1, 1));	}
 	public GameObject(float x, float y, float z) { init(new Vector3f(x, y, z), new Vector3f(), new Vector3f(1, 1, 1));	}
@@ -29,8 +31,11 @@ public class GameObject {
 	
 	private void init(Vector3f position, Vector3f rotation, Vector3f scale) {
 		this.transform = new Transform(position, rotation, scale);
-		this.components = new ArrayList<>();
 		this.tags = new ArrayList<>();
+		this.enabled = true;
+		this.components = new ArrayList<>();
+		this.parent = null;
+		this.children = new ArrayList<>();
 	}
 	
 	public GameObject addTags(Tag... tags) {
@@ -56,6 +61,7 @@ public class GameObject {
 		
 		return true;
 	}
+	
 	
 	public void update() {
 		// Update
@@ -84,6 +90,32 @@ public class GameObject {
 			mover.addVelocity(transformation);
 		}else {
 			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+		}
+	}
+
+	public GameObject addChildren(GameObject... objs) {
+		if(objs != null) {
+			for(int i=0;i<objs.length;i++) {
+				children.add(objs[i]);
+			}
+		}
+		
+		return this;
+	}
+	
+	public List<GameObject> getChildren(Tag... tags) {
+		if(tags == null) {
+			return children;
+		}else {
+			List<GameObject> list = new ArrayList<>();
+			
+			for(int i=0;i<children.size();i++) {
+				if(children.get(i).hasTags(tags)) {
+					list.add(children.get(i));
+				}
+			}
+			
+			return list;
 		}
 	}
 
@@ -127,7 +159,23 @@ public class GameObject {
 			}
 		}
 	}
+	
+	public void setParent(GameObject parent) {
+		this.parent = parent;
+	}
+	
+	public GameObject getParent() {
+		return parent;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
 	public Vector3f getPosition() {
 		return new Vector3f(transform.getPosition());
 	}

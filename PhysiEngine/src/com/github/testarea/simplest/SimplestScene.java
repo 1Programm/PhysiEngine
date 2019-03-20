@@ -28,7 +28,7 @@ public class SimplestScene extends Scene{
 		.addTags(Tag.Entity)
 		.addComponent(new Model("Cube"))
 		.addComponent(new Texture("test"))
-		.addComponent(new CameraComponent(5,0,0.01f));
+		.addComponent(new CameraComponent(5));
 	}
 	
 	
