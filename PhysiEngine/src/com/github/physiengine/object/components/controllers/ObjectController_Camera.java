@@ -4,7 +4,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.helperclasses.debug.Debug;
+import com.github.helperclasses.log.Log;
 import com.github.helperclasses.math.Transform;
 import com.github.helperclasses.strings.StringUtils;
 import com.github.physiengine.gfx.components.Camera;
@@ -24,6 +24,10 @@ public class ObjectController_Camera extends ObjectController{
 		CameraComponent camComponent = parent.getComponent(CameraComponent.class);
 		if(camComponent != null) {
 			cam = camComponent.getCamera();
+		}
+		
+		if(cam == null) {
+			Log.warn("Initializing Camera Controller", "Could not find a CameraComponent attached to this GameObject (" + parent.getClass().getSimpleName() + ") ...");
 		}
 	}
 
@@ -67,8 +71,6 @@ public class ObjectController_Camera extends ObjectController{
 			
 			transform.getPosition().x = dx;
 			transform.getPosition().z = dz;
-		}else {
-			Debug.LogWarning(getClass(), "Could not find a CameraComponent attached to this GameObject (" + parent.getClass().getSimpleName() + ") ...");
 		}
 
 		return transform;

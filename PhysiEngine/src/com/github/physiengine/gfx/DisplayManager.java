@@ -48,7 +48,7 @@ public class DisplayManager {
 			
 			if(timer >= 1.0) {
 				timer = 0;
-				settings.getFpsLogConsole().println("Updates: " + updates);
+				settings.getFpsLogger().trace("Engine", "Updates: " + updates);
 				updates = 0;
 			}
 		}

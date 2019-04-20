@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import com.github.helperclasses.debug.Debug;
+import com.github.helperclasses.log.Log;
 import com.github.helperclasses.math.Transform;
 import com.github.physiengine.object.components.Component;
 import com.github.physiengine.object.components.controllers.Mover;
@@ -92,7 +92,7 @@ public class GameObject {
 		if(mover != null) {
 			mover.addTransformation(transformation);
 		}else {
-			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+			Log.warn("GameObject transform", "This GameObject has no Mover attached to it - it will not move");
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class GameObject {
 		if(mover != null) {
 			mover.addVelocity(velocity);
 		}else {
-			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+			Log.warn("GameObject transform position", "This GameObject has no Mover attached to it - it will not move");
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class GameObject {
 		if(mover != null) {
 			mover.addRotationVel(velocity);
 		}else {
-			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+			Log.warn("GameObject transform rotation", "This GameObject has no Mover attached to it - it will not move");
 		}
 	}
 	
@@ -119,11 +119,11 @@ public class GameObject {
 		if(mover != null) {
 			mover.addScaleVel(velocity);
 		}else {
-			Debug.LogWarning(GameObject.class, "This GameObject has no Mover attached to it - it will not move", true);
+			Log.warn("GameObject transform scale", "This GameObject has no Mover attached to it - it will not move");
 		}
 	}
 	
-	/*
+	
 	public List<GameObject> getChildren(Tag... tags) {
 		if(tags == null) {
 			return children;
@@ -138,7 +138,7 @@ public class GameObject {
 			
 			return list;
 		}
-	}*/
+	}
 
 	public GameObject addComponent(Component c) {
 		components.add(c);

@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.lwjgl.opengl.Display;
 
-import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.fileManagement.Loader;
+import com.github.helperclasses.log.Log;
 import com.github.physiengine.EngineSettings;
 import com.github.physiengine.gfx.DisplayManager;
 import com.github.physiengine.gfx.components.Camera;
@@ -20,7 +20,7 @@ public class GamePlayer {
 	
 	public static void setCamera(Camera cam) {
 		if(GamePlayer.cam != null) {
-			Debug.Log(GamePlayer.class, "Camera is overwritten by new one");
+			Log.warn("GamePlayer setting Camera", "Camera is overwritten by new one");
 		}
 		
 		GamePlayer.cam = cam;
@@ -46,7 +46,7 @@ public class GamePlayer {
 		Scene scene = scenes.get(sceneName);
 		
 		if(scene == null) {
-			Debug.LogWarning(GamePlayer.class, "Could not load Scene. Scene is null");
+			Log.error("GamePlayer loading scene", "Could not load Scene. Scene is null");
 			return;
 		}
 		
@@ -60,7 +60,7 @@ public class GamePlayer {
 	
 	public void startGame() {
 		if(curScene == null) {
-			Debug.LogWarning(GamePlayer.class, "There is no loaded Scene !");
+			Log.error("GamePlayer starting game", "There is no loaded Scene !");
 			return;
 		}
 		
@@ -70,7 +70,7 @@ public class GamePlayer {
 		MasterRenderer.init();
 		
 		if(cam == null) {
-			Debug.Log(getClass(), "returned ERROR - Camera is not initialized");
+			Log.error("GamePlayer starting game", "Camera is not initialized");
 			return;
 		}
 		

@@ -3,10 +3,10 @@ package com.github.physiengine.engine;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.helperclasses.debug.Debug;
 import com.github.helperclasses.fileManagement.Loader;
 import com.github.helperclasses.fileManagement.OBJLoader;
 import com.github.helperclasses.fileManagement.PATHS;
+import com.github.helperclasses.log.Log;
 import com.github.physiengine.gfx.model.ModelTexture;
 import com.github.physiengine.gfx.model.RawModel;
 
@@ -30,7 +30,7 @@ public class AssetsLoader {
 				if(!tmpTextures.containsKey(t)) {
 					tmpTextures.put(t, new ModelTexture(Loader.loadTexture(t)));
 				}else {
-					Debug.Log(AssetsLoader.class, "Double Texture names: " + t);
+					Log.warn("AssetsLoader loading texture", "Double Texture names: " + t);
 				}
 			}
 		}
@@ -46,7 +46,7 @@ public class AssetsLoader {
 				if(!tmpModels.containsKey(m)) {
 					tmpModels.put(m, OBJLoader.loadOBJModel(m));
 				}else {
-					Debug.Log(AssetsLoader.class, "Double Model names: " + m);
+					Log.warn("AssetsLoader loading texture", "Double Model names: " + m);
 				}
 			}
 		}
@@ -59,7 +59,7 @@ public class AssetsLoader {
 			return textures.get(name);
 		}
 		
-		Debug.Log(AssetsLoader.class, "Could not find texture: " + PATHS._TEXTURES + name + ".png");
+		Log.error("AssetsLoader get texture", "Could not find texture: " + PATHS._TEXTURES + name + ".png");
 		return null;
 	}
 	
@@ -73,7 +73,7 @@ public class AssetsLoader {
 			return models.get(name);
 		}
 		
-		Debug.Log(AssetsLoader.class, "Could not find model: " + PATHS._OBJECTS + name + ".obj");
+		Log.error("AssetsLoader loading texture", "Could not find model: " + PATHS._OBJECTS + name + ".obj");
 		return null;
 	}
 	

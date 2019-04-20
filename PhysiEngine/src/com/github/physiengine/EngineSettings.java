@@ -1,7 +1,7 @@
 package com.github.physiengine;
 
-import com.github.helperclasses.debug.ConsoleOut;
-import com.github.helperclasses.debug.SystemConsole;
+import com.github.helperclasses.log.ConsoleLogger;
+import com.github.helperclasses.log.Logger;
 
 public class EngineSettings{
 
@@ -16,7 +16,7 @@ public class EngineSettings{
 	 */
 	private int gameFpsCap;
 	private boolean printFPS;
-	private ConsoleOut fpsLogConsole;
+	private Logger fpsLogger;
 	
 	public EngineSettings() {
 		init(
@@ -42,17 +42,17 @@ public class EngineSettings{
 		);
 	}
 	
-	private void init(String windowTitle, int windowWidth, int windowHeight, int gameFpsCap, boolean printFPS, ConsoleOut fpsLogConsole) {
+	private void init(String windowTitle, int windowWidth, int windowHeight, int gameFpsCap, boolean printFPS, Logger fpsLogger) {
 		this.windowTitle = windowTitle;
 		this.windowWidth = windowWidth;
 		this.windowHeight = windowHeight;
 		
 		this.gameFpsCap = gameFpsCap;
 		this.printFPS = printFPS;
-		this.fpsLogConsole = fpsLogConsole;
+		this.fpsLogger = fpsLogger;
 		
-		if(fpsLogConsole == null) {
-			fpsLogConsole = new SystemConsole();
+		if(fpsLogger == null) {
+			fpsLogger = new ConsoleLogger();
 		}
 	}
 
@@ -106,12 +106,12 @@ public class EngineSettings{
 		return this;
 	}
 
-	public ConsoleOut getFpsLogConsole() {
-		return fpsLogConsole;
+	public Logger getFpsLogger() {
+		return fpsLogger;
 	}
 
-	public EngineSettings setFpsLogConsole(ConsoleOut fpsLogConsole) {
-		this.fpsLogConsole = fpsLogConsole;
+	public EngineSettings setFpsLogger(Logger fpsLogger) {
+		this.fpsLogger = fpsLogger;
 		
 		return this;
 	}
